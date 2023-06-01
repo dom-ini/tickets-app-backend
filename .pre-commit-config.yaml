@@ -30,9 +30,3 @@ repos:
     hooks:
       - id: mypy
         args: [ --warn-unused-configs, --ignore-missing-imports, --disallow-untyped-defs, --install-types, --non-interactive ]
-
-  - repo: https://github.com/commitizen-tools/commitizen
-    rev: 3.2.2
-    hooks:
-      - id: commitizen
-        stages: [ commit-msg ]
