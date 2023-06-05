@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := all
 
 bandit:
-	poetry run bandit -r . -x ./tests
+	poetry run bandit -r . -x ./src/app/tests
 toml_sort:
 	poetry run toml-sort pyproject.toml --all --in-place
 flake8:
@@ -9,7 +9,7 @@ flake8:
 isort:
 	poetry run isort .
 pylint:
-	poetry run pylint src
+	poetry run pylint app
 black:
 	poetry run black .
 mypy:
