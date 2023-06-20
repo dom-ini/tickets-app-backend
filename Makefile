@@ -9,7 +9,7 @@ flake8:
 isort:
 	poetry run isort .
 pylint:
-	poetry run pylint app
+	poetry run pylint app --extension-pkg-whitelist='pydantic'
 black:
 	poetry run black .
 mypy:
