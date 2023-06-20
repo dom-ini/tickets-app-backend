@@ -39,7 +39,6 @@ disallow_untyped_defs = true
 ignore_missing_imports = true
 plugins = ["pydantic.mypy", "sqlmypy"]
 python_version = "3.10"
-warn_return_any = true
 warn_unused_configs = true
 
 [tool.poetry]
@@ -52,8 +51,12 @@ version = "0.1.0"
 [tool.poetry.dependencies]
 alembic = "^1.11.1"
 fastapi = "^0.95.2"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 psycopg2 = "^2.9.6"
+pydantic = {extras = ["email"], version = "^1.10.9"}
 python = "^3.10"
+python-dotenv = "^1.0.0"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 python-multipart = "^0.0.6"
 sqlalchemy = "^2.0.15"
 uvicorn = "^0.22.0"
@@ -72,7 +75,7 @@ sqlalchemy-stubs = "^0.4"
 toml-sort = "^0.23.1"
 
 [tool.pylint.BASIC]
-good-names = "id,i,j,k"
+good-names = "id,i,j,k,db"
 
 [tool.pylint.DESIGN]
 max-args = 5
@@ -83,7 +86,7 @@ min-public-methods = 1
 max-line-length = 120
 
 [tool.pylint."MESSAGES CONTROL"]
-disable = "missing-docstring, logging-fstring-interpolation"
+disable = "missing-docstring, logging-fstring-interpolation, too-few-public-methods"
 
 [tool.pylint.SIMILARITIES]
 ignore-comments = "yes"
