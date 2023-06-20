@@ -1,9 +1,9 @@
-import os
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config, pool
 
 from alembic import context
+from app.core.settings import settings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -13,6 +13,8 @@ config = context.config
 # This line sets up loggers basically.
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
+
+config.set_main_option("sqlalchemy.url", settings.SQLALCHEMY_DATABASE_URI)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
@@ -29,15 +31,6 @@ target_metadata = Base.metadata
 # ... etc.
 
 
-def get_url() -> str:
-    user = os.getenv("POSTGRES_USER", "postgres")
-    password = os.getenv("POSTGRES_PASSWORD", "")
-    server = os.getenv("POSTGRES_SERVER", "db")
-    db = os.getenv("POSTGRES_DB", "app")
-    url = f"postgresql+psycopg2://{user}:{password}@{server}/{db}"
-    return url
-
-
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
 
@@ -50,7 +43,7 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    url = get_url()
+    url = config.get_main_option("sqlalchemy.url")
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -71,7 +64,6 @@ def run_migrations_online() -> None:
 
     """
     configuration = config.get_section(config.config_ini_section, {})
-    configuration["sqlalchemy.url"] = get_url()
     connectable = engine_from_config(
         configuration,
         prefix="sqlalchemy.",
