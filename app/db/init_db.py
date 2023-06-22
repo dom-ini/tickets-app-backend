@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 
 from app.auth import crud
 from app.auth.schemas.user import UserCreate
-from app.core.settings import settings
+from app.core.config import settings
 
 
 def init_db(db: Session) -> None:

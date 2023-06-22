@@ -2,7 +2,7 @@ from datetime import datetime
 
 from pydantic import BaseModel, EmailStr, Field
 
-from app.core.settings import settings
+from app.core.config import settings
 
 
 # shared properties
