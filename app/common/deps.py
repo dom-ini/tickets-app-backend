@@ -42,7 +42,7 @@ def get_current_active_user(current_user: "CurrentUser") -> models.User:
     return current_user
 
 
-def get_current_active_superuser(current_user: "CurrentUser") -> models.User:
+def get_current_active_superuser(current_user: "CurrentActiveUser") -> models.User:
     if not crud.user.is_superuser(current_user):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="User doesn't have required privileges")
     return current_user
