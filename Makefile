@@ -16,4 +16,4 @@ mypy:
 	poetry run mypy --install-types --non-interactive .
 test:
 	poetry run pytest
-lint: flake8 isort pylint black mypy toml_sort
+lint: black flake8 isort pylint mypy toml_sort
