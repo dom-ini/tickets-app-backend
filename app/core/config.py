@@ -1,7 +1,10 @@
 # pylint: disable=invalid-name,no-self-argument
-from typing import Any
+import re
+from typing import Any, Callable
 
 from pydantic import BaseSettings, EmailStr, validator
+
+_PASSWORD_MIN_LENGTH = 8
 
 
 class Settings(BaseSettings):
@@ -18,7 +21,16 @@ class Settings(BaseSettings):
     PASSWORD_RESET_TOKEN_EXPIRE_MINUTES: int = 60
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     JWT_ALGORITHM: str = "HS256"
-    PASSWORD_REGEX: str = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%^&*()\-_=+{}[\]|\\:;<>,.?/~])(?=.*[^\s]).{8,}$"
+    PASSWORD_MIN_LENGTH: int = _PASSWORD_MIN_LENGTH
+    PASSWORD_RULES: dict[Callable, str] = {
+        lambda x: len(x) >= _PASSWORD_MIN_LENGTH: f"Password must be at least {_PASSWORD_MIN_LENGTH} characters long",
+        lambda x: re.search(r"[A-Z]", x): "Password must contain at least one uppercase letter",
+        lambda x: re.search(r"[a-z]", x): "Password must contain at least one lowercase letter",
+        lambda x: re.search(r"\d", x): "Password must contain at least one digit",
+        lambda x: re.search(
+            r"[@#$!%^&*()\-_=+{}[\]|\\:;<>,.?/~\"`\']", x
+        ): "Password must contain at least one special character",
+    }
 
     SMTP_TLS: bool = True
     SMTP_PORT: int | None = None

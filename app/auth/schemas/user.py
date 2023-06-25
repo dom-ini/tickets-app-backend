@@ -1,11 +1,11 @@
+# pylint: disable=no-self-argument
 from datetime import datetime
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, validator
 
-from app.core.config import settings
+from app.auth.utils import generate_valid_password, validate_password
 
 
-# shared properties
 class UserBase(BaseModel):
     email: EmailStr
     is_activated: bool | None = False
@@ -14,15 +14,32 @@ class UserBase(BaseModel):
     joined_at: datetime | None = Field(default_factory=datetime.now)
 
 
-# additional properties on creation
 class UserCreate(UserBase):
-    password: str = Field(..., regex=settings.PASSWORD_REGEX)
+    password: str
+
+    @validator("password")
+    def validate_password(cls, password: str) -> str:
+        return validate_password(password)
 
 
-# additional properties on update
+class UserCreateOpen(BaseModel):
+    email: EmailStr
+    password: str = Field(..., example=generate_valid_password())
+
+    @validator("password")
+    def validate_password(cls, password: str) -> str:
+        return validate_password(password)
+
+
 class UserUpdate(UserBase):
-    password: str | None = Field(default=None, regex=settings.PASSWORD_REGEX)
     email: EmailStr | None = None  # type: ignore
+    password: str | None = Field(None, example=generate_valid_password())
+
+    @validator("password")
+    def validate_password(cls, password: str | None) -> str | None:
+        if password is None:
+            return password
+        return validate_password(password)
 
 
 class UserInDBBase(UserBase):
@@ -32,11 +49,9 @@ class UserInDBBase(UserBase):
         orm_mode = True
 
 
-# properties to return via API
 class User(UserInDBBase):
     pass
 
 
-# additional properties stored in DB
 class UserInDB(UserInDBBase):
     hashed_password: str
