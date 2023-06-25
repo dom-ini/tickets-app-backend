@@ -5,7 +5,7 @@ from pydantic import EmailStr
 from starlette import status
 
 from app.auth import crud, schemas
-from app.auth.utils import send_new_user_email
+from app.auth.emails import send_new_user_email
 from app.common.deps import DBSession
 from app.core.config import settings
 

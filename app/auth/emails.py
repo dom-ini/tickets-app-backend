@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from app.common.utils import send_email
+from app.common.emails import send_email
 from app.core.config import settings
 
 

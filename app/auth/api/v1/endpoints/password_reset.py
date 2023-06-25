@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException
 from starlette import status
 
 from app.auth import crud, schemas
-from app.auth.utils import send_password_reset_request_mail
+from app.auth.emails import send_password_reset_request_mail
 from app.common import schemas as common_schemas
 from app.common.deps import DBSession
 
