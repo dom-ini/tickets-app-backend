@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Annotated, Any
 
 from fastapi import APIRouter, BackgroundTasks, Body, HTTPException
 from pydantic import EmailStr
@@ -12,15 +12,21 @@ from app.core.config import settings
 router = APIRouter()
 
 
-@router.post("/", response_model=schemas.User)
+@router.post("/", response_model=schemas.User, status_code=status.HTTP_201_CREATED)
 def create_user_open(
     db: DBSession,
     background_tasks: BackgroundTasks,
-    email: EmailStr = Body(...),
-    password: str = Body(..., regex=settings.PASSWORD_REGEX),
+    email: Annotated[EmailStr, Body()],
+    password: Annotated[str, Body(regex=settings.PASSWORD_REGEX)],
 ) -> Any:
     """
     Open registration for unauthenticated users
+
+    Password rules:
+    * min. 8 characters long
+    * min. 1 uppercase letter
+    * min. 1 lowercase letter
+    * min. 1 digit
     """
     if not settings.USERS_OPEN_REGISTRATION:
         raise HTTPException(detail="Open registration is forbidden", status_code=status.HTTP_403_FORBIDDEN)
