@@ -28,7 +28,7 @@ def get_current_user(db: "DBSession", token: Annotated[str, Depends(oauth2_schem
         token_data = schemas.TokenPayload(sub=payload["sub"])
     except (jwt.JWTError, ValidationError) as exc:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Could not validate credentials") from exc
-    user = crud.user.get(db, user_id=token_data.sub)
+    user = crud.user.get(db, id_=token_data.sub)
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     return user

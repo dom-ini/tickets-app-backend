@@ -39,8 +39,12 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
             update_data["email"] = update_data["email"].lower()
         return super().update(db, db_obj=db_obj, obj_in=update_data)
 
+    def change_password(self, db: Session, *, user: User, new_password: str) -> User:
+        user_in = UserUpdate(password=new_password)
+        return self.update(db, db_obj=user, obj_in=user_in)
+
     def deactivate(self, db: Session, *, user_id: int) -> User | None:
-        user = db.query(self.model).get(user_id)
+        user = self.get(db, user_id)
         if not user:
             return None
 

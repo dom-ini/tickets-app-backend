@@ -1,8 +1,13 @@
 from datetime import datetime
+from typing import TYPE_CHECKING
 
 from sqlalchemy import Boolean, Column, DateTime, Integer, String
+from sqlalchemy.orm import relationship
 
 from app.db.base_class import Base
+
+if TYPE_CHECKING:
+    from app.auth.models import PasswordResetToken  # noqa
 
 
 class User(Base):
@@ -12,4 +17,6 @@ class User(Base):
     is_activated = Column(Boolean(), default=False)
     is_disabled = Column(Boolean(), default=False)
     is_superuser = Column(Boolean(), default=False)
-    joined_at = Column(DateTime, nullable=False, default=datetime.now)
+    joined_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+
+    password_reset_tokens = relationship("PasswordResetToken", back_populates="user")

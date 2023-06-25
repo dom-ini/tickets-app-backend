@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     FIRST_SUPERUSER_EMAIL: str
     FIRST_SUPERUSER_PASSWORD: str
 
+    PASSWORD_RESET_TOKEN_EXPIRE_MINUTES: int = 60
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     JWT_ALGORITHM: str = "HS256"
     PASSWORD_REGEX: str = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%^&*()\-_=+{}[\]|\\:;<>,.?/~])(?=.*[^\s]).{8,}$"

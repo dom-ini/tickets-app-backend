@@ -20,8 +20,8 @@ class CRUDBase(Generic[Model, CreateSchema, UpdateSchema]):
         """
         self.model = model
 
-    def get(self, db: Session, user_id: Any) -> Model | None:
-        return db.query(self.model).filter(self.model.id == user_id).first()
+    def get(self, db: Session, id_: Any) -> Model | None:
+        return db.query(self.model).filter(self.model.id == id_).first()
 
     def get_all(self, db: Session, *, skip: int = 0, limit: int = 100) -> List[Model]:
         return db.query(self.model).offset(skip).limit(limit).all()
