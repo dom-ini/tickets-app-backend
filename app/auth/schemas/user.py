@@ -31,7 +31,7 @@ class UserCreateOpen(BaseModel):
         return validate_password(password)
 
 
-class UserUpdate(UserBase):
+class UserUpdate(BaseModel):
     email: EmailStr | None = None  # type: ignore
     password: str | None = Field(None, example=generate_valid_password())
 
