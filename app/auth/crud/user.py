@@ -3,8 +3,8 @@ from typing import Any, Dict, Union
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
-from app.auth.models.user import User
-from app.auth.schemas.user import UserCreate, UserUpdate
+from app.auth.models import User
+from app.auth.schemas import UserCreate, UserUpdate
 from app.auth.security import get_password_hash, verify_password
 from app.common.crud import CRUDBase
 

@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from app.auth.models.password_reset import PasswordResetToken
+from app.auth.models import PasswordResetToken
 from app.auth.schemas import PasswordResetTokenCreate
 from app.common.crud import CRUDBase
 from app.core.config import settings

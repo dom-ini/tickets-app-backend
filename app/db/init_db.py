@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from app.auth import crud
-from app.auth.schemas.user import UserCreate
+from app.auth.schemas import UserCreate
 from app.core.config import settings
 
 
