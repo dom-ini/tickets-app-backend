@@ -48,7 +48,14 @@ def get_current_active_superuser(current_user: "CurrentActiveUser") -> models.Us
     return current_user
 
 
+class PaginationParams:
+    def __init__(self, skip: int = 0, limit: int = 100) -> None:
+        self.skip = skip
+        self.limit = limit
+
+
 DBSession = Annotated[Session, Depends(get_db)]
 CurrentUser = Annotated[models.User, Depends(get_current_user)]
 CurrentActiveUser = Annotated[models.User, Depends(get_current_active_user)]
 CurrentActiveSuperUser = Annotated[models.User, Depends(get_current_active_superuser)]
+Pagination = Annotated[PaginationParams, Depends()]
