@@ -11,7 +11,7 @@ class UserBase(BaseModel):
     is_activated: bool | None = False
     is_disabled: bool | None = False
     is_superuser: bool | None = False
-    joined_at: datetime | None = Field(default_factory=datetime.now)
+    joined_at: datetime | None = Field(default_factory=datetime.utcnow)
 
 
 class UserCreate(UserBase):
