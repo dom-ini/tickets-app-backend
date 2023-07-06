@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     SECRET_KEY: str
     SQLALCHEMY_DATABASE_URI: str
+    SQLALCHEMY_TEST_DATABASE_URI: str
 
     USERS_OPEN_REGISTRATION: bool = True
     FIRST_SUPERUSER_EMAIL: str
@@ -57,6 +58,11 @@ class Settings(BaseSettings):
         if v and not is_mailing_setup:
             raise ValueError("Mailing is not set up properly")
         return v
+
+    TEST_SUPERUSER_EMAIL: str = "superuser@example.com"
+    TEST_SUPERUSER_PASSWORD: str = "Test1234!"
+    TEST_USER_EMAIL: str = "user@example.com"
+    TEST_USER_PASSWORD: str = "Test1234!"
 
     class Config:
         env_file = ".env"

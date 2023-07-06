@@ -12,6 +12,24 @@ services:
       - .env
     networks:
       - base_network
+  test_db:
+    container_name: test-db
+    image: postgres:15
+    volumes:
+      - postgres-test-data:/var/lib/postgresql/data/pgdata
+    expose:
+      - "5433"
+    ports:
+      - "5433:5433"
+    command: -p 5433
+    environment:
+      - POSTGRES_USER=${POSTGRES_TEST_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_TEST_PASSWORD}
+      - POSTGRES_SERVER=${POSTGRES_SERVER}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - PGDATA=${PGDATA}
+    networks:
+      - base_network
   web:
     container_name: fastapi
     build:
@@ -45,6 +63,7 @@ services:
 
 volumes:
   postgres-data:
+  postgres-test-data:
   pgadmin-data:
 
 networks:
