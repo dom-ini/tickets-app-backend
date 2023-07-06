@@ -19,6 +19,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
             hashed_password=get_password_hash(obj_in.password),
             is_superuser=obj_in.is_superuser,  # type: ignore
             is_activated=obj_in.is_activated,  # type: ignore
+            is_disabled=obj_in.is_disabled,  # type: ignore
             joined_at=obj_in.joined_at,  # type: ignore
         )
         db.add(db_obj)
