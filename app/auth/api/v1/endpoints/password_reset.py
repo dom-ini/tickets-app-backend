@@ -22,7 +22,7 @@ def request_password_reset(
     """
     user = crud.user.get_by_email(db, email=password_reset_request.email)
     if user:
-        crud.password_reset_token.invalidate_all(db)
+        crud.password_reset_token.invalidate_all(db, user_id=user.id)
         token_in = schemas.PasswordResetTokenCreate(user_id=user.id)
         token = crud.password_reset_token.generate(db, obj_in=token_in)
         background_tasks.add_task(send_password_reset_request_mail, email_to=user.email, token=token.value)

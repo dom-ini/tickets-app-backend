@@ -24,7 +24,7 @@ class CRUDPasswordResetToken(CRUDBase[PasswordResetToken, PasswordResetTokenCrea
             try:
                 db.commit()
                 break
-            except IntegrityError:
+            except IntegrityError:  # pragma: no cover
                 db.rollback()
         return token
 
@@ -34,8 +34,8 @@ class CRUDPasswordResetToken(CRUDBase[PasswordResetToken, PasswordResetTokenCrea
         db.refresh(token)
         return token
 
-    def invalidate_all(self, db: Session) -> None:
-        tokens = db.query(self.model).filter(self.model.is_invalidated.is_(False))
+    def invalidate_all(self, db: Session, *, user_id: int) -> None:
+        tokens = db.query(self.model).filter((self.model.user_id == user_id) & (self.model.is_invalidated.is_(False)))
         tokens.update({self.model.is_invalidated: True})
         db.commit()
 
