@@ -1,6 +1,6 @@
 from typing import Any
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, BackgroundTasks, HTTPException
 from starlette import status
 
 from app.auth import crud, schemas
@@ -12,7 +12,11 @@ router = APIRouter()
 
 
 @router.post("/password/reset", response_model=common_schemas.MessageResponse)
-def request_password_reset(db: DBSession, password_reset_request: schemas.PasswordResetRequest) -> Any:
+def request_password_reset(
+    db: DBSession,
+    password_reset_request: schemas.PasswordResetRequest,
+    background_tasks: BackgroundTasks,
+) -> Any:
     """
     Request email message with password reset token
     """
@@ -21,7 +25,7 @@ def request_password_reset(db: DBSession, password_reset_request: schemas.Passwo
         crud.password_reset_token.invalidate_all(db)
         token_in = schemas.PasswordResetTokenCreate(user_id=user.id)
         token = crud.password_reset_token.generate(db, obj_in=token_in)
-        send_password_reset_request_mail(email_to=user.email, token=token.value)
+        background_tasks.add_task(send_password_reset_request_mail, email_to=user.email, token=token.value)
     return common_schemas.MessageResponse(
         message="If the given email address exists in the database, you will receive an email message with instruction "
         "how to reset your password"
