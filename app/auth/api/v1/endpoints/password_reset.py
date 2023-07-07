@@ -36,6 +36,13 @@ def request_password_reset(
 def reset_password(db: DBSession, password_reset_form: schemas.PasswordResetForm) -> Any:
     """
     Reset password using the obtained token
+
+    Password rules:
+    * min. 8 characters long
+    * min. 1 uppercase letter
+    * min. 1 lowercase letter
+    * min. 1 digit
+    * min. 1 special character
     """
     token = crud.password_reset_token.get_by_value(db, value=password_reset_form.token)
     if not token or crud.password_reset_token.is_invalidated(token) or crud.password_reset_token.is_expired(token):
