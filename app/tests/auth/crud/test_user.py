@@ -11,7 +11,7 @@ from app.auth.utils import generate_valid_password
 class TestUser:  # pylint: disable=R0904
     email: str = "RaNdOm@eMaIl.com"
     password: str = generate_valid_password()
-    joined_at = datetime.utcnow()
+    joined_at: datetime = datetime.utcnow()
 
     @pytest.fixture(name="default_user")
     def create_default_user(self, db: Session) -> models.User:
@@ -45,6 +45,7 @@ class TestUser:  # pylint: disable=R0904
         assert default_user.hashed_password != self.password
 
     def test_create_user_joined_at_should_be_saved_correctly(self, default_user: models.User) -> None:
+        assert isinstance(default_user.joined_at, datetime)
         assert default_user.joined_at == self.joined_at
 
     def test_create_user_is_superuser_should_be_false_as_default(self, default_user: models.User) -> None:
@@ -87,6 +88,7 @@ class TestUser:  # pylint: disable=R0904
     def test_get_user_by_email(self, db: Session, default_user: models.User) -> None:
         user = crud.user.get_by_email(db, email=default_user.email)
         assert isinstance(user, models.User)
+        assert jsonable_encoder(user) == jsonable_encoder(default_user)
 
     def test_get_user_by_wrong_email_should_return_none(self, db: Session) -> None:
         email = "wrong@email.com"
