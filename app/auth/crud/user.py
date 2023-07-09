@@ -17,10 +17,10 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         db_obj = self.model(
             email=obj_in.email.lower(),
             hashed_password=get_password_hash(obj_in.password),
-            is_superuser=obj_in.is_superuser,  # type: ignore
-            is_activated=obj_in.is_activated,  # type: ignore
-            is_disabled=obj_in.is_disabled,  # type: ignore
-            joined_at=obj_in.joined_at,  # type: ignore
+            is_superuser=obj_in.is_superuser,
+            is_activated=obj_in.is_activated,
+            is_disabled=obj_in.is_disabled,
+            joined_at=obj_in.joined_at,
         )
         db.add(db_obj)
         db.commit()

@@ -8,10 +8,10 @@ from app.auth.utils import generate_valid_password, validate_password
 
 class UserBase(BaseModel):
     email: EmailStr
-    is_activated: bool | None = False
-    is_disabled: bool | None = False
-    is_superuser: bool | None = False
-    joined_at: datetime | None = Field(default_factory=datetime.utcnow)
+    is_activated: bool = False
+    is_disabled: bool = False
+    is_superuser: bool = False
+    joined_at: datetime = Field(default_factory=datetime.utcnow)
 
 
 class UserCreate(UserBase):
@@ -32,7 +32,7 @@ class UserCreateOpen(BaseModel):
 
 
 class UserUpdate(BaseModel):
-    email: EmailStr | None = None  # type: ignore
+    email: EmailStr | None = None
     password: str | None = Field(None, example=generate_valid_password())
 
     @validator("password")
