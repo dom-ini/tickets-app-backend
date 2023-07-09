@@ -18,6 +18,9 @@ base.Base.metadata.create_all(bind=engine)
 
 
 def _session() -> Generator:
+    """
+    Create nested transaction and rollback it on tear down, so that transaction is never committed to database
+    """
     connection = engine.connect()
     transaction = connection.begin()
     session = TestingSessionLocal(bind=connection)
