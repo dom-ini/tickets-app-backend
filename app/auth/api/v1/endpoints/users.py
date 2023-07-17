@@ -6,8 +6,7 @@ from starlette import status
 from app.auth import crud, schemas
 from app.auth.deps import open_registration_allowed, user_create_unique_email, user_update_unique_email, valid_user_id
 from app.auth.emails import send_new_user_email
-from app.common.deps import CurrentActiveUser, DBSession, Pagination, get_current_active_superuser
-from app.core.config import settings
+from app.common.deps import CurrentActiveUser, DBSession, Mailer, Pagination, get_current_active_superuser
 
 router = APIRouter()
 
@@ -22,6 +21,7 @@ def create_user_open(
     db: DBSession,
     background_tasks: BackgroundTasks,
     registration_form: Annotated[schemas.UserCreate, Depends(user_create_unique_email)],
+    mailer: Mailer,
 ) -> Any:
     """
     Open registration for unauthenticated users
@@ -35,8 +35,7 @@ def create_user_open(
     """
     user_in = schemas.UserCreate(email=registration_form.email, password=registration_form.password, is_activated=True)
     new_user = crud.user.create(db, obj_in=user_in)
-    if settings.EMAILS_ENABLED:
-        background_tasks.add_task(send_new_user_email, email_to=new_user.email)
+    background_tasks.add_task(mailer.send, send_new_user_email(email_to=new_user.email))
     return new_user
 
 

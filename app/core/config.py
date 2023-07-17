@@ -33,6 +33,7 @@ class Settings(BaseSettings):
         ): "Password must contain at least one special character",
     }
 
+    SMTP_STARTTLS: bool = False
     SMTP_TLS: bool = True
     SMTP_PORT: int | None = None
     SMTP_HOST: str | None = None

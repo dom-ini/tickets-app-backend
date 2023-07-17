@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from starlette import status
 
 from app.auth import crud, models, schemas
+from app.common.emails import MailSender, mailer
 from app.core.config import settings
 from app.db.session import SessionLocal
 
@@ -59,3 +60,4 @@ CurrentUser = Annotated[models.User, Depends(get_current_user)]
 CurrentActiveUser = Annotated[models.User, Depends(get_current_active_user)]
 CurrentActiveSuperUser = Annotated[models.User, Depends(get_current_active_superuser)]
 Pagination = Annotated[PaginationParams, Depends()]
+Mailer = Annotated[MailSender, Depends(mailer)]

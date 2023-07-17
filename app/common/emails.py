@@ -1,28 +1,64 @@
-from typing import Any
+from pathlib import Path
+from typing import Any, Iterable, Protocol
 
-import emails
 from emails.template import JinjaTemplate
+from fastapi_mail import ConnectionConfig, FastMail, MessageSchema
 
 from app.core.config import settings
-from app.logging import logger
 
 
-def send_email(
-    email_to: str,
-    subject: str = "",
-    html_template: str = "",
+class MailEngine(Protocol):
+    async def send_message(self, message: MessageSchema, template_name: str = ...) -> None:
+        ...
+
+
+class MailSender:
+    def __init__(self, engine: MailEngine) -> None:
+        self.engine = engine
+
+    async def send(self, message: MessageSchema) -> None:
+        return await self.engine.send_message(message)
+
+
+def prepare_email(
+    email_to: Iterable[str],
+    subject: str,
+    template_name: str,
     context: dict[str, Any] | None = None,
-) -> None:
-    assert settings.EMAILS_ENABLED, "no provided configuration for email variables"
-    if context is None:
-        context = {}
-    message = emails.Message(
-        subject=JinjaTemplate(subject),
-        html=JinjaTemplate(html_template),
-        mail_from=(settings.DEFAULT_FROM_NAME, settings.DEFAULT_FROM_EMAIL),
+) -> MessageSchema:
+    base_context = {
+        "project_name": settings.PROJECT_NAME,
+        "url": settings.SERVER_HOST,
+    }
+    if context is not None:
+        base_context.update(context)
+    subject = JinjaTemplate(subject).render(**base_context)
+    with open(Path(settings.EMAIL_TEMPLATES_DIR) / template_name, encoding="utf-8") as file:
+        template = file.read()
+    body = JinjaTemplate(template).render(**base_context)
+    message = MessageSchema(
+        recipients=email_to,
+        subject=subject,
+        body=body,
+        subtype="html",
     )
-    smtp_options = {"host": settings.SMTP_HOST, "port": settings.SMTP_PORT, "tls": settings.SMTP_TLS}
-    if settings.SMTP_USER and settings.SMTP_PASSWORD:
-        smtp_options.update({"user": settings.SMTP_USER, "password": settings.SMTP_PASSWORD})
-    response = message.send(to=email_to, render=context, smtp=smtp_options)
-    logger.info(f"send email result: {response}")
+    return message
+
+
+def get_mailer_config() -> dict[str, Any]:
+    return {
+        "MAIL_USERNAME": settings.SMTP_USER,
+        "MAIL_PASSWORD": settings.SMTP_PASSWORD,
+        "MAIL_PORT": settings.SMTP_PORT,
+        "MAIL_SERVER": settings.SMTP_HOST,
+        "MAIL_FROM": settings.DEFAULT_FROM_EMAIL,
+        "MAIL_FROM_NAME": settings.DEFAULT_FROM_NAME,
+        "MAIL_STARTTLS": settings.SMTP_STARTTLS,
+        "MAIL_SSL_TLS": settings.SMTP_TLS,
+    }
+
+
+def mailer() -> MailSender:
+    config = ConnectionConfig(**get_mailer_config())
+    engine = FastMail(config)
+    return MailSender(engine)

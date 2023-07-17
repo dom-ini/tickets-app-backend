@@ -52,6 +52,7 @@ version = "0.1.0"
 alembic = "^1.11.1"
 emails = "^0.6"
 fastapi = "^0.95.2"
+fastapi-mail = "^1.3.1"
 jinja2 = "^3.1.2"
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 psycopg2 = "^2.9.6"
@@ -74,11 +75,12 @@ pre-commit = "^3.3.2"
 pylint = "^2.17.4"
 pytest = "^7.3.1"
 pytest-cov = "^4.1.0"
+pytest-mock = "^3.11.1"
 sqlalchemy-stubs = "^0.4"
 toml-sort = "^0.23.1"
 
 [tool.pylint.BASIC]
-good-names = "id,i,j,k,db"
+good-names = "id,i,j,k,db,r"
 
 [tool.pylint.DESIGN]
 max-args = 5
