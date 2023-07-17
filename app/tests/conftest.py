@@ -17,7 +17,13 @@ base.Base.metadata.drop_all(bind=engine)
 base.Base.metadata.create_all(bind=engine)
 
 
-def _session() -> Generator:
+@pytest.fixture(scope="session", autouse=True)
+def setup_db() -> None:
+    init_db()
+
+
+@pytest.fixture()
+def db() -> Generator:
     """
     Create nested transaction and rollback it on tear down, so that transaction is never committed to database
     """
@@ -40,29 +46,21 @@ def _session() -> Generator:
     connection.close()
 
 
-@pytest.fixture(scope="session")
-def setup_db() -> None:
-    init_db()
+@pytest.fixture()
+def client(db: Session) -> Generator:
+    def override_get_db() -> Generator:
+        yield db
 
-
-@pytest.fixture(scope="function")
-def db(setup_db: None) -> Generator:
-    yield from _session()
-
-
-@pytest.fixture(scope="module")
-def client() -> Generator:
-    app.dependency_overrides[get_db] = _session
-    with TestClient(app) as test_client:
-        yield test_client
+    app.dependency_overrides[get_db] = override_get_db
+    yield TestClient(app)
     del app.dependency_overrides[get_db]
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture()
 def superuser_token_headers(client: TestClient) -> dict[str, str]:
     return get_superuser_token_headers(client)
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture()
 def normal_user_token_headers(client: TestClient) -> dict[str, str]:
     return get_normal_user_token_headers(client)
