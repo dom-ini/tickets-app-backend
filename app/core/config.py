@@ -8,7 +8,7 @@ _PASSWORD_MIN_LENGTH = 8
 
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "Survey App"
+    PROJECT_NAME: str = "Tickets App"
     SERVER_HOST: str
     API_V1_STR: str = "/api/v1"
     SECRET_KEY: str
