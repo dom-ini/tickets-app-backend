@@ -1,5 +1,6 @@
+from contextlib import contextmanager
 from pathlib import Path
-from typing import Any, Iterable, Protocol
+from typing import Any, Generator, Iterable, Protocol
 
 from emails.template import JinjaTemplate
 from fastapi_mail import ConnectionConfig, FastMail, MessageSchema
@@ -11,6 +12,10 @@ class MailEngine(Protocol):
     async def send_message(self, message: MessageSchema, template_name: str = ...) -> None:
         ...
 
+    @contextmanager
+    def record_messages(self) -> Generator:
+        ...
+
 
 class MailSender:
     def __init__(self, engine: MailEngine) -> None:
@@ -18,6 +23,11 @@ class MailSender:
 
     async def send(self, message: MessageSchema) -> None:
         return await self.engine.send_message(message)
+
+    @contextmanager
+    def record_messages(self) -> Generator:
+        with self.engine.record_messages() as outbox:
+            yield outbox
 
 
 def prepare_email(
