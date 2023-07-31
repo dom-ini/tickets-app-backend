@@ -9,6 +9,7 @@ from starlette.testclient import TestClient
 from app.common.deps import get_db
 from app.db import base
 from app.main import app
+from app.tests.test_db.initial_data import INITIAL_DATA
 from app.tests.test_db.session import TestingSessionLocal, engine
 from app.tests.test_db.setup_db import init_db
 from app.tests.utils.users import get_normal_user_token_headers, get_superuser_token_headers
@@ -19,7 +20,7 @@ base.Base.metadata.create_all(bind=engine)
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_db() -> None:
-    init_db()
+    init_db(INITIAL_DATA)
 
 
 @pytest.fixture()

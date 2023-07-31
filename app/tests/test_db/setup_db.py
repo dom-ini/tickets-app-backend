@@ -1,21 +1,17 @@
-from app.auth.models import User
-from app.auth.security import get_password_hash
-from app.core.config import settings
+from typing import Any, Mapping, Protocol, Type
+
+from app.db.base_class import Base
 from app.tests.test_db.session import TestingSessionLocal
 
 
-def init_db() -> None:
+class DataProtocol(Protocol):
+    model: Type[Base]
+    data: list[dict[str, Any]]
+
+
+def init_db(initial_data: Mapping[str, DataProtocol]) -> None:
     session = TestingSessionLocal()
-    super_user = User(
-        email=settings.TEST_SUPERUSER_EMAIL,
-        hashed_password=get_password_hash(settings.TEST_SUPERUSER_PASSWORD),
-        is_activated=True,
-        is_superuser=True,
-    )
-    user = User(
-        email=settings.TEST_USER_EMAIL,
-        hashed_password=get_password_hash(settings.TEST_USER_PASSWORD),
-        is_activated=True,
-    )
-    session.add_all([super_user, user])
+    for entry in initial_data.values():
+        instances = [entry.model(**instance) for instance in entry.data]
+        session.add_all(instances)
     session.commit()

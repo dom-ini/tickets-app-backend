@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 
 from app.auth import crud, models, schemas
 from app.auth.utils import generate_valid_password
+from app.tests.test_db.initial_data import INITIAL_DATA
 
 
 class TestUser:  # pylint: disable=R0904
@@ -101,7 +102,7 @@ class TestUser:  # pylint: disable=R0904
 
     def test_get_all_users_should_return_every_user(self, db: Session) -> None:
         users = crud.user.get_all(db)
-        assert len(users) == 2
+        assert len(users) == len(INITIAL_DATA["users"].data)
 
     def test_authenticate_by_email_with_correct_credentials(self, db: Session, default_user: models.User) -> None:
         user = crud.user.authenticate_by_mail(db, email=self.email, password=self.password)
