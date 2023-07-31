@@ -3,10 +3,12 @@ from typing import Generator
 
 import pytest
 import sqlalchemy
+from fastapi_mail import ConnectionConfig, FastMail
 from sqlalchemy.orm.session import Session, SessionTransaction
 from starlette.testclient import TestClient
 
 from app.common.deps import get_db
+from app.common.emails import MailSender, get_mailer_config, mailer
 from app.db import base
 from app.main import app
 from app.tests.test_db.initial_data import INITIAL_DATA
@@ -47,14 +49,28 @@ def db() -> Generator:
     connection.close()
 
 
+def create_test_mailer() -> MailSender:
+    config = ConnectionConfig(**get_mailer_config())
+    config.SUPPRESS_SEND = True
+    mail_engine = FastMail(config)
+    return MailSender(mail_engine)
+
+
 @pytest.fixture()
 def client(db: Session) -> Generator:
     def override_get_db() -> Generator:
         yield db
 
     app.dependency_overrides[get_db] = override_get_db
+    app.dependency_overrides[mailer] = create_test_mailer
     yield TestClient(app)
     del app.dependency_overrides[get_db]
+    del app.dependency_overrides[mailer]
+
+
+@pytest.fixture()
+def mail_engine() -> MailSender:
+    return create_test_mailer()
 
 
 @pytest.fixture()
