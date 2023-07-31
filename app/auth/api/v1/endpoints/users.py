@@ -48,14 +48,6 @@ def list_users(db: DBSession, pagination: Pagination) -> Any:
     return users
 
 
-@router.get("/{user_id}", response_model=schemas.User, dependencies=[Depends(get_current_active_superuser)])
-def read_user(user: Annotated[schemas.User, Depends(valid_user_id)]) -> Any:
-    """
-    Read user by id (for superusers only)
-    """
-    return user
-
-
 @router.get("/me", response_model=schemas.User)
 def read_current_user(user: CurrentActiveUser) -> Any:
     """
@@ -72,4 +64,12 @@ def update_current_user(
     Update currently authenticated user
     """
     user = crud.user.update(db, db_obj=user, obj_in=user_in)
+    return user
+
+
+@router.get("/{user_id}", response_model=schemas.User, dependencies=[Depends(get_current_active_superuser)])
+def read_user(user: Annotated[schemas.User, Depends(valid_user_id)]) -> Any:
+    """
+    Read user by id (for superusers only)
+    """
     return user
