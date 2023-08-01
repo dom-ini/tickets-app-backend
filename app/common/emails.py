@@ -8,7 +8,7 @@ from fastapi_mail import ConnectionConfig, FastMail, MessageSchema
 from app.core.config import settings
 
 
-class MailEngine(Protocol):
+class MailEngine(Protocol):  # pragma: no cover
     async def send_message(self, message: MessageSchema, template_name: str = ...) -> None:
         ...
 

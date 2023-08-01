@@ -70,7 +70,7 @@ class TestPasswordReset:
         assert not crud.password_reset_token.is_expired(reset_token)
 
     def test_is_expired_if_expired(
-        self, override_token_expire_time: None, reset_token: models.PasswordResetToken  # pylint: disable=W0613
+        self, override_token_expire_time: Generator, reset_token: models.PasswordResetToken  # pylint: disable=W0613
     ) -> None:
         assert crud.password_reset_token.is_expired(reset_token)
 
@@ -80,3 +80,7 @@ class TestPasswordReset:
         crud.password_reset_token.invalidate_all(db, user_id=self.user_id)
         assert crud.password_reset_token.is_invalidated(reset_tokens_for_different_users[self.user_id])
         assert not crud.password_reset_token.is_invalidated(reset_tokens_for_different_users[self.second_user_id])
+
+    def test_remove_token(self, db: Session, reset_token: models.PasswordResetToken) -> None:
+        crud.password_reset_token.remove(db, id_=reset_token.id)
+        assert crud.password_reset_token.get(db, id_=reset_token.id) is None

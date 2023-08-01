@@ -1,3 +1,5 @@
+from typing import Generator
+
 import pytest
 from fastapi import status
 from fastapi.testclient import TestClient
@@ -20,6 +22,29 @@ class TestUsers:  # pylint: disable=R0904
             user_in = schemas.UserCreate(email=f"{i}@example.com", password=self.password, is_activated=True)
             crud.user.create(db, obj_in=user_in)
 
+    @pytest.fixture(name="disallow_open_registration")
+    def override_open_registration(self) -> Generator:
+        old_setting = settings.USERS_OPEN_REGISTRATION
+        settings.USERS_OPEN_REGISTRATION = False
+        yield
+        settings.USERS_OPEN_REGISTRATION = old_setting
+
+    @pytest.fixture(name="deactivate_user")
+    def deactivate_test_user(self, db: Session) -> None:
+        user = crud.user.get_by_email(db, email=settings.TEST_USER_EMAIL)
+        if not user:
+            raise LookupError("User not found")
+        user.is_activated = False
+        db.add(user)
+        db.commit()
+
+    @pytest.fixture(name="disable_user")
+    def disable_test_user(self, db: Session) -> None:
+        user = crud.user.get_by_email(db, email=settings.TEST_USER_EMAIL)
+        if not user:
+            raise LookupError("User not found")
+        crud.user.deactivate(db, user_id=user.id)
+
     def test_create_user_open(self, client: TestClient, mail_engine: Mailer) -> None:
         password = generate_valid_password()
         email = "random@email.com"
@@ -31,6 +56,15 @@ class TestUsers:  # pylint: disable=R0904
         assert r.status_code == status.HTTP_201_CREATED
         assert "email" in result
         assert result.get("is_activated")
+
+    def test_create_user_open_disallowed_open_registration_should_fail(
+        self, client: TestClient, disallow_open_registration: Generator  # pylint: disable=W0613
+    ) -> None:
+        password = generate_valid_password()
+        email = "random@email.com"
+        payload = {"email": email, "password": password}
+        r = client.post(f"{settings.API_V1_STR}/users/", json=payload)
+        assert r.status_code == status.HTTP_403_FORBIDDEN
 
     def test_create_user_open_weak_password_should_fail(self, client: TestClient) -> None:
         password = "weak"
@@ -78,6 +112,21 @@ class TestUsers:  # pylint: disable=R0904
         assert r.status_code == status.HTTP_200_OK
         assert result.get("email") == settings.TEST_USER_EMAIL
         assert not result.get("is_superuser")
+
+    def test_read_current_user_by_not_activated_user_should_fail(
+        self,
+        client: TestClient,
+        normal_user_token_headers: dict[str, str],
+        deactivate_user: None,  # pylint: disable=W0613
+    ) -> None:
+        r = client.get(f"{settings.API_V1_STR}/users/me", headers=normal_user_token_headers)
+        assert r.status_code == status.HTTP_403_FORBIDDEN
+
+    def test_read_current_user_by_disabled_user_should_fail(
+        self, client: TestClient, normal_user_token_headers: dict[str, str], disable_user: None  # pylint: disable=W0613
+    ) -> None:
+        r = client.get(f"{settings.API_V1_STR}/users/me", headers=normal_user_token_headers)
+        assert r.status_code == status.HTTP_403_FORBIDDEN
 
     def test_read_current_user_by_superuser(
         self,
