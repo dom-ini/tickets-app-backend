@@ -1,4 +1,3 @@
-from datetime import timedelta
 from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -7,7 +6,6 @@ from starlette import status
 
 from app.auth import crud, schemas, security
 from app.common import deps
-from app.core.config import settings
 
 router = APIRouter()
 
@@ -34,11 +32,7 @@ def login_for_access_token(db: deps.DBSession, form_data: Annotated[OAuth2Passwo
             detail="Account is disabled",
         )
 
-    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = security.create_access_token(
-        subject=user.id,
-        expires_delta=access_token_expires,
-    )
+    access_token = security.create_access_token(subject=user.id)
 
     return schemas.Token(access_token=access_token, token_type="bearer")
 
