@@ -11,9 +11,9 @@ from app.common.deps import get_db
 from app.common.emails import MailSender, get_mailer_config, mailer
 from app.db import base
 from app.main import app
-from app.tests.test_db.initial_data import INITIAL_DATA
-from app.tests.test_db.session import TestingSessionLocal, engine
-from app.tests.test_db.setup_db import init_db
+from app.tests.test_db_config.initial_data import INITIAL_DATA
+from app.tests.test_db_config.session import TestingSessionLocal, engine
+from app.tests.test_db_config.setup_db import init_db
 from app.tests.utils.users import get_normal_user_token_headers, get_superuser_token_headers
 
 base.Base.metadata.drop_all(bind=engine)
