@@ -4,14 +4,13 @@ from starlette import status
 from app.auth import crud, models, schemas
 from app.auth.exceptions import EmailAlreadyTaken, UserNotFound
 from app.common.deps import CurrentActiveUser, DBSession
+from app.common.utils import validate_instance_id
 from app.core.config import settings
 
 
 def valid_user_id(db: DBSession, user_id: int) -> models.User:
-    user = crud.user.get(db, id_=user_id)
-    if not user:
-        raise UserNotFound()
-    return user
+    event = validate_instance_id(db, id_=user_id, crud_service=crud.user, not_found_exception=UserNotFound())
+    return event
 
 
 def validate_unique_email(db: DBSession, email: str) -> None:
