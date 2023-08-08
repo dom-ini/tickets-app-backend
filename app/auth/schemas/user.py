@@ -1,7 +1,7 @@
 # pylint: disable=no-self-argument
 from datetime import datetime
 
-from pydantic import BaseModel, EmailStr, Field, validator
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 
 from app.auth.utils import generate_valid_password, validate_password
 
@@ -17,25 +17,25 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
 
-    @validator("password")
+    @field_validator("password")
     def validate_password(cls, password: str) -> str:
         return validate_password(password)
 
 
 class UserCreateOpen(BaseModel):
     email: EmailStr
-    password: str = Field(..., example=generate_valid_password())
+    password: str = Field(..., examples=[generate_valid_password()])
 
-    @validator("password")
+    @field_validator("password")
     def validate_password(cls, password: str) -> str:
         return validate_password(password)
 
 
 class UserUpdate(BaseModel):
     email: EmailStr | None = None
-    password: str | None = Field(None, example=generate_valid_password())
+    password: str | None = Field(None, examples=[generate_valid_password()])
 
-    @validator("password")
+    @field_validator("password")
     def validate_password(cls, password: str | None) -> str | None:
         if password is None:
             return password
@@ -43,10 +43,8 @@ class UserUpdate(BaseModel):
 
 
 class UserInDBBase(UserBase):
+    model_config = ConfigDict(from_attributes=True)
     id: int
-
-    class Config:
-        orm_mode = True
 
 
 class User(UserInDBBase):

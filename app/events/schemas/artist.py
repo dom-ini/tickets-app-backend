@@ -1,4 +1,4 @@
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel, ConfigDict, HttpUrl
 
 
 class ArtistBase(BaseModel):
@@ -9,10 +9,8 @@ class ArtistBase(BaseModel):
 
 
 class ArtistInDBBase(ArtistBase):
+    model_config = ConfigDict(from_attributes=True)
     id: int
-
-    class Config:
-        orm_mode = True
 
 
 class Artist(ArtistInDBBase):

@@ -8,7 +8,7 @@ class TestArtist:
         name = "artist"
         description = "description"
         slug = "artist-slug"
-        photo = "https://example.com"
+        photo = "https://example.com/"
         artist_in = schemas.ArtistCreate(name=name, description=description, slug=slug, photo=photo)
         artist = crud.artist.create(db, obj_in=artist_in)
         assert artist.name == name

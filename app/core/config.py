@@ -1,8 +1,10 @@
 # pylint: disable=invalid-name,no-self-argument
 import re
-from typing import Any, Callable
+from typing import Callable
 
-from pydantic import BaseSettings, EmailStr, validator
+from pydantic import EmailStr, field_validator
+from pydantic_core.core_schema import FieldValidationInfo
+from pydantic_settings import BaseSettings
 
 _PASSWORD_MIN_LENGTH = 8
 
@@ -42,8 +44,9 @@ class Settings(BaseSettings):
     DEFAULT_FROM_EMAIL: EmailStr | None = None
     DEFAULT_FROM_NAME: str | None = None
 
-    @validator("DEFAULT_FROM_NAME")
-    def get_default_from_name(cls, v: str | None, values: dict[str, Any]) -> str:
+    @field_validator("DEFAULT_FROM_NAME")
+    def get_default_from_name(cls, v: str | None, info: FieldValidationInfo) -> str:
+        values = info.data
         if not v:
             return values["PROJECT_NAME"]
         return v
@@ -51,8 +54,9 @@ class Settings(BaseSettings):
     EMAILS_ENABLED: bool = True
     EMAIL_TEMPLATES_DIR: str = "/app/app/email-templates/"
 
-    @validator("EMAILS_ENABLED", pre=True)
-    def get_emails_enabled(cls, v: bool, values: dict[str, Any]) -> bool:
+    @field_validator("EMAILS_ENABLED")
+    def get_emails_enabled(cls, v: bool, info: FieldValidationInfo) -> bool:
+        values = info.data
         is_mailing_setup = bool(
             values.get("SMTP_HOST") and values.get("SMTP_PORT") and values.get("DEFAULT_FROM_EMAIL")
         )
@@ -64,9 +68,6 @@ class Settings(BaseSettings):
     TEST_SUPERUSER_PASSWORD: str = "Test1234!"
     TEST_USER_EMAIL: str = "user@example.com"
     TEST_USER_PASSWORD: str = "Test1234!"
-
-    class Config:
-        env_file = ".env"
 
 
 settings = Settings()

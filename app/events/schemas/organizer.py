@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class OrganizerBase(BaseModel):
@@ -6,10 +6,8 @@ class OrganizerBase(BaseModel):
 
 
 class OrganizerInDBBase(OrganizerBase):
+    model_config = ConfigDict(from_attributes=True)
     id: int
-
-    class Config:
-        orm_mode = True
 
 
 class Organizer(OrganizerInDBBase):

@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel, ConfigDict, HttpUrl
 
 from app.events.schemas.artist import Artist
 from app.events.schemas.event_type import EventType
@@ -18,10 +18,8 @@ class EventBase(BaseModel):
 
 
 class EventInDBase(EventBase):
+    model_config = ConfigDict(from_attributes=True)
     id: int
-
-    class Config:
-        orm_mode = True
 
 
 class EventBrief(EventInDBase):

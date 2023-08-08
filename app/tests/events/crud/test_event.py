@@ -2,6 +2,7 @@ from datetime import datetime
 
 from sqlalchemy.orm import Session
 
+from app.auth import models as auth_models
 from app.events import crud, models, schemas
 
 
@@ -13,8 +14,8 @@ class TestEvent:
             "name": "event",
             "description": "description",
             "slug": "event-slug",
-            "poster_vertical": "https://example.com",
-            "poster_horizontal": "https://example.com",
+            "poster_vertical": "https://example.com/",
+            "poster_horizontal": "https://example.com/",
             "held_at": datetime.now(),
         }
         event_in = schemas.EventCreate(
