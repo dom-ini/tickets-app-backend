@@ -7,8 +7,13 @@ from app.events import crud, models, schemas
 
 
 class TestEvent:
-    def test_create_event(
-        self, db: Session, location: models.Location, organizer: models.Organizer, event_type: models.EventType
+    def test_create_event(  # pylint: disable=R0913
+        self,
+        db: Session,
+        location: models.Location,
+        organizer: models.Organizer,
+        event_type: models.EventType,
+        superuser: auth_models.User,
     ) -> None:
         fields = {
             "name": "event",
@@ -19,7 +24,11 @@ class TestEvent:
             "held_at": datetime.now(),
         }
         event_in = schemas.EventCreate(
-            **fields, location_id=location.id, organizer_id=organizer.id, event_type_id=event_type.id
+            **fields,
+            location_id=location.id,
+            organizer_id=organizer.id,
+            event_type_id=event_type.id,
+            created_by_id=superuser.id,
         )
         event = crud.event.create(db, obj_in=event_in)
         assert all(getattr(event, field) == value for field, value in fields.items())

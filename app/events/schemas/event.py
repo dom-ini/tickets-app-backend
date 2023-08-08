@@ -37,3 +37,4 @@ class EventCreate(EventBase):
     location_id: int
     organizer_id: int
     event_type_id: int
+    created_by_id: int

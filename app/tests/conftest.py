@@ -7,6 +7,8 @@ from fastapi_mail import ConnectionConfig, FastMail
 from sqlalchemy.orm.session import Session, SessionTransaction
 from starlette.testclient import TestClient
 
+from app.auth import crud, models, schemas
+from app.auth.utils import generate_valid_password
 from app.common.deps import get_db
 from app.common.emails import MailSender, get_mailer_config, mailer
 from app.db import base
@@ -81,3 +83,15 @@ def superuser_token_headers(client: TestClient) -> dict[str, str]:
 @pytest.fixture()
 def normal_user_token_headers(client: TestClient) -> dict[str, str]:
     return get_normal_user_token_headers(client)
+
+
+@pytest.fixture()
+def superuser(db: Session) -> models.User:
+    user_in = schemas.UserCreate(
+        email="random@example.com",
+        password=generate_valid_password(),
+        is_activated=True,
+        is_disabled=False,
+        is_superuser=True,
+    )
+    return crud.user.create(db, obj_in=user_in)

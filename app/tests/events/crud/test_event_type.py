@@ -19,6 +19,7 @@ class TestEventType:
         assert event_type2.parent_type_id == event_type.id
         assert len(event_type.children) == 1
         assert event_type.children[0].id == event_type2.id
+        assert event_type2.parent is not None
         assert event_type2.parent.id == event_type.id
 
     def test_remove_event_type(self, db: Session, event_type: models.EventType) -> None:

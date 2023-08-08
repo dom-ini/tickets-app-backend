@@ -5,6 +5,7 @@ from fastapi import status
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
+from app.auth import models as auth_models
 from app.core.config import settings
 from app.events import crud, models, schemas
 
@@ -13,8 +14,13 @@ class TestEvents:
     EVENT_COUNT = 3
 
     @pytest.fixture(name="multiple_events")
-    def create_multiple_events(
-        self, db: Session, location: models.Location, organizer: models.Organizer, event_type: models.EventType
+    def create_multiple_events(  # pylint: disable=R0913
+        self,
+        db: Session,
+        location: models.Location,
+        organizer: models.Organizer,
+        event_type: models.EventType,
+        superuser: auth_models.User,
     ) -> list[models.Event]:
         events = []
         for i in range(self.EVENT_COUNT):
@@ -26,6 +32,7 @@ class TestEvents:
                 location_id=location.id,
                 organizer_id=organizer.id,
                 event_type_id=event_type.id,
+                created_by_id=superuser.id,
             )
             event = crud.event.create(db, obj_in=event_in)
             events.append(event)

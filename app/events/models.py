@@ -1,8 +1,10 @@
-from typing import TYPE_CHECKING
+from datetime import datetime
+from typing import TYPE_CHECKING, Optional
 
-from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String, Table, Text
-from sqlalchemy.orm import Mapped, relationship  # type: ignore
+from sqlalchemy import Column, ForeignKey, String, Table, Text
+from sqlalchemy.orm import Mapped, mapped_column, relationship  # type: ignore[attr-defined]
 
+from app.common.models import IntPk, UniqueIndexedStr
 from app.db.base_class import Base
 
 if TYPE_CHECKING:
@@ -10,72 +12,70 @@ if TYPE_CHECKING:
 
 event_artist = Table(
     "event_artist",
-    Base.metadata,  # pylint: disable=E1101
+    Base.metadata,
     Column("event_id", ForeignKey("event.id"), primary_key=True),
     Column("artist_id", ForeignKey("artist.id"), primary_key=True),
 )
 
 
 class Event(Base):
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(128), index=True, nullable=False)
-    slug = Column(String, unique=True, index=True, nullable=False)
-    description = Column(Text)
-    poster_vertical = Column(String)
-    poster_horizontal = Column(String)
-    held_at = Column(DateTime, nullable=False)
-    organizer_id = Column(Integer, ForeignKey("organizer.id"))
-    created_by_id = Column(Integer, ForeignKey("user.id"))
-    event_type_id = Column(Integer, ForeignKey("eventtype.id"))
-    location_id = Column(Integer, ForeignKey("location.id"))
+    id: Mapped[IntPk]
+    name: Mapped[str] = mapped_column(String(128), index=True, nullable=False)
+    slug: Mapped[UniqueIndexedStr]
+    description: Mapped[Optional[str]] = mapped_column(Text)
+    poster_vertical: Mapped[Optional[str]]
+    poster_horizontal: Mapped[Optional[str]]
+    held_at: Mapped[datetime]
+    organizer_id: Mapped[int] = mapped_column(ForeignKey("organizer.id"), nullable=False)
+    created_by_id: Mapped[int] = mapped_column(ForeignKey("user.id"), nullable=False)
+    event_type_id: Mapped[int] = mapped_column(ForeignKey("eventtype.id"), nullable=False)
+    location_id: Mapped[int] = mapped_column(ForeignKey("location.id"), nullable=False)
 
-    organizer = relationship("Organizer", back_populates="events")
-    created_by = relationship("User", back_populates="events")
-    event_type = relationship("EventType", back_populates="events")
-    location = relationship("Location", back_populates="events")
-    artists: Mapped[list["Artist"]] = relationship(
-        "Artist", secondary=event_artist, primaryjoin=(event_artist.c.event_id == id), back_populates="events"
-    )
+    organizer: Mapped["Organizer"] = relationship("Organizer", back_populates="events")
+    created_by: Mapped["User"] = relationship("User", back_populates="events")
+    event_type: Mapped["EventType"] = relationship("EventType", back_populates="events")
+    location: Mapped["Location"] = relationship("Location", back_populates="events")
+    artists: Mapped[list["Artist"]] = relationship("Artist", secondary=event_artist, back_populates="events")
 
 
 class Organizer(Base):
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(128), nullable=False, unique=True, index=True)
+    id: Mapped[IntPk]
+    name: Mapped[str] = mapped_column(String(128), nullable=False, unique=True, index=True)
 
-    events = relationship("Event", back_populates="organizer")
+    events: Mapped[list["Event"]] = relationship("Event", back_populates="organizer")
 
 
 class EventType(Base):
-    id = Column(Integer, primary_key=True, index=True)
-    parent_type_id = Column(Integer, ForeignKey("eventtype.id"))
-    name = Column(String(80), index=True, nullable=False)
-    slug = Column(String, unique=True, index=True, nullable=False)
+    id: Mapped[IntPk]
+    parent_type_id: Mapped[Optional[int]] = mapped_column(ForeignKey("eventtype.id"))
+    name: Mapped[str] = mapped_column(String(80), index=True, nullable=False)
+    slug: Mapped[UniqueIndexedStr]
 
-    parent = relationship("EventType", remote_side=[id], back_populates="children")
+    parent: Mapped[Optional["EventType"]] = relationship(
+        "EventType", remote_side="EventType.id", back_populates="children"
+    )
     children: Mapped[list["EventType"]] = relationship(
         "EventType", remote_side=[parent_type_id], back_populates="parent"
     )
-    events = relationship("Event", back_populates="event_type", lazy="dynamic")
+    events: Mapped[list["Event"]] = relationship("Event", back_populates="event_type", lazy="dynamic")
 
 
 class Location(Base):
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(64), index=True, nullable=False)
-    city = Column(String(40), index=True, nullable=False)
-    slug = Column(String, unique=True, index=True, nullable=False)
-    longitude = Column(Float, nullable=False)
-    latitude = Column(Float, nullable=False)
+    id: Mapped[IntPk]
+    name: Mapped[str] = mapped_column(String(64), index=True, nullable=False)
+    city: Mapped[str] = mapped_column(String(40), index=True, nullable=False)
+    slug: Mapped[UniqueIndexedStr]
+    longitude: Mapped[float]
+    latitude: Mapped[float]
 
-    events = relationship("Event", back_populates="location", lazy="dynamic")
+    events: Mapped[list["Event"]] = relationship("Event", back_populates="location", lazy="dynamic")
 
 
 class Artist(Base):
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(40), index=True, nullable=False)
-    slug = Column(String, unique=True, index=True, nullable=False)
-    photo = Column(String)
-    description = Column(Text)
+    id: Mapped[IntPk]
+    name: Mapped[str] = mapped_column(String(40), index=True, nullable=False)
+    slug: Mapped[UniqueIndexedStr]
+    photo: Mapped[Optional[str]]
+    description: Mapped[Optional[str]] = mapped_column(Text)
 
-    events = relationship(
-        "Event", secondary=event_artist, secondaryjoin=(event_artist.c.artist_id == id), back_populates="artists"
-    )
+    events: Mapped[list["Event"]] = relationship("Event", secondary=event_artist, back_populates="artists")

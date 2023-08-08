@@ -3,6 +3,7 @@ from datetime import datetime
 import pytest
 from sqlalchemy.orm import Session
 
+from app.auth import models as auth_models
 from app.events import crud, models, schemas
 
 
@@ -28,7 +29,11 @@ def create_event_type(db: Session) -> models.EventType:
 
 @pytest.fixture(name="event")
 def create_event(
-    db: Session, location: models.Location, organizer: models.Organizer, event_type: models.EventType
+    db: Session,
+    location: models.Location,
+    organizer: models.Organizer,
+    event_type: models.EventType,
+    superuser: auth_models.User,
 ) -> models.Event:
     event_in = schemas.EventCreate(
         name="Event",
@@ -38,6 +43,7 @@ def create_event(
         location_id=location.id,
         organizer_id=organizer.id,
         event_type_id=event_type.id,
+        created_by_id=superuser.id,
     )
     return crud.event.create(db, obj_in=event_in)
 
