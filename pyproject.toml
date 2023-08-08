@@ -44,7 +44,7 @@ warn_unused_configs = true
 [tool.poetry]
 authors = ["Dominik <dominik.szlaza@gazeta.pl>"]
 description = ""
-name = "survey app"
+name = "tickets app"
 readme = "README.md"
 version = "0.1.0"
 
