@@ -1,6 +1,7 @@
 import secrets
 from datetime import datetime, timedelta
 
+from sqlalchemy import select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -13,7 +14,9 @@ from app.core.config import settings
 
 class CRUDPasswordResetToken(CRUDBase[PasswordResetToken, PasswordResetTokenCreate, EmptySchema]):
     def get_by_value(self, db: Session, *, value: str) -> PasswordResetToken | None:
-        return db.query(self.model).filter(self.model.value == value).first()
+        query = select(self.model).where(self.model.value == value)
+        result = db.execute(query)
+        return result.scalar()
 
     def generate(self, db: Session, *, obj_in: PasswordResetTokenCreate) -> PasswordResetToken:
         while True:
@@ -35,8 +38,12 @@ class CRUDPasswordResetToken(CRUDBase[PasswordResetToken, PasswordResetTokenCrea
         return token
 
     def invalidate_all(self, db: Session, *, user_id: int) -> None:
-        tokens = db.query(self.model).filter((self.model.user_id == user_id) & (self.model.is_invalidated.is_(False)))
-        tokens.update({self.model.is_invalidated: True})
+        query = (
+            update(self.model)  # type: ignore[arg-type]
+            .where((self.model.user_id == user_id) & (self.model.is_invalidated.is_(False)))
+            .values(is_invalidated=True)
+        )
+        db.execute(query)
         db.commit()
 
     def is_invalidated(self, token: PasswordResetToken) -> bool:

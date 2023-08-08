@@ -1,6 +1,6 @@
-from typing import Any, Dict, Union
+from typing import Any
 
-from sqlalchemy import func
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.auth.models import User
@@ -11,7 +11,9 @@ from app.common.crud import CRUDBase
 
 class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
     def get_by_email(self, db: Session, *, email: str) -> User | None:
-        return db.query(self.model).filter(func.lower(self.model.email) == func.lower(email)).first()
+        query = select(self.model).where(func.lower(self.model.email) == func.lower(email))
+        result = db.execute(query)
+        return result.scalar()
 
     def create(self, db: Session, *, obj_in: UserCreate) -> User:
         db_obj = self.model(
@@ -27,7 +29,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         db.refresh(db_obj)
         return db_obj
 
-    def update(self, db: Session, *, db_obj: User, obj_in: Union[UserUpdate, Dict[str, Any]]) -> User:
+    def update(self, db: Session, *, db_obj: User, obj_in: UserUpdate | dict[str, Any]) -> User:
         if isinstance(obj_in, dict):
             update_data = obj_in
         else:

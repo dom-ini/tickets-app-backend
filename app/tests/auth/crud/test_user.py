@@ -96,10 +96,6 @@ class TestUser:  # pylint: disable=R0904
         user = crud.user.get_by_email(db, email=email)
         assert user is None
 
-    def test_get_all_users_should_return_list(self, db: Session) -> None:
-        users = crud.user.get_all(db)
-        assert isinstance(users, list)
-
     def test_get_all_users_should_return_every_user(self, db: Session) -> None:
         users = crud.user.get_all(db)
         assert len(users) == len(INITIAL_DATA["users"].data)

@@ -1,7 +1,8 @@
-from typing import Any, Dict, Generic, List, Type, TypeVar, Union
+from typing import Any, Generic, Sequence, Type, TypeVar
 
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.db.base_class import Base
@@ -21,10 +22,14 @@ class CRUDBase(Generic[Model, CreateSchema, UpdateSchema]):
         self.model = model
 
     def get(self, db: Session, id_: Any) -> Model | None:
-        return db.query(self.model).filter(self.model.id == id_).first()
+        query = select(self.model).where(self.model.id == id_)
+        result = db.execute(query)
+        return result.scalar()
 
-    def get_all(self, db: Session, *, skip: int = 0, limit: int = 100) -> List[Model]:
-        return db.query(self.model).offset(skip).limit(limit).all()
+    def get_all(self, db: Session, *, skip: int = 0, limit: int = 100) -> Sequence[Model]:
+        query = select(self.model).offset(skip).limit(limit)
+        result = db.execute(query)
+        return result.scalars().all()
 
     def create(self, db: Session, *, obj_in: CreateSchema) -> Model:
         obj_in_data = jsonable_encoder(obj_in)
@@ -34,7 +39,7 @@ class CRUDBase(Generic[Model, CreateSchema, UpdateSchema]):
         db.refresh(db_obj)
         return db_obj
 
-    def update(self, db: Session, *, db_obj: Model, obj_in: Union[UpdateSchema, Dict[str, Any]]) -> Model:
+    def update(self, db: Session, *, db_obj: Model, obj_in: UpdateSchema | dict[str, Any]) -> Model:
         obj_data = jsonable_encoder(obj_in)
         if isinstance(obj_in, dict):
             update_data = obj_in
@@ -49,7 +54,7 @@ class CRUDBase(Generic[Model, CreateSchema, UpdateSchema]):
         return db_obj
 
     def remove(self, db: Session, *, id_: int) -> Model | None:
-        obj = db.query(self.model).get(id_)
+        obj = self.get(db, id_=id_)
         db.delete(obj)
         db.commit()
         return obj
