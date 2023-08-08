@@ -4,6 +4,7 @@ from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from app.db.base_class import Base
+from app.events.models import Event
 
 
 class User(Base):
@@ -16,6 +17,7 @@ class User(Base):
     joined_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
     password_reset_tokens = relationship("PasswordResetToken", back_populates="user")
+    events = relationship(Event, back_populates="created_by")
 
 
 class PasswordResetToken(Base):
