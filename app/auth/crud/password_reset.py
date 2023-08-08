@@ -1,17 +1,17 @@
 import secrets
 from datetime import datetime, timedelta
 
-from pydantic import BaseModel
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.auth.models import PasswordResetToken
 from app.auth.schemas import PasswordResetTokenCreate
 from app.common.crud import CRUDBase
+from app.common.schemas import EmptySchema
 from app.core.config import settings
 
 
-class CRUDPasswordResetToken(CRUDBase[PasswordResetToken, PasswordResetTokenCreate, BaseModel]):
+class CRUDPasswordResetToken(CRUDBase[PasswordResetToken, PasswordResetTokenCreate, EmptySchema]):
     def get_by_value(self, db: Session, *, value: str) -> PasswordResetToken | None:
         return db.query(self.model).filter(self.model.value == value).first()
 
