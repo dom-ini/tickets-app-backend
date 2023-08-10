@@ -58,3 +58,12 @@ class CRUDBase(Generic[Model, CreateSchema, UpdateSchema]):
         db.delete(obj)
         db.commit()
         return obj
+
+
+class SlugMixin(Generic[Model]):
+    model: Type[Model]
+
+    def get_by_slug(self, db: Session, slug: str) -> Model | None:
+        query = select(self.model).where(self.model.slug == slug)
+        result = db.execute(query)
+        return result.scalar()

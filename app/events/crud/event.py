@@ -1,12 +1,12 @@
-from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from app.common.crud import CRUDBase
+from app.common.crud import CRUDBase, SlugMixin
+from app.common.schemas import EmptySchema
 from app.events.models import Artist, Event
 from app.events.schemas import EventCreate
 
 
-class CRUDEvent(CRUDBase[Event, EventCreate, BaseModel]):
+class CRUDEvent(CRUDBase[Event, EventCreate, EmptySchema], SlugMixin[Event]):
     def artists(self, event: Event) -> list[Artist]:
         return event.artists
 
