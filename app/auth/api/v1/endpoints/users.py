@@ -4,7 +4,7 @@ from fastapi import APIRouter, BackgroundTasks, Depends
 from starlette import status
 
 from app.auth import crud, schemas
-from app.auth.deps import open_registration_allowed, user_create_unique_email, user_update_unique_email, valid_user_id
+from app.auth.deps import open_registration_allowed, user_create_unique_email, user_exists, user_update_unique_email
 from app.auth.emails import send_new_user_email
 from app.common.deps import CurrentActiveUser, DBSession, Mailer, Pagination, get_current_active_superuser
 
@@ -67,8 +67,8 @@ def update_current_user(
     return user
 
 
-@router.get("/{user_id}", response_model=schemas.User, dependencies=[Depends(get_current_active_superuser)])
-def read_user(user: Annotated[schemas.User, Depends(valid_user_id)]) -> Any:
+@router.get("/{id}", response_model=schemas.User, dependencies=[Depends(get_current_active_superuser)])
+def read_user(user: Annotated[schemas.User, Depends(user_exists.by_id)]) -> Any:
     """
     Read user by id (for superusers only)
     """

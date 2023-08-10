@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 
 from app.common.deps import DBSession, Pagination
 from app.events import crud, schemas
-from app.events.deps import valid_event_id
+from app.events.deps import event_exists
 
 router = APIRouter()
 
@@ -18,8 +18,8 @@ def list_events(db: DBSession, pagination: Pagination) -> Any:
     return events
 
 
-@router.get("/{event_id}", response_model=schemas.EventDetails)
-def get_event(event: Annotated[schemas.EventDetails, Depends(valid_event_id)]) -> Any:
+@router.get("/{id}", response_model=schemas.EventDetails)
+def get_event(event: Annotated[schemas.EventDetails, Depends(event_exists.by_id)]) -> Any:
     """
     Read event by id
     """

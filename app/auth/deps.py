@@ -2,15 +2,13 @@ from fastapi import HTTPException
 from starlette import status
 
 from app.auth import crud, models, schemas
+from app.auth.crud import CRUDUser
 from app.auth.exceptions import EmailAlreadyTaken, UserNotFound
 from app.common.deps import CurrentActiveUser, DBSession
-from app.common.utils import validate_instance_id
+from app.common.utils import InstanceInDBValidator
 from app.core.config import settings
 
-
-def valid_user_id(db: DBSession, user_id: int) -> models.User:
-    event = validate_instance_id(db, id_=user_id, crud_service=crud.user, not_found_exception=UserNotFound())
-    return event
+user_exists = InstanceInDBValidator[models.User, CRUDUser](crud_service=crud.user, exception=UserNotFound())
 
 
 def validate_unique_email(db: DBSession, email: str) -> None:
