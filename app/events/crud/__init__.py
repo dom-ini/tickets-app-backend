@@ -1,12 +1,17 @@
 from pydantic import BaseModel
 
 from app.common.crud import CRUDBase
+from app.events.crud.artist import CRUDArtist
 from app.events.crud.event import CRUDEvent
+from app.events.crud.event_type import CRUDEventType
 from app.events.models import Artist, Event, EventType, Location, Organizer
-from app.events.schemas import ArtistCreate, EventTypeCreate, LocationCreate, OrganizerCreate
+from app.events.schemas import LocationCreate, OrganizerCreate
+
+CRUDLocation = CRUDBase[Location, LocationCreate, BaseModel]
+CRUDOrganizer = CRUDBase[Organizer, OrganizerCreate, BaseModel]
 
 event = CRUDEvent(Event)
-artist = CRUDBase[Artist, ArtistCreate, BaseModel](Artist)
-event_type = CRUDBase[EventType, EventTypeCreate, BaseModel](EventType)
-location = CRUDBase[Location, LocationCreate, BaseModel](Location)
-organizer = CRUDBase[Organizer, OrganizerCreate, BaseModel](Organizer)
+artist = CRUDArtist(Artist)
+event_type = CRUDEventType(EventType)
+location = CRUDLocation(Location)
+organizer = CRUDOrganizer(Organizer)
