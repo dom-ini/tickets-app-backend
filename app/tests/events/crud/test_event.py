@@ -36,6 +36,11 @@ class TestEvent:
         assert event.organizer.id == organizer.id
         assert event.event_type.id == event_type.id
 
+    def test_get_by_slug(self, db: Session, event: models.Event) -> None:
+        event2 = crud.event.get_by_slug(db, slug=event.slug)
+        assert event2 is not None
+        assert event2.id == event.id
+
     def test_add_artist_to_event(self, db: Session, event: models.Event, artist: models.Artist) -> None:
         crud.event.add_artist(db, event=event, artist=artist)
         artists = crud.event.artists(event)

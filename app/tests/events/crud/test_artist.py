@@ -16,6 +16,11 @@ class TestArtist:
         assert artist.slug == slug
         assert artist.photo == photo
 
+    def test_get_by_slug(self, db: Session, artist: models.Artist) -> None:
+        artist2 = crud.artist.get_by_slug(db, slug=artist.slug)
+        assert artist2 is not None
+        assert artist2.id == artist.id
+
     def test_remove_artist(self, db: Session, artist: models.Artist) -> None:
         crud.artist.remove(db, id_=artist.id)
         artist3 = crud.artist.get(db, id_=artist.id)

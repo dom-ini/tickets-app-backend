@@ -22,6 +22,11 @@ class TestEventType:
         assert event_type2.parent is not None
         assert event_type2.parent.id == event_type.id
 
+    def test_get_by_slug(self, db: Session, event_type: models.EventType) -> None:
+        event_type2 = crud.event_type.get_by_slug(db, slug=event_type.slug)
+        assert event_type2 is not None
+        assert event_type2.id == event_type.id
+
     def test_remove_event_type(self, db: Session, event_type: models.EventType) -> None:
         crud.event_type.remove(db, id_=event_type.id)
         event_type3 = crud.event_type.get(db, id_=event_type.id)
