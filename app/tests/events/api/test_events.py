@@ -81,6 +81,10 @@ class TestEvents:
         assert r.status_code == status.HTTP_200_OK
         assert len(result) == expected_count
 
+    def test_list_events_sorting_by_wrong_field_should_fail(self, client: TestClient) -> None:
+        r = client.get(f"{settings.API_V1_STR}/events/?sort_by=invalid_field")
+        assert r.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
+
     def test_list_events_sorting_ascending(self, client: TestClient, multiple_events: list[models.Event]) -> None:
         r = client.get(f"{settings.API_V1_STR}/events/?sort_by=held_at")
         result = r.json()
