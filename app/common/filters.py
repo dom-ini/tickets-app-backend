@@ -19,9 +19,9 @@ class BaseFilter(BaseModel):
 
     @property
     def filters(self) -> list:
-        schema = self.model_dump(exclude_none=True)
+        filter_values = self.model_dump(exclude_none=True)
         filters = []
-        for key, value in schema.items():
+        for key, value in filter_values.items():
             field, lookup = key.split("__")
             filter_ = _OPERATORS_MAP[lookup](getattr(self.Constants.model, field), value)
             filters.append(filter_)
@@ -37,15 +37,15 @@ class BaseSorter(BaseModel):
 
     @property
     def order_by(self) -> list:
-        rules: list[Any] = []
+        ordering_rules: list[Any] = []
         if not self.sort_by:
-            return rules
+            return ordering_rules
         sortable_fields = self._get_sortable_fields(self.sort_by)
         for field, descending in sortable_fields:
             model_field = getattr(self.Constants.model, field)
             rule = model_field.desc() if descending else model_field.asc()
-            rules.append(rule)
-        return rules
+            ordering_rules.append(rule)
+        return ordering_rules
 
     def _get_sortable_fields(self, fields_raw: str) -> Iterator[tuple[str, bool]]:
         fields_list = fields_raw.split(",")
