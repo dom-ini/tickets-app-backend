@@ -3,6 +3,8 @@ from typing import Any, Iterator
 from pydantic import BaseModel
 from sqlalchemy import func
 
+from app.common.exceptions import InvalidSortField
+
 _OPERATORS_MAP = {
     "lte": lambda model_value, filter_value: model_value <= filter_value,
     "gte": lambda model_value, filter_value: model_value >= filter_value,
@@ -51,5 +53,5 @@ class BaseSorter(BaseModel):
             descending = field.startswith("-")
             field_name = field[1:] if descending else field
             if field_name not in self.Constants.order_by_fields:
-                continue
+                raise InvalidSortField()
             yield field_name, descending
