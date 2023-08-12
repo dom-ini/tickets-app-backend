@@ -22,6 +22,13 @@ class TestEventType:
         assert event_type2.parent is not None
         assert event_type2.parent.id == event_type.id
 
+    def test_get_category_tree(self, db: Session, event_type: models.EventType) -> None:
+        event_type_in = schemas.EventTypeCreate(name=self.name, slug=self.slug, parent_type_id=event_type.id)
+        event_type2 = crud.event_type.create(db, obj_in=event_type_in)
+        event_type_tree = crud.event_type.get_event_type_tree(db)
+        assert event_type_tree
+        assert event_type_tree[0].children[0].id == event_type2.id
+
     def test_get_by_slug(self, db: Session, event_type: models.EventType) -> None:
         event_type2 = crud.event_type.get_by_slug(db, slug=event_type.slug)
         assert event_type2 is not None
