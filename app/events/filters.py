@@ -1,6 +1,6 @@
 from datetime import date
 
-from app.common.filters import BaseFilter
+from app.common.filters import BaseFilter, BaseSorter
 from app.events.models import Event
 
 
@@ -14,3 +14,9 @@ class EventFilters(BaseFilter):
 
     class Constants:
         model = Event
+
+
+class EventSorter(BaseSorter):
+    class Constants:
+        model = Event
+        order_by_fields = ["held_at"]

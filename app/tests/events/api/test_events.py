@@ -81,6 +81,20 @@ class TestEvents:
         assert r.status_code == status.HTTP_200_OK
         assert len(result) == expected_count
 
+    def test_list_events_sorting_ascending(self, client: TestClient, multiple_events: list[models.Event]) -> None:
+        r = client.get(f"{settings.API_V1_STR}/events/?sort_by=held_at")
+        result = r.json()
+        assert r.status_code == status.HTTP_200_OK
+        assert len(result) == len(multiple_events)
+        assert result == sorted(result, key=lambda event: event["held_at"])
+
+    def test_list_events_sorting_descending(self, client: TestClient, multiple_events: list[models.Event]) -> None:
+        r = client.get(f"{settings.API_V1_STR}/events/?sort_by=-held_at")
+        result = r.json()
+        assert r.status_code == status.HTTP_200_OK
+        assert len(result) == len(multiple_events)
+        assert result == sorted(result, key=lambda event: event["held_at"], reverse=True)
+
     def test_list_events_filter_by_valid_event_type_id(
         self, client: TestClient, multiple_events: list[models.Event]
     ) -> None:

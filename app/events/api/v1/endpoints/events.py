@@ -5,17 +5,24 @@ from fastapi import APIRouter, Depends
 from app.common.deps import DBSession, Pagination
 from app.events import crud, schemas
 from app.events.deps import event_exists
-from app.events.filters import EventFilters
+from app.events.filters import EventFilters, EventSorter
 
 router = APIRouter()
 
 
 @router.get("/", response_model=list[schemas.EventBrief])
-def list_events(db: DBSession, pagination: Pagination, event_filter: Annotated[EventFilters, Depends()]) -> Any:
+def list_events(
+    db: DBSession,
+    pagination: Pagination,
+    event_filter: Annotated[EventFilters, Depends()],
+    event_sorter: Annotated[EventSorter, Depends()],
+) -> Any:
     """
     List events
     """
-    events = crud.event.get_filtered(db, filters=event_filter.filters, limit=pagination.limit, skip=pagination.skip)
+    events = crud.event.get_filtered(
+        db, filters=event_filter.filters, order_by=event_sorter.order_by, limit=pagination.limit, skip=pagination.skip
+    )
     return events
 
 

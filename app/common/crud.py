@@ -73,11 +73,19 @@ class FilterableMixin(Generic[Model]):
     model: Type[Model]
 
     def get_filtered(
-        self, db: Session, *, filters: Iterable | None = None, skip: int = 0, limit: int = 100
+        self,
+        db: Session,
+        *,
+        filters: Iterable | None = None,
+        order_by: Iterable | None = None,
+        skip: int = 0,
+        limit: int = 100,
     ) -> Sequence[Model]:
         query = select(self.model)
         if filters:
             query = query.where(*filters)
+        if order_by:
+            query = query.order_by(*order_by)
         query = query.offset(skip).limit(limit)
         result = db.execute(query)
         return result.scalars().all()
