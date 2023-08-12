@@ -1,4 +1,4 @@
-from typing import Any, Generic, Sequence, Type, TypeVar
+from typing import Any, Generic, Iterable, Sequence, Type, TypeVar
 
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
@@ -67,3 +67,17 @@ class SlugMixin(Generic[Model]):
         query = select(self.model).where(self.model.slug == slug)
         result = db.execute(query)
         return result.scalar()
+
+
+class FilterableMixin(Generic[Model]):
+    model: Type[Model]
+
+    def get_filtered(
+        self, db: Session, *, filters: Iterable | None = None, skip: int = 0, limit: int = 100
+    ) -> Sequence[Model]:
+        query = select(self.model)
+        if filters:
+            query = query.where(*filters)
+        query = query.offset(skip).limit(limit)
+        result = db.execute(query)
+        return result.scalars().all()
