@@ -9,7 +9,7 @@ from app.auth import crud, schemas
 from app.auth.utils import generate_valid_password
 from app.common.deps import Mailer
 from app.core.config import settings
-from app.tests.test_db_config.initial_data import INITIAL_DATA
+from app.tests.integration.test_db_config.initial_data import INITIAL_DATA
 
 
 class TestUsers:  # pylint: disable=R0904

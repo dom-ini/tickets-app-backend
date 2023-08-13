@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from app.auth import crud, models, schemas
 from app.auth.utils import generate_valid_password
-from app.tests.test_db_config.initial_data import INITIAL_DATA
+from app.tests.integration.test_db_config.initial_data import INITIAL_DATA
 
 
 class TestUser:  # pylint: disable=R0904
