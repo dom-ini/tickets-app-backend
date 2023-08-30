@@ -15,7 +15,9 @@ black:
 mypy:
 	poetry run mypy --install-types --non-interactive .
 unit:
-	poetry run pytest app/tests/unit
+	poetry run pytest app/tests/unit --no-cov
 integration:
-	poetry run pytest app/tests/integration
+	poetry run pytest app/tests/integration --no-cov
+test:
+	poetry run pytest app/tests
 lint: black flake8 isort pylint mypy toml_sort
