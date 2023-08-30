@@ -1,9 +1,9 @@
-from typing import Any, Iterator
+from typing import Any, Callable, Iterator
 
 from pydantic import BaseModel
 from sqlalchemy import func
 
-from app.common.exceptions import InvalidSortField
+from app.common.exceptions import InvalidFilterField, InvalidFilterType, InvalidSortField
 
 _OPERATORS_MAP = {
     "lte": lambda model_value, filter_value: model_value <= filter_value,
@@ -11,6 +11,13 @@ _OPERATORS_MAP = {
     "icontains": lambda model_value, filter_value: func.lower(model_value).contains(func.lower(filter_value)),
     "exact": lambda model_value, filter_value: model_value == filter_value,
 }
+
+
+def _get_filter_function(filter_type: str) -> Callable:
+    filter_function = _OPERATORS_MAP.get(filter_type)
+    if filter_function is None:
+        raise InvalidFilterType
+    return filter_function
 
 
 class BaseFilter(BaseModel):
@@ -23,9 +30,17 @@ class BaseFilter(BaseModel):
         filters = []
         for key, value in filter_values.items():
             field, lookup = key.split("__")
-            filter_ = _OPERATORS_MAP[lookup](getattr(self.Constants.model, field), value)
+            filter_function = _get_filter_function(lookup)
+            model_field = self._get_model_field(field)
+            filter_ = filter_function(model_field, value)
             filters.append(filter_)
         return filters
+
+    def _get_model_field(self, field_name: str) -> Any:
+        model_field = getattr(self.Constants.model, field_name, None)
+        if model_field is None:
+            raise InvalidFilterField
+        return model_field
 
 
 class BaseSorter(BaseModel):
