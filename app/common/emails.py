@@ -30,6 +30,11 @@ class MailSender:
             yield outbox
 
 
+def read_template(template_name: str) -> str:
+    with open(Path(settings.EMAIL_TEMPLATES_DIR) / template_name, encoding="utf-8") as file:
+        return file.read()
+
+
 def prepare_email(
     email_to: Iterable[str],
     subject: str,
@@ -43,8 +48,7 @@ def prepare_email(
     if context is not None:
         base_context.update(context)
     subject = JinjaTemplate(subject).render(**base_context)
-    with open(Path(settings.EMAIL_TEMPLATES_DIR) / template_name, encoding="utf-8") as file:
-        template = file.read()
+    template = read_template(template_name)
     body = JinjaTemplate(template).render(**base_context)
     message = MessageSchema(
         recipients=email_to,
