@@ -13,6 +13,8 @@ from app.core.config import settings
 from app.db.session import SessionLocal
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/auth/login")
+DEFAULT_PAGE_SIZE = 100
+DEFAULT_PAGE_OFFSET = 0
 
 
 def get_db() -> Generator:
@@ -50,7 +52,7 @@ def get_current_active_superuser(current_user: "CurrentActiveUser") -> models.Us
 
 
 class PaginationParams:
-    def __init__(self, skip: int = 0, limit: int = 100) -> None:
+    def __init__(self, skip: int = DEFAULT_PAGE_OFFSET, limit: int = DEFAULT_PAGE_SIZE) -> None:
         self.skip = skip
         self.limit = limit
 
