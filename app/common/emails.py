@@ -9,7 +9,7 @@ from app.core.config import settings
 
 
 class MailEngine(Protocol):  # pragma: no cover
-    async def send_message(self, message: MessageSchema, template_name: str = ...) -> None:
+    async def send_message(self, message: Any, template_name: str = ...) -> None:
         ...
 
     @contextmanager
@@ -21,7 +21,7 @@ class MailSender:
     def __init__(self, engine: MailEngine) -> None:
         self.engine = engine
 
-    async def send(self, message: MessageSchema) -> None:
+    async def send(self, message: Any) -> None:
         return await self.engine.send_message(message)
 
     @contextmanager
