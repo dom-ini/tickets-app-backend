@@ -1,6 +1,6 @@
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Any, Generator, Iterable, Protocol
+from typing import Any, Generator, Protocol
 
 from emails.template import JinjaTemplate
 from fastapi_mail import ConnectionConfig, FastMail, MessageSchema
@@ -36,7 +36,7 @@ def read_template(template_name: str) -> str:
 
 
 def prepare_email(
-    email_to: Iterable[str],
+    email_to: list[str] | tuple[str],
     subject: str,
     template_name: str,
     context: dict[str, Any] | None = None,
