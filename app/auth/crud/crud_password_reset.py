@@ -27,7 +27,7 @@ class CRUDPasswordResetToken(CRUDBase[PasswordResetToken, PasswordResetTokenCrea
             try:
                 db.commit()
                 break
-            except IntegrityError:  # pragma: no cover
+            except IntegrityError:
                 db.rollback()
         return token
 
