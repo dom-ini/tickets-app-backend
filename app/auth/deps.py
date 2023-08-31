@@ -1,9 +1,6 @@
-from fastapi import HTTPException
-from starlette import status
-
 from app.auth import crud, models, schemas
 from app.auth.crud import CRUDUser
-from app.auth.exceptions import EmailAlreadyTaken, UserNotFound
+from app.auth.exceptions import EmailAlreadyTaken, OpenRegistrationNotAllowed, UserNotFound
 from app.common.deps import CurrentActiveUser, DBSession
 from app.common.utils import InstanceInDBValidator
 from app.core.config import settings
@@ -32,4 +29,4 @@ def user_create_unique_email(db: DBSession, user_in: schemas.UserCreateOpen) -> 
 
 def open_registration_allowed() -> None:
     if not settings.USERS_OPEN_REGISTRATION:
-        raise HTTPException(detail="Open registration is forbidden", status_code=status.HTTP_403_FORBIDDEN)
+        raise OpenRegistrationNotAllowed()

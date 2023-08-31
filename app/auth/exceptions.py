@@ -10,3 +10,8 @@ class EmailAlreadyTaken(HTTPException):
 class UserNotFound(HTTPException):
     def __init__(self) -> None:
         super().__init__(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+
+
+class OpenRegistrationNotAllowed(HTTPException):
+    def __init__(self) -> None:
+        super().__init__(status_code=status.HTTP_403_FORBIDDEN, detail="Open registration is forbidden")
