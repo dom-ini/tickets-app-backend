@@ -11,7 +11,7 @@ user_exists = InstanceInDBValidator[models.User, CRUDUser](crud_service=crud.use
 def validate_unique_email(db: DBSession, email: str) -> None:
     user = crud.user.get_by_email(db, email=email)
     if user:
-        raise EmailAlreadyTaken()
+        raise EmailAlreadyTaken
 
 
 def user_update_unique_email(
@@ -29,4 +29,4 @@ def user_create_unique_email(db: DBSession, user_in: schemas.UserCreateOpen) -> 
 
 def open_registration_allowed() -> None:
     if not settings.USERS_OPEN_REGISTRATION:
-        raise OpenRegistrationNotAllowed()
+        raise OpenRegistrationNotAllowed

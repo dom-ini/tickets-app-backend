@@ -1,7 +1,7 @@
 import pytest
+from fastapi import status
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
-from starlette import status
 
 from app.auth import crud, models, schemas
 from app.auth.utils import generate_valid_password

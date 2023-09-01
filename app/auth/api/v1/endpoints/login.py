@@ -1,10 +1,10 @@
 from typing import Annotated, Any
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
-from starlette import status
 
 from app.auth import crud, schemas, security
+from app.auth.exceptions import InvalidCredentials, UserDisabled, UserNotActivated
 from app.common import deps
 
 router = APIRouter()
@@ -17,20 +17,11 @@ def login_for_access_token(db: deps.DBSession, form_data: Annotated[OAuth2Passwo
     """
     user = crud.user.authenticate_by_mail(db, email=form_data.username, password=form_data.password)
     if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid credentials",
-        )
+        raise InvalidCredentials
     if not crud.user.is_activated(user):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Account is not activated",
-        )
+        raise UserNotActivated
     if crud.user.is_disabled(user):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Account is disabled",
-        )
+        raise UserDisabled
 
     access_token = security.create_access_token(subject=user.id)
 

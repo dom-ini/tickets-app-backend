@@ -1,10 +1,10 @@
 from typing import Any
 
-from fastapi import APIRouter, BackgroundTasks, HTTPException
-from starlette import status
+from fastapi import APIRouter, BackgroundTasks
 
 from app.auth import crud, schemas
 from app.auth.emails import send_password_reset_request_mail
+from app.auth.exceptions import InvalidToken, UserNotFound
 from app.common import schemas as common_schemas
 from app.common.deps import DBSession, Mailer
 
@@ -47,11 +47,11 @@ def reset_password(db: DBSession, password_reset_form: schemas.PasswordResetForm
     """
     token = crud.password_reset_token.get_by_value(db, value=password_reset_form.token)
     if not token or crud.password_reset_token.is_invalidated(token) or crud.password_reset_token.is_expired(token):
-        raise HTTPException(detail="Invalid token", status_code=status.HTTP_400_BAD_REQUEST)
+        raise InvalidToken
     crud.password_reset_token.invalidate(db, token=token)
     user_id = token.user_id
     user = crud.user.get(db, id_=user_id)
     if not user:
-        raise HTTPException(detail="User not found", status_code=status.HTTP_400_BAD_REQUEST)
+        raise UserNotFound
     crud.user.change_password(db, user=user, new_password=password_reset_form.new_password)
     return common_schemas.MessageResponse(message="Password changed successfully")

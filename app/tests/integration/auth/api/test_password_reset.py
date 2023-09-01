@@ -1,9 +1,9 @@
 from unittest.mock import MagicMock
 
 import pytest
+from fastapi import status
 from fastapi.testclient import TestClient
 from pytest_mock import MockerFixture
-from starlette import status
 
 from app.common.deps import Mailer
 from app.core.config import settings

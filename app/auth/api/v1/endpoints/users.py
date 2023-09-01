@@ -1,7 +1,6 @@
 from typing import Annotated, Any
 
-from fastapi import APIRouter, BackgroundTasks, Depends
-from starlette import status
+from fastapi import APIRouter, BackgroundTasks, Depends, status
 
 from app.auth import crud, schemas
 from app.auth.deps import open_registration_allowed, user_create_unique_email, user_exists, user_update_unique_email

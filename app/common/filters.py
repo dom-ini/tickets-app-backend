@@ -68,5 +68,5 @@ class BaseSorter(BaseModel):
             descending = field.startswith("-")
             field_name = field[1:] if descending else field
             if field_name not in self.Constants.order_by_fields:
-                raise InvalidSortField()
+                raise InvalidSortField
             yield field_name, descending
