@@ -25,7 +25,7 @@ def request_password_reset(
     if user:
         crud.password_reset_token.invalidate_all(db, user_id=user.id)
         token_in = schemas.PasswordResetTokenCreate(user_id=user.id)
-        token = crud.password_reset_token.generate(db, obj_in=token_in)
+        token = crud.password_reset_token.create(db, obj_in=token_in)
         background_tasks.add_task(mailer.send, send_password_reset_request_mail(email_to=user.email, token=token.value))
     return common_schemas.MessageResponse(
         message="If the given email address exists in the database, you will receive an email message with instruction "

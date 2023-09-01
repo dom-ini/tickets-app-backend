@@ -18,7 +18,7 @@ class CRUDPasswordResetToken(CRUDBase[PasswordResetToken, PasswordResetTokenCrea
         result = db.execute(query)
         return result.scalar()
 
-    def generate(self, db: Session, *, obj_in: PasswordResetTokenCreate) -> PasswordResetToken:
+    def create(self, db: Session, *, obj_in: PasswordResetTokenCreate) -> PasswordResetToken:
         while True:
             token_value = secrets.token_urlsafe(64)
             expires_at = datetime.utcnow() + timedelta(minutes=settings.PASSWORD_RESET_TOKEN_EXPIRE_MINUTES)

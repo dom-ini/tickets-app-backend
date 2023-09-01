@@ -25,7 +25,7 @@ def test_get_by_value(mock_db: Mock, mock_select: Mock) -> None:
     mock_select.assert_called_once_with(crud.password_reset_token.model)
 
 
-def test_generate_should_rollback_on_integrity_error(mock_db: Mock) -> None:
+def test_create_should_rollback_on_integrity_error(mock_db: Mock) -> None:
     def side_effect() -> None:
         side_effect.called = getattr(side_effect, "called", 0) + 1  # type: ignore[attr-defined]
         if side_effect.called == 1:  # type: ignore[attr-defined]
@@ -34,22 +34,22 @@ def test_generate_should_rollback_on_integrity_error(mock_db: Mock) -> None:
     mock_db.commit.side_effect = side_effect
     obj_in = PasswordResetTokenCreate(user_id=1)
 
-    crud.password_reset_token.generate(mock_db, obj_in=obj_in)
+    crud.password_reset_token.create(mock_db, obj_in=obj_in)
 
     mock_db.rollback.assert_called_once()
 
 
-def test_generate_contains_user_id(mock_db: Mock) -> None:
+def test_create_contains_user_id(mock_db: Mock) -> None:
     user_id = 123
     obj_in = PasswordResetTokenCreate(user_id=user_id)
-    token = crud.password_reset_token.generate(mock_db, obj_in=obj_in)
+    token = crud.password_reset_token.create(mock_db, obj_in=obj_in)
 
     assert token.user_id == user_id
 
 
-def test_generate_expiration_date_is_in_future(mock_db: Mock) -> None:
+def test_create_expiration_date_is_in_future(mock_db: Mock) -> None:
     obj_in = PasswordResetTokenCreate(user_id=1)
-    token = crud.password_reset_token.generate(mock_db, obj_in=obj_in)
+    token = crud.password_reset_token.create(mock_db, obj_in=obj_in)
 
     assert token.expires_at > datetime.utcnow()
 

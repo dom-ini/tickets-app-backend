@@ -17,20 +17,20 @@ class TestPasswordReset:
     @pytest.fixture(name="reset_token")
     def create_reset_token(self, db: Session) -> models.PasswordResetToken:
         token_in = schemas.PasswordResetTokenCreate(user_id=self.user_id)
-        token = crud.password_reset_token.generate(db, obj_in=token_in)
+        token = crud.password_reset_token.create(db, obj_in=token_in)
         self.value = token.value
         return token
 
     @pytest.fixture(name="multiple_reset_tokens")
     def create_multiple_reset_tokens(self, db: Session) -> list[models.PasswordResetToken]:
         token_in = schemas.PasswordResetTokenCreate(user_id=self.user_id)
-        tokens = [crud.password_reset_token.generate(db, obj_in=token_in) for _ in range(5)]
+        tokens = [crud.password_reset_token.create(db, obj_in=token_in) for _ in range(5)]
         return tokens
 
     @pytest.fixture(name="reset_tokens_for_different_users")
     def create_reset_tokens_for_different_users(self, db: Session) -> dict[int, models.PasswordResetToken]:
         tokens = {
-            user_id: crud.password_reset_token.generate(db, obj_in=schemas.PasswordResetTokenCreate(user_id=user_id))
+            user_id: crud.password_reset_token.create(db, obj_in=schemas.PasswordResetTokenCreate(user_id=user_id))
             for user_id in (self.user_id, self.second_user_id)
         }
         return tokens
