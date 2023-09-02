@@ -1,0 +1,98 @@
+[
+  {
+    "model": "Organizer",
+    "data": [
+      {
+        "id": 1,
+        "name": "Organizator sp. z o.o."
+      }
+    ]
+  },
+  {
+    "model": "Location",
+    "data": [
+      {
+        "id": 1,
+        "name": "Politechnika Gdańska, WZiE",
+        "city": "Gdańsk",
+        "longitude": 18.6166,
+        "latitude": 54.3703,
+        "slug": "pg-wzie"
+      }
+    ]
+  },
+  {
+    "model": "EventType",
+    "data": [
+      {
+        "id": 1,
+        "parent_type_id": null,
+        "name": "Biznes",
+        "slug": "biznes"
+      },
+      {
+        "id": 2,
+        "parent_type_id": null,
+        "name": "IT",
+        "slug": "it"
+      },
+      {
+        "id": 3,
+        "parent_type_id": null,
+        "name": "Sport",
+        "slug": "sport"
+      },
+      {
+        "id": 4,
+        "parent_type_id": 2,
+        "name": "Warsztaty",
+        "slug": "warsztaty"
+      },
+      {
+        "id": 5,
+        "parent_type_id": 2,
+        "name": "Wykłady",
+        "slug": "wyklady"
+      }
+    ]
+  },
+  {
+    "model": "Event",
+    "data": [
+      {
+        "id": 1,
+        "name": "Warsztaty z Pythonem",
+        "description": "<b>Warsztaty z Pythonem</b>",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2023-12-01 14:00:00",
+        "created_by_id": 1,
+        "event_type_id": 1,
+        "location_id": 1,
+        "organizer_id": 1,
+        "slug": "warszaty-z-pythonem"
+      }
+    ]
+  },
+  {
+    "model": "Speaker",
+    "data": [
+      {
+        "id": 1,
+        "name": "Jan Kowalski",
+        "photo": null,
+        "description": "<b>Jan Kowalski</b>",
+        "slug": "jan-kowalski"
+      }
+    ]
+  },
+  {
+    "model": "event_speaker",
+    "data": [
+      {
+        "event_id": 1,
+        "speaker_id": 1
+      }
+    ]
+  }
+]

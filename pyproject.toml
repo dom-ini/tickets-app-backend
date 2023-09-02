@@ -68,6 +68,7 @@ uvicorn = "^0.23.2"
 [tool.poetry.group.dev.dependencies]
 bandit = "^1.7.5"
 black = "^23.3.0"
+click = "^8.1.7"
 flake8 = "^6.0.0"
 httpx = "^0.24.1"
 isort = "^5.12.0"
