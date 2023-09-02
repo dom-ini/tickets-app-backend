@@ -10,11 +10,11 @@ from app.db.base_class import Base
 if TYPE_CHECKING:
     from app.auth.models import User  # noqa: F401
 
-event_artist = Table(
-    "event_artist",
+event_speaker = Table(
+    "event_speaker",
     Base.metadata,
     Column("event_id", ForeignKey("event.id"), primary_key=True),
-    Column("artist_id", ForeignKey("artist.id"), primary_key=True),
+    Column("speaker_id", ForeignKey("speaker.id"), primary_key=True),
 )
 
 
@@ -32,10 +32,10 @@ class Event(Base):
     location_id: Mapped[int] = mapped_column(ForeignKey("location.id"), nullable=False)
 
     organizer: Mapped["Organizer"] = relationship("Organizer", back_populates="events")
-    created_by: Mapped["User"] = relationship("User", back_populates="events")
+    created_by: Mapped["User"] = relationship("User")
     event_type: Mapped["EventType"] = relationship("EventType", back_populates="events")
     location: Mapped["Location"] = relationship("Location", back_populates="events")
-    artists: Mapped[list["Artist"]] = relationship("Artist", secondary=event_artist, back_populates="events")
+    speakers: Mapped[list["Speaker"]] = relationship("Speaker", secondary=event_speaker, back_populates="events")
 
 
 class Organizer(Base):
@@ -71,11 +71,11 @@ class Location(Base):
     events: Mapped[list["Event"]] = relationship("Event", back_populates="location", lazy="dynamic")
 
 
-class Artist(Base):
+class Speaker(Base):
     id: Mapped[IntPk]
     name: Mapped[str] = mapped_column(String(40), index=True, nullable=False)
     slug: Mapped[UniqueIndexedStr]
     photo: Mapped[Optional[str]]
     description: Mapped[Optional[str]] = mapped_column(Text)
 
-    events: Mapped[list["Event"]] = relationship("Event", secondary=event_artist, back_populates="artists")
+    events: Mapped[list["Event"]] = relationship("Event", secondary=event_speaker, back_populates="speakers")

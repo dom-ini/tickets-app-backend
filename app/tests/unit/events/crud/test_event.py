@@ -10,24 +10,24 @@ def get_mock_event() -> Mock:
     return Mock()
 
 
-@pytest.fixture(name="mock_artist")
-def get_mock_artist() -> Mock:
+@pytest.fixture(name="mock_speaker")
+def get_mock_speaker() -> Mock:
     return Mock()
 
 
-def test_artists(mock_event: Mock, mock_artist: Mock) -> None:
-    expected = [mock_artist]
-    mock_event.artists = expected
-    artists = crud.event.artists(mock_event)
+def test_speakers(mock_event: Mock, mock_speaker: Mock) -> None:
+    expected = [mock_speaker]
+    mock_event.speakers = expected
+    speakers = crud.event.speakers(mock_event)
 
-    assert artists == expected
-
-
-def test_add_artist(mock_db: Mock, mock_event: Mock, mock_artist: Mock) -> None:
-    crud.event.add_artist(mock_db, event=mock_event, artist=mock_artist)
-    mock_event.artists.append.assert_called_once_with(mock_artist)
+    assert speakers == expected
 
 
-def test_remove_artist(mock_db: Mock, mock_event: Mock, mock_artist: Mock) -> None:
-    crud.event.remove_artist(mock_db, event=mock_event, artist=mock_artist)
-    mock_event.artists.remove.assert_called_once_with(mock_artist)
+def test_add_speaker(mock_db: Mock, mock_event: Mock, mock_speaker: Mock) -> None:
+    crud.event.add_speaker(mock_db, event=mock_event, speaker=mock_speaker)
+    mock_event.speakers.append.assert_called_once_with(mock_speaker)
+
+
+def test_remove_speaker(mock_db: Mock, mock_event: Mock, mock_speaker: Mock) -> None:
+    crud.event.remove_speaker(mock_db, event=mock_event, speaker=mock_speaker)
+    mock_event.speakers.remove.assert_called_once_with(mock_speaker)

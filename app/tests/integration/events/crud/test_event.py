@@ -41,17 +41,17 @@ class TestEvent:
         assert event2 is not None
         assert event2.id == event.id
 
-    def test_add_artist_to_event(self, db: Session, event: models.Event, artist: models.Artist) -> None:
-        crud.event.add_artist(db, event=event, artist=artist)
-        artists = crud.event.artists(event)
-        assert len(artists) == 1
-        assert artists[0].id == artist.id
+    def test_add_speaker_to_event(self, db: Session, event: models.Event, speaker: models.Speaker) -> None:
+        crud.event.add_speaker(db, event=event, speaker=speaker)
+        speakers = crud.event.speakers(event)
+        assert len(speakers) == 1
+        assert speakers[0].id == speaker.id
 
-    def test_remove_artist_from_event(self, db: Session, event: models.Event, artist: models.Artist) -> None:
-        crud.event.add_artist(db, event=event, artist=artist)
-        crud.event.remove_artist(db, event=event, artist=artist)
-        artists = crud.event.artists(event)
-        assert len(artists) == 0
+    def test_remove_speaker_from_event(self, db: Session, event: models.Event, speaker: models.Speaker) -> None:
+        crud.event.add_speaker(db, event=event, speaker=speaker)
+        crud.event.remove_speaker(db, event=event, speaker=speaker)
+        speakers = crud.event.speakers(event)
+        assert len(speakers) == 0
 
     def test_remove_event(self, db: Session, event: models.Event) -> None:
         crud.event.remove(db, id_=event.id)

@@ -2,18 +2,18 @@ from sqlalchemy.orm import Session
 
 from app.common.crud import CRUDBase, FilterableMixin, SlugMixin
 from app.common.schemas import EmptySchema
-from app.events.models import Artist, Event
+from app.events.models import Event, Speaker
 from app.events.schemas import EventCreate
 
 
 class CRUDEvent(CRUDBase[Event, EventCreate, EmptySchema], SlugMixin[Event], FilterableMixin[Event]):
-    def artists(self, event: Event) -> list[Artist]:
-        return event.artists
+    def speakers(self, event: Event) -> list[Speaker]:
+        return event.speakers
 
-    def add_artist(self, db: Session, *, event: Event, artist: Artist) -> None:
-        event.artists.append(artist)
+    def add_speaker(self, db: Session, *, event: Event, speaker: Speaker) -> None:
+        event.speakers.append(speaker)
         db.commit()
 
-    def remove_artist(self, db: Session, *, event: Event, artist: Artist) -> None:
-        event.artists.remove(artist)
+    def remove_speaker(self, db: Session, *, event: Event, speaker: Speaker) -> None:
+        event.speakers.remove(speaker)
         db.commit()

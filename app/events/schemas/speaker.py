@@ -1,21 +1,21 @@
 from pydantic import BaseModel, ConfigDict, HttpUrl
 
 
-class ArtistBase(BaseModel):
+class SpeakerBase(BaseModel):
     name: str
     photo: HttpUrl | None = None
     description: str
     slug: str
 
 
-class ArtistInDBBase(ArtistBase):
+class SpeakerInDBBase(SpeakerBase):
     model_config = ConfigDict(from_attributes=True)
     id: int
 
 
-class Artist(ArtistInDBBase):
+class Speaker(SpeakerInDBBase):
     pass
 
 
-class ArtistCreate(ArtistBase):
+class SpeakerCreate(SpeakerBase):
     pass

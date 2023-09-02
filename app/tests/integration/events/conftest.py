@@ -48,7 +48,7 @@ def create_event(
     return crud.event.create(db, obj_in=event_in)
 
 
-@pytest.fixture(name="artist")
-def create_artist(db: Session) -> models.Artist:
-    artist_in = schemas.ArtistCreate(name="Artist", description="Description", slug="artist")
-    return crud.artist.create(db, obj_in=artist_in)
+@pytest.fixture(name="speaker")
+def create_speaker(db: Session) -> models.Speaker:
+    speaker_in = schemas.SpeakerCreate(name="Speaker", description="Description", slug="speaker")
+    return crud.speaker.create(db, obj_in=speaker_in)

@@ -1,8 +1,8 @@
 from app.common.utils import InstanceInDBValidator
 from app.events import crud
-from app.events.crud import CRUDArtist, CRUDEvent
-from app.events.exceptions import ArtistNotFound, EventNotFound
-from app.events.models import Artist, Event
+from app.events.crud import CRUDEvent, CRUDSpeaker
+from app.events.exceptions import EventNotFound, SpeakerNotFound
+from app.events.models import Event, Speaker
 
 event_exists = InstanceInDBValidator[Event, CRUDEvent](crud_service=crud.event, exception=EventNotFound())
-artist_exists = InstanceInDBValidator[Artist, CRUDArtist](crud_service=crud.artist, exception=ArtistNotFound())
+speaker_exists = InstanceInDBValidator[Speaker, CRUDSpeaker](crud_service=crud.speaker, exception=SpeakerNotFound())

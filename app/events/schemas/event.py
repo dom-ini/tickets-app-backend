@@ -2,10 +2,10 @@ from datetime import datetime
 
 from pydantic import BaseModel, ConfigDict, HttpUrl
 
-from app.events.schemas.artist import Artist
 from app.events.schemas.event_type import EventType
 from app.events.schemas.location import Location, SimpleLocation
 from app.events.schemas.organizer import Organizer
+from app.events.schemas.speaker import Speaker
 
 
 class EventBase(BaseModel):
@@ -30,7 +30,7 @@ class EventDetails(EventInDBase):
     location: Location
     organizer: Organizer
     event_type: EventType
-    artists: list[Artist] | None = None
+    speakers: list[Speaker] | None = None
 
 
 class EventCreate(EventBase):
