@@ -29,6 +29,7 @@ class CRUDPasswordResetToken(CRUDBase[PasswordResetToken, PasswordResetTokenCrea
                 break
             except IntegrityError:
                 db.rollback()
+        db.refresh(token)
         return token
 
     def invalidate(self, db: Session, *, token: PasswordResetToken) -> PasswordResetToken:
