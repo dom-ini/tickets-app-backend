@@ -1,4 +1,5 @@
 # pylint: disable=W0621,W0613,E1101
+from datetime import datetime
 from typing import Generator
 
 import pytest
@@ -11,7 +12,9 @@ from app.auth import crud, models, schemas
 from app.auth.utils import generate_valid_password
 from app.common.deps import get_db
 from app.common.emails import MailSender, get_mailer_config, mailer
+from app.core.config import settings
 from app.db import base
+from app.events import crud as event_crud, models as event_models, schemas as event_schemas
 from app.main import app
 from app.tests.integration.test_db_config.initial_data import INITIAL_DATA
 from app.tests.integration.test_db_config.session import TestingSessionLocal, engine
@@ -95,3 +98,57 @@ def superuser(db: Session) -> models.User:
         is_superuser=True,
     )
     return crud.user.create(db, obj_in=user_in)
+
+
+@pytest.fixture(name="location")
+def create_location(db: Session) -> event_models.Location:
+    location_in = event_schemas.LocationCreate(
+        name="Location", city="New York", slug="location", latitude=50.0, longitude=18.0
+    )
+    return event_crud.location.create(db, obj_in=location_in)
+
+
+@pytest.fixture(name="organizer")
+def create_organizer(db: Session) -> event_models.Organizer:
+    organizer_in = event_schemas.OrganizerCreate(name="Organizer")
+    return event_crud.organizer.create(db, obj_in=organizer_in)
+
+
+@pytest.fixture(name="event_type")
+def create_event_type(db: Session) -> event_models.EventType:
+    event_type_in = event_schemas.EventTypeCreate(name="event type", slug="event-type")
+    return event_crud.event_type.create(db, obj_in=event_type_in)
+
+
+@pytest.fixture(name="speaker")
+def create_speaker(db: Session) -> event_models.Speaker:
+    speaker_in = event_schemas.SpeakerCreate(name="Speaker", description="Description", slug="speaker")
+    return event_crud.speaker.create(db, obj_in=speaker_in)
+
+
+@pytest.fixture(name="event")
+def create_event(
+    db: Session,
+    location: event_models.Location,
+    organizer: event_models.Organizer,
+    event_type: event_models.EventType,
+    superuser: models.User,
+) -> event_models.Event:
+    event_in = event_schemas.EventCreate(
+        name="Event",
+        description="Description",
+        slug="event",
+        held_at=datetime.now(),
+        location_id=location.id,
+        organizer_id=organizer.id,
+        event_type_id=event_type.id,
+        created_by_id=superuser.id,
+    )
+    return event_crud.event.create(db, obj_in=event_in)
+
+
+@pytest.fixture(name="test_user")
+def get_test_user(db: Session) -> models.User:
+    user = crud.user.get_by_email(db, email=settings.TEST_USER_EMAIL)
+    assert user is not None
+    return user

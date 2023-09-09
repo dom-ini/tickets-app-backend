@@ -9,29 +9,8 @@ from app.auth import crud
 from app.auth.schemas import PasswordResetTokenCreate
 
 
-@pytest.fixture(name="mock_select")
-def get_mock_select(mocker: MockerFixture) -> Mock:
-    return mocker.patch("app.auth.crud.crud_password_reset.select", return_value=Mock())
-
-
-@pytest.fixture(name="mock_update")
-def get_mock_update(mocker: MockerFixture) -> Mock:
-    return mocker.patch("app.auth.crud.crud_password_reset.update", return_value=Mock())
-
-
-def test_get_by_value(mock_db: Mock, mock_select: Mock) -> None:
-    crud.password_reset_token.get_by_value(mock_db, value="123")
-
-    mock_select.assert_called_once_with(crud.password_reset_token.model)
-
-
 def test_create_should_rollback_on_integrity_error(mock_db: Mock) -> None:
-    def side_effect() -> None:
-        side_effect.called = getattr(side_effect, "called", 0) + 1  # type: ignore[attr-defined]
-        if side_effect.called == 1:  # type: ignore[attr-defined]
-            raise IntegrityError("IntegrityError raised", orig=BaseException(), params=None)
-
-    mock_db.commit.side_effect = side_effect
+    mock_db.commit.side_effect = [IntegrityError("IntegrityError raised", orig=BaseException(), params=None), None]
     obj_in = PasswordResetTokenCreate(user_id=1)
 
     crud.password_reset_token.create(mock_db, obj_in=obj_in)
@@ -61,12 +40,6 @@ def test_invalidate(mock_db: Mock, invalidated: bool) -> None:
     token = crud.password_reset_token.invalidate(mock_db, token=db_obj)
 
     assert token.is_invalidated
-
-
-def test_invalidate_all(mock_db: Mock, mock_update: Mock) -> None:
-    crud.password_reset_token.invalidate_all(mock_db, user_id=1)
-
-    mock_update.assert_called_once_with(crud.password_reset_token.model)
 
 
 @pytest.mark.parametrize("invalidated", [False, True])

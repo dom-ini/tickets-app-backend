@@ -7,17 +7,6 @@ from pytest_mock import MockerFixture
 from app.auth import crud, schemas
 
 
-@pytest.fixture(name="mock_select")
-def get_mock_select(mocker: MockerFixture) -> Mock:
-    return mocker.patch("app.auth.crud.crud_user.select", return_value=Mock())
-
-
-def test_get_by_mail(mock_db: Mock, mock_select: Mock) -> None:
-    crud.user.get_by_email(mock_db, email="email@example.com")
-
-    mock_select.assert_called_once_with(crud.user.model)
-
-
 def test_create_hashes_password(mock_db: Mock) -> None:
     password = "Test1234!"
     obj_in = schemas.UserCreate(email="email@example.com", password=password)

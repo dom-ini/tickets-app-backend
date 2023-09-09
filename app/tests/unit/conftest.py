@@ -4,6 +4,6 @@ import pytest
 from sqlalchemy.orm import Session
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def mock_db() -> Mock:
     return Mock(spec=Session)
