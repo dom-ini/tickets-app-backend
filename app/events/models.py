@@ -9,6 +9,7 @@ from app.db.base_class import Base
 
 if TYPE_CHECKING:
     from app.auth.models import User  # noqa: F401
+    from app.tickets.models import TicketCategory  # noqa: F401
 
 event_speaker = Table(
     "event_speaker",
@@ -36,6 +37,7 @@ class Event(Base):
     event_type: Mapped["EventType"] = relationship("EventType", back_populates="events")
     location: Mapped["Location"] = relationship("Location", back_populates="events")
     speakers: Mapped[list["Speaker"]] = relationship("Speaker", secondary=event_speaker, back_populates="events")
+    ticket_categories: Mapped[list["TicketCategory"]] = relationship("TicketCategory", back_populates="event")
 
 
 class Organizer(Base):

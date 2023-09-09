@@ -5,7 +5,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship  # type: ignore[a
 
 from app.common.models import BoolFalse, IntPk, UniqueIndexedStr
 from app.db.base_class import Base
-from app.events.models import Event
+from app.tickets.models import Ticket
 
 
 class User(Base):
@@ -20,7 +20,7 @@ class User(Base):
     password_reset_tokens: Mapped[list["PasswordResetToken"]] = relationship(
         "PasswordResetToken", back_populates="user"
     )
-    events: Mapped[list["Event"]] = relationship(Event, back_populates="created_by")
+    tickets: Mapped[list["Ticket"]] = relationship(Ticket, back_populates="user")
 
 
 class PasswordResetToken(Base):
