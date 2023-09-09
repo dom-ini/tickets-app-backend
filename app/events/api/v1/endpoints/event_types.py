@@ -9,9 +9,9 @@ router = APIRouter()
 
 
 @router.get("/", response_model=list[schemas.EventTypeNode])
-def list_events(db: DBSession) -> Any:
+def list_event_types(db: DBSession) -> Any:
     """
-    List events
+    List event types
     """
     event_types = crud.event_type.get_event_type_tree(db)
     return event_types
