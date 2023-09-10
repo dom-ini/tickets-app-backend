@@ -3,12 +3,15 @@ from fastapi_mail import MessageSchema
 from app.common.emails import prepare_email
 
 
-def send_new_user_email(email_to: str) -> MessageSchema:
+def send_new_user_email(email_to: str, verification_token: str) -> MessageSchema:
     subject = "[{{ project_name }}] Welcome to {{ project_name }}!"
     return prepare_email(
         email_to=[email_to],
         subject=subject,
         template_name="auth/new_user.html",
+        context={
+            "token": verification_token,
+        },
     )
 
 

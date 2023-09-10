@@ -35,18 +35,29 @@ def test_change_password_hashes_password(mock_db: Mock) -> None:
     assert result.hashed_password != password
 
 
-def test_deactivate(mock_db: Mock, mocker: MockerFixture) -> None:
-    mocker.patch.object(crud.user, "get", return_value=Mock())
-    result = crud.user.deactivate(mock_db, user_id=1)
+@pytest.mark.parametrize(
+    "get_return,crud_method,attr,expected",
+    [
+        (Mock(), "deactivate", "is_disabled", True),
+        (None, "deactivate", None, None),
+        (Mock(), "activate", "is_activated", True),
+        (None, "activate", None, None),
+    ],
+)
+def test_activate_deactivate(  # pylint: disable=R0913
+    mock_db: Mock,
+    mocker: MockerFixture,
+    get_return: Mock | None,
+    crud_method: str,
+    attr: str | None,
+    expected: bool | None,
+) -> None:
+    mocker.patch.object(crud.user, "get", return_value=get_return)
+    method = getattr(crud.user, crud_method)
+    user = method(mock_db, user_id=1)
+    result = getattr(user, attr) if attr else user
 
-    assert result.is_disabled  # type: ignore[union-attr]
-
-
-def test_deactivate_returns_none_if_invalid_id(mock_db: Mock, mocker: MockerFixture) -> None:
-    mocker.patch.object(crud.user, "get", return_value=None)
-    result = crud.user.deactivate(mock_db, user_id=1)
-
-    assert result is None
+    assert result == expected
 
 
 @pytest.mark.parametrize(

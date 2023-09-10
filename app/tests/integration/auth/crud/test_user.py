@@ -127,6 +127,15 @@ class TestUser:  # pylint: disable=R0904
         user = crud.user.authenticate_by_mail(db, email=email, password=password)
         assert user is None
 
+    def test_activate_user(self, db: Session, default_user: models.User) -> None:
+        crud.user.activate(db, user_id=default_user.id)
+        assert crud.user.is_activated(default_user)
+
+    def test_activate_user_with_wrong_id_should_return_none(self, db: Session) -> None:
+        user_id = 9999
+        user = crud.user.activate(db, user_id=user_id)
+        assert user is None
+
     def test_deactivate_user(self, db: Session, default_user: models.User) -> None:
         crud.user.deactivate(db, user_id=default_user.id)
         assert crud.user.is_disabled(default_user)

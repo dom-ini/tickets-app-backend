@@ -2,7 +2,9 @@ from unittest.mock import Mock
 
 import pytest
 from pytest_mock import MockerFixture
+from sqlalchemy.exc import IntegrityError
 
+from app.common.crud import generate_unique_token
 from app.tests.unit.common.conftest import CreateSchema, Model, SampleCRUD, UpdateSchema
 
 
@@ -89,3 +91,10 @@ def test_get_filtered_with_ordering(mock_db: Mock, mock_crud: SampleCRUD, mock_s
     mock_crud.get_filtered(mock_db, order_by=order_by)
 
     mock_select.return_value.order_by.assert_called_once_with(*order_by)
+
+
+def test_generate_unique_token_should_rollback_on_integrity_error(mock_db: Mock) -> None:
+    mock_db.commit.side_effect = [IntegrityError("IntegrityError raised", orig=BaseException(), params=None), None]
+    generate_unique_token(mock_db, token_model=Mock, payload={})
+
+    mock_db.rollback.assert_called_once()

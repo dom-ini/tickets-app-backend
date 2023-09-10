@@ -47,15 +47,23 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         user_in = UserUpdate(password=new_password)
         return self.update(db, db_obj=user, obj_in=user_in)
 
-    def deactivate(self, db: Session, *, user_id: int) -> User | None:
+    def _set_attribute(self, db: Session, *, user_id: int, attr: str, value: Any) -> User | None:
         user = self.get(db, user_id)
         if not user:
             return None
 
-        user.is_disabled = True
+        setattr(user, attr, value)
         db.add(user)
         db.commit()
         db.refresh(user)
+        return user
+
+    def deactivate(self, db: Session, *, user_id: int) -> User | None:
+        user = self._set_attribute(db, user_id=user_id, attr="is_disabled", value=True)
+        return user
+
+    def activate(self, db: Session, *, user_id: int) -> User | None:
+        user = self._set_attribute(db, user_id=user_id, attr="is_activated", value=True)
         return user
 
     def authenticate_by_mail(self, db: Session, *, email: str, password: str) -> User | None:

@@ -1,11 +1,15 @@
 from typing import Annotated, Any
 
-from fastapi import APIRouter, BackgroundTasks, Depends, status
+from fastapi import APIRouter, Depends, status
 
-from app.auth import crud, schemas
-from app.auth.deps import open_registration_allowed, user_create_unique_email, user_exists, user_update_unique_email
-from app.auth.emails import send_new_user_email
-from app.common.deps import CurrentActiveUser, DBSession, Mailer, Pagination, get_current_active_superuser
+from app.auth import crud, models, schemas
+from app.auth.deps import (
+    open_registration_allowed,
+    register_new_user_and_send_verification_email,
+    user_exists,
+    user_update_unique_email,
+)
+from app.common.deps import CurrentActiveUser, DBSession, Pagination, get_current_active_superuser
 
 router = APIRouter()
 
@@ -16,12 +20,7 @@ router = APIRouter()
     status_code=status.HTTP_201_CREATED,
     dependencies=[Depends(open_registration_allowed)],
 )
-def create_user_open(
-    db: DBSession,
-    background_tasks: BackgroundTasks,
-    registration_form: Annotated[schemas.UserCreate, Depends(user_create_unique_email)],
-    mailer: Mailer,
-) -> Any:
+def create_user_open(new_user: Annotated[models.User, Depends(register_new_user_and_send_verification_email)]) -> Any:
     """
     Open registration for unauthenticated users
 
@@ -32,9 +31,6 @@ def create_user_open(
     * min. 1 digit
     * min. 1 special character
     """
-    user_in = schemas.UserCreate(email=registration_form.email, password=registration_form.password, is_activated=True)
-    new_user = crud.user.create(db, obj_in=user_in)
-    background_tasks.add_task(mailer.send, send_new_user_email(email_to=new_user.email))
     return new_user
 
 

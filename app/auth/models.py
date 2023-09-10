@@ -20,6 +20,7 @@ class User(Base):
     password_reset_tokens: Mapped[list["PasswordResetToken"]] = relationship(
         "PasswordResetToken", back_populates="user"
     )
+    verification_token: Mapped["VerificationToken"] = relationship("VerificationToken", back_populates="user")
     tickets: Mapped[list["Ticket"]] = relationship(Ticket, back_populates="user")
 
 
@@ -31,3 +32,11 @@ class PasswordResetToken(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey("user.id"), nullable=False)
 
     user: Mapped["User"] = relationship("User", back_populates="password_reset_tokens")
+
+
+class VerificationToken(Base):
+    id: Mapped[IntPk]
+    value: Mapped[UniqueIndexedStr]
+    user_id: Mapped[int] = mapped_column(ForeignKey("user.id"), nullable=False)
+
+    user: Mapped["User"] = relationship("User", back_populates="verification_token")

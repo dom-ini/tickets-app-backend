@@ -45,7 +45,7 @@ class TestUsers:  # pylint: disable=R0904
             raise LookupError("User not found")
         crud.user.deactivate(db, user_id=user.id)
 
-    def test_create_user_open(self, client: TestClient, mail_engine: Mailer) -> None:
+    def test_create_user_open_user_is_not_activated(self, client: TestClient, mail_engine: Mailer) -> None:
         password = generate_valid_password()
         email = "random@email.com"
         payload = {"email": email, "password": password}
@@ -55,7 +55,7 @@ class TestUsers:  # pylint: disable=R0904
         result = r.json()
         assert r.status_code == status.HTTP_201_CREATED
         assert "email" in result
-        assert result.get("is_activated")
+        assert not result.get("is_activated")
 
     def test_create_user_open_disallowed_open_registration_should_fail(
         self, client: TestClient, disallow_open_registration: Generator  # pylint: disable=W0613

@@ -7,15 +7,31 @@ from pytest_mock import MockerFixture
 
 from app.auth import crud
 from app.auth.deps import (
+    create_verification_token,
     open_registration_allowed,
+    register_new_user_and_send_verification_email,
+    register_user,
     user_create_unique_email,
     user_update_unique_email,
     validate_unique_email,
+    verify_account,
 )
-from app.auth.exceptions import EmailAlreadyTaken, OpenRegistrationNotAllowed
-from app.auth.schemas import UserCreateOpen, UserUpdate
+from app.auth.exceptions import EmailAlreadyTaken, InvalidToken, OpenRegistrationNotAllowed
+from app.auth.schemas import UserCreate, UserCreateOpen, UserUpdate
 from app.auth.utils import generate_valid_password
 from app.core.config import settings
+
+
+@pytest.fixture(name="mock_crud_user")
+def get_mock_crud_user(mocker: MockerFixture) -> Mock:
+    mocked = mocker.patch.object(crud, "user")
+    return mocked
+
+
+@pytest.fixture(name="mock_crud_token")
+def get_mock_crud_verification_token(mocker: MockerFixture) -> Mock:
+    mocked = mocker.patch.object(crud, "verification_token")
+    return mocked
 
 
 @pytest.fixture(name="mock_current_user")
@@ -138,3 +154,64 @@ def test_open_registration_allowed_when_disallowed(
 ) -> None:
     with pytest.raises(OpenRegistrationNotAllowed):
         open_registration_allowed()
+
+
+def test_register_user_creates_user(mock_db: Mock, mock_crud_user: Mock) -> None:
+    form = UserCreate(email="email@example.com", password=generate_valid_password())
+    register_user(mock_db, registration_form=form)
+
+    mock_crud_user.create.assert_called_once()
+
+
+def test_create_verification_token(mock_db: Mock, mock_crud_token: Mock) -> None:
+    user = Mock()
+    user.id = 1
+    create_verification_token(mock_db, user=user)
+
+    mock_crud_token.create.assert_called_once()
+
+
+def test_register_new_user_and_send_verification_email_returns_user(mocker: MockerFixture) -> None:
+    user_mock = Mock()
+    mock = Mock()
+    mocker.patch("app.auth.deps.send_new_user_email")
+    result = register_new_user_and_send_verification_email(
+        user=user_mock, token=mock, background_tasks=mock, mailer=mock
+    )
+
+    assert result == user_mock
+
+
+def test_register_new_user_and_send_verification_email_sends_email(mocker: MockerFixture) -> None:
+    mock_background_tasks = Mock()
+    mock_mailer = Mock()
+    mock = Mock()
+    mock_send_email = mocker.patch("app.auth.deps.send_new_user_email")
+    register_new_user_and_send_verification_email(
+        user=mock, token=mock, background_tasks=mock_background_tasks, mailer=mock_mailer
+    )
+
+    mock_background_tasks.add_task.assert_called_once_with(mock_mailer.send, mock_send_email())
+
+
+def verify_account_if_token_does_not_exist_should_raise_error(mock_db: Mock) -> None:
+    token = "invalid"
+
+    with pytest.raises(InvalidToken):
+        verify_account(mock_db, token=token)
+
+
+def verify_account_should_activate_user(mock_db: Mock, mock_crud_token: Mock, mock_crud_user: Mock) -> None:
+    mock_crud_token.get_by_value.return_value = Mock()
+    verify_account(mock_db, "token")
+
+    mock_crud_user.activate.assert_called_once()
+
+
+def verify_account_should_remove_verification_token(
+    mock_db: Mock, mock_crud_token: Mock, mock_crud_user: Mock  # pylint: disable=W0613
+) -> None:
+    mock_crud_token.get_by_value.return_value = Mock()
+    verify_account(mock_db, "token")
+
+    mock_crud_token.remove.assert_called_once()
