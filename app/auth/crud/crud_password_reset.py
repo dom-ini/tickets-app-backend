@@ -1,13 +1,11 @@
-import secrets
 from datetime import datetime, timedelta
 
 from sqlalchemy import select, update
-from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.auth.models import PasswordResetToken
 from app.auth.schemas import PasswordResetTokenCreate
-from app.common.crud import CRUDBase
+from app.common.crud import CRUDBase, generate_unique_token
 from app.common.schemas import EmptySchema
 from app.core.config import settings
 
@@ -19,16 +17,10 @@ class CRUDPasswordResetToken(CRUDBase[PasswordResetToken, PasswordResetTokenCrea
         return result.scalar()
 
     def create(self, db: Session, *, obj_in: PasswordResetTokenCreate) -> PasswordResetToken:
-        while True:
-            token_value = secrets.token_urlsafe(64)
-            expires_at = datetime.utcnow() + timedelta(minutes=settings.PASSWORD_RESET_TOKEN_EXPIRE_MINUTES)
-            token = self.model(user_id=obj_in.user_id, value=token_value, expires_at=expires_at)
-            db.add(token)
-            try:
-                db.commit()
-                break
-            except IntegrityError:
-                db.rollback()
+        expires_at = datetime.utcnow() + timedelta(minutes=settings.PASSWORD_RESET_TOKEN_EXPIRE_MINUTES)
+        token = generate_unique_token(
+            db, token_model=self.model, payload={"user_id": obj_in.user_id, "expires_at": expires_at}
+        )
         db.refresh(token)
         return token
 

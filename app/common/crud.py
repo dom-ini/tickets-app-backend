@@ -1,8 +1,10 @@
+import secrets
 from typing import Any, Generic, Iterable, Sequence, Type, TypeVar
 
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.db.base_class import Base
@@ -89,3 +91,16 @@ class FilterableMixin(Generic[Model]):
         query = query.offset(skip).limit(limit)
         result = db.execute(query)
         return result.scalars().all()
+
+
+def generate_unique_token(db: Session, *, token_model: Type[Model], payload: dict[str, Any]) -> Model:
+    while True:
+        value = secrets.token_urlsafe(64)
+        instance = token_model(**payload, value=value)
+        db.add(instance)
+        try:
+            db.commit()
+            break
+        except IntegrityError:
+            db.rollback()
+    return instance
