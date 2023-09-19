@@ -21,3 +21,10 @@ class NoMoreTicketsLeft(HTTPException):
         super().__init__(
             status_code=status.HTTP_400_BAD_REQUEST, detail="Could not reserve ticket - there are no tickets left"
         )
+
+
+class TicketReservationNotAvailableForEvent(HTTPException):
+    def __init__(self) -> None:
+        super().__init__(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Ticket reservation for this event is not possible"
+        )

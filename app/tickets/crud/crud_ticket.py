@@ -9,8 +9,6 @@ from app.common.crud import CRUDBase
 from app.tickets.models import Ticket
 from app.tickets.schemas.ticket import TicketCreate
 
-MAX_NO_OF_RESERVE_RETRIES = 3
-
 
 class CRUDTicket(CRUDBase[Ticket, TicketCreate, BaseModel]):
     def get_by_token(self, db: Session, token: str) -> Ticket | None:

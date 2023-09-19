@@ -14,6 +14,7 @@ router = APIRouter()
     "/",
     response_model=schemas.Ticket,
     status_code=status.HTTP_201_CREATED,
+    dependencies=[Depends(get_current_active_user)],
 )
 def reserve_ticket(reserved_ticket: Annotated[Ticket, Depends(reserve_ticket_if_available)]) -> Any:
     """

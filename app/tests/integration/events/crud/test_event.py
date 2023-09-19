@@ -1,5 +1,6 @@
 from datetime import datetime
 
+import pytest
 from sqlalchemy.orm import Session
 
 from app.auth import models as auth_models
@@ -57,3 +58,13 @@ class TestEvent:
         crud.event.remove(db, id_=event.id)
         event3 = crud.event.get(db, id_=event.id)
         assert event3 is None
+
+    @pytest.mark.parametrize("is_active", [True, False])
+    def test_is_active(self, event: models.Event, is_active: bool) -> None:
+        event.is_active = is_active
+        assert crud.event.is_active(event) == is_active
+
+    @pytest.mark.parametrize("held_at,expected", [(datetime(2010, 1, 1), True), (datetime(2040, 1, 1), False)])
+    def test_is_expired(self, event: models.Event, held_at: datetime, expected: bool) -> None:
+        event.held_at = held_at
+        assert crud.event.is_expired(event) == expected

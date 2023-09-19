@@ -9,6 +9,7 @@ class EventFilters(BaseFilter):
     held_at__gte: date | None = None
     held_at__lte: date | None = None
     slug__exact: str | None = None
+    is_active__exact: bool | None = None
     event_type_id__exact: int | None = None
     location_id__exact: int | None = None
 

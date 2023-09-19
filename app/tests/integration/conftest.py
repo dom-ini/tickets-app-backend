@@ -1,5 +1,5 @@
 # pylint: disable=W0621,W0613,E1101
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Generator
 
 import pytest
@@ -138,7 +138,8 @@ def create_event(
         name="Event",
         description="Description",
         slug="event",
-        held_at=datetime.now(),
+        held_at=datetime.now() + timedelta(days=30),
+        is_active=True,
         location_id=location.id,
         organizer_id=organizer.id,
         event_type_id=event_type.id,

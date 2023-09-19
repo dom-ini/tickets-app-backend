@@ -1,3 +1,6 @@
+import datetime
+from typing import Any
+
 import pytest
 from fastapi import status
 from fastapi.testclient import TestClient
@@ -15,7 +18,14 @@ def create_category(db: Session, quota: int, event: Event) -> TicketCategory:
     return crud.ticket_category.create(db, obj_in=category_in)
 
 
-class TestTickets:
+def modify_event(db: Session, event: Event, attr_name: str, attr_value: Any) -> Event:
+    setattr(event, attr_name, attr_value)
+    db.add(event)
+    db.commit()
+    return event
+
+
+class TestTickets:  # pylint: disable=R0904
     @pytest.fixture()
     def category_with_no_quota(self, db: Session, event: Event) -> TicketCategory:
         return create_category(db, quota=0, event=event)
@@ -23,6 +33,16 @@ class TestTickets:
     @pytest.fixture()
     def category_with_one_ticket(self, db: Session, event: Event) -> TicketCategory:
         return create_category(db, quota=1, event=event)
+
+    @pytest.fixture()
+    def category_for_inactive_event(self, db: Session, event: Event) -> TicketCategory:
+        inactive_event = modify_event(db, event=event, attr_name="is_active", attr_value=False)
+        return create_category(db, quota=10, event=inactive_event)
+
+    @pytest.fixture()
+    def category_for_expired_event(self, db: Session, event: Event) -> TicketCategory:
+        expired_event = modify_event(db, event=event, attr_name="held_at", attr_value=datetime.datetime(2010, 1, 1))
+        return create_category(db, quota=10, event=expired_event)
 
     def test_get_tickets_by_user_if_user_not_authenticated_should_fail(self, client: TestClient) -> None:
         r = client.get(f"{settings.API_V1_STR}/tickets/")
@@ -102,6 +122,20 @@ class TestTickets:
         payload = {"email": "email@example.com", "ticket_category_id": 9999}
         r = client.post(f"{settings.API_V1_STR}/tickets", json=payload, headers=normal_user_token_headers)
         assert r.status_code == status.HTTP_404_NOT_FOUND
+
+    def test_reserve_ticket_inactive_event_should_fail(
+        self, client: TestClient, category_for_inactive_event: TicketCategory, normal_user_token_headers: dict[str, str]
+    ) -> None:
+        payload = {"email": "email@example.com", "ticket_category_id": category_for_inactive_event.id}
+        r = client.post(f"{settings.API_V1_STR}/tickets", json=payload, headers=normal_user_token_headers)
+        assert r.status_code == status.HTTP_400_BAD_REQUEST
+
+    def test_reserve_ticket_expired_event_should_fail(
+        self, client: TestClient, category_for_expired_event: TicketCategory, normal_user_token_headers: dict[str, str]
+    ) -> None:
+        payload = {"email": "email@example.com", "ticket_category_id": category_for_expired_event.id}
+        r = client.post(f"{settings.API_V1_STR}/tickets", json=payload, headers=normal_user_token_headers)
+        assert r.status_code == status.HTTP_400_BAD_REQUEST
 
     def test_reserve_ticket_if_user_already_has_ticket_for_event_should_fail(
         self, client: TestClient, ticket: Ticket, normal_user_token_headers: dict[str, str]

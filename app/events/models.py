@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Optional
 from sqlalchemy import Column, ForeignKey, String, Table, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship  # type: ignore[attr-defined]
 
-from app.common.models import IntPk, UniqueIndexedStr
+from app.common.models import BoolTrue, IntPk, UniqueIndexedStr
 from app.db.base_class import Base
 
 if TYPE_CHECKING:
@@ -27,6 +27,7 @@ class Event(Base):
     poster_vertical: Mapped[Optional[str]]
     poster_horizontal: Mapped[Optional[str]]
     held_at: Mapped[datetime]
+    is_active: Mapped[BoolTrue]
     organizer_id: Mapped[int] = mapped_column(ForeignKey("organizer.id"), nullable=False)
     created_by_id: Mapped[int] = mapped_column(ForeignKey("user.id"), nullable=False)
     event_type_id: Mapped[int] = mapped_column(ForeignKey("eventtype.id"), nullable=False)

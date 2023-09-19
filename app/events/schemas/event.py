@@ -14,6 +14,7 @@ class EventBase(BaseModel):
     slug: str
     poster_vertical: HttpUrl | None = None
     poster_horizontal: HttpUrl | None = None
+    is_active: bool = True
     held_at: datetime
 
 
