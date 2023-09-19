@@ -10,7 +10,7 @@ from app.events.schemas.speaker import Speaker
 
 class EventBase(BaseModel):
     name: str
-    description: str
+    description: str | None
     slug: str
     poster_vertical: HttpUrl | None = None
     poster_horizontal: HttpUrl | None = None
