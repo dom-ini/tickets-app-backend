@@ -73,6 +73,6 @@ def get_mailer_config() -> dict[str, Any]:
 
 
 def mailer() -> MailSender:
-    config = ConnectionConfig(**get_mailer_config())
+    config = ConnectionConfig(**get_mailer_config())  # type: ignore
     engine = FastMail(config)
     return MailSender(engine)
