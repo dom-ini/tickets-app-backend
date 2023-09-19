@@ -12,8 +12,10 @@ _PASSWORD_MIN_LENGTH = 8
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Tickets App"
     SERVER_HOST: str
+    SERVER_PROTOCOL: str
     API_V1_STR: str = "/api/v1"
     SECRET_KEY: str
+    ADMIN_PANEL_PATH: str
     SQLALCHEMY_DATABASE_URI: str
     SQLALCHEMY_TEST_DATABASE_URI: str
 

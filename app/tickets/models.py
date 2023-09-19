@@ -20,7 +20,7 @@ class Ticket(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey("user.id"), nullable=False)
     ticket_category_id: Mapped[int] = mapped_column(ForeignKey("ticketcategory.id"), nullable=False)
 
-    user: Mapped["User"] = relationship("User", back_populates="tickets")
+    user: Mapped["User"] = relationship("User", back_populates="tickets", lazy="joined")
     ticket_category: Mapped["TicketCategory"] = relationship("TicketCategory", back_populates="tickets")
 
     def __str__(self) -> str:
@@ -34,7 +34,7 @@ class TicketCategory(Base):
     event_id: Mapped[int] = mapped_column(ForeignKey("event.id"), nullable=False)
 
     tickets: Mapped[list["Ticket"]] = relationship("Ticket", back_populates="ticket_category")
-    event: Mapped["Event"] = relationship(Event, back_populates="ticket_categories")
+    event: Mapped["Event"] = relationship(Event, back_populates="ticket_categories", lazy="joined")
 
     def __str__(self) -> str:
         return f"{self.name} ({self.quota} pcs)"
