@@ -112,11 +112,8 @@ def invalidate_password_reset_token(
     db: DBSession, password_reset_form: schemas.PasswordResetForm
 ) -> models.PasswordResetToken:
     token = crud.password_reset_token.get_by_value(db, value=password_reset_form.token)
-    print(crud.password_reset_token)
     if not token or crud.password_reset_token.is_invalidated(token) or crud.password_reset_token.is_expired(token):
         raise InvalidToken
-    print(crud.password_reset_token)
-    print(crud.password_reset_token.invalidate)
     crud.password_reset_token.invalidate(db, token=token)
     return token
 
