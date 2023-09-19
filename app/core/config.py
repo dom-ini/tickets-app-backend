@@ -52,7 +52,7 @@ class Settings(BaseSettings):
         return v
 
     EMAILS_ENABLED: bool = True
-    EMAIL_TEMPLATES_DIR: str = "/app/app/email-templates/"
+    EMAIL_TEMPLATES_DIR: str = "/app/app/email_templates/"
 
     @field_validator("EMAILS_ENABLED")
     def get_emails_enabled(cls, v: bool, info: FieldValidationInfo) -> bool:
