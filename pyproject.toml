@@ -53,8 +53,11 @@ alembic = "^1.11.1"
 emails = "^0.6"
 fastapi = "^0.101.0"
 fastapi-mail = "^1.4.1"
+fastapi-storages = "^0.2.0"
+itsdangerous = "^2.1.2"
 jinja2 = "^3.1.2"
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+pillow = "^10.0.1"
 psycopg2 = "^2.9.6"
 pydantic = {extras = ["email"], version = "^2.1.1"}
 pydantic-settings = "^2.0.2"

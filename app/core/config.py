@@ -69,5 +69,12 @@ class Settings(BaseSettings):
     TEST_USER_EMAIL: str = "user@example.com"
     TEST_USER_PASSWORD: str = "Test1234!"
 
+    AWS_ACCESS_KEY_ID: str
+    AWS_SECRET_ACCESS_KEY: str
+    AWS_S3_BUCKET_NAME: str
+    AWS_S3_ENDPOINT_URL: str
+    AWS_DEFAULT_ACL: str
+    AWS_S3_USE_SSL: bool
+
 
 settings = Settings()

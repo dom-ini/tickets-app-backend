@@ -1,10 +1,12 @@
 from datetime import datetime
 from typing import TYPE_CHECKING, Optional
 
+from fastapi_storages.integrations.sqlalchemy import FileType
 from sqlalchemy import Column, ForeignKey, String, Table, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship  # type: ignore[attr-defined]
 
 from app.common.models import BoolTrue, IntPk, UniqueIndexedStr
+from app.common.storage import img_storage
 from app.db.base_class import Base
 
 if TYPE_CHECKING:
@@ -24,8 +26,8 @@ class Event(Base):
     name: Mapped[str] = mapped_column(String(128), index=True, nullable=False)
     slug: Mapped[UniqueIndexedStr]
     description: Mapped[Optional[str]] = mapped_column(Text)
-    poster_vertical: Mapped[Optional[str]]
-    poster_horizontal: Mapped[Optional[str]]
+    poster_vertical: Mapped[Optional[FileType]] = mapped_column(FileType(storage=img_storage))
+    poster_horizontal: Mapped[Optional[FileType]] = mapped_column(FileType(storage=img_storage))
     held_at: Mapped[datetime]
     is_active: Mapped[BoolTrue]
     organizer_id: Mapped[int] = mapped_column(ForeignKey("organizer.id"), nullable=False)
@@ -90,7 +92,7 @@ class Speaker(Base):
     id: Mapped[IntPk]
     name: Mapped[str] = mapped_column(String(40), index=True, nullable=False)
     slug: Mapped[UniqueIndexedStr]
-    photo: Mapped[Optional[str]]
+    photo: Mapped[Optional[FileType]] = mapped_column(FileType(storage=img_storage))
     description: Mapped[Optional[str]] = mapped_column(Text)
 
     events: Mapped[list["Event"]] = relationship("Event", secondary=event_speaker, back_populates="speakers")

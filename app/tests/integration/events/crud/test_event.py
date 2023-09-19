@@ -20,8 +20,6 @@ class TestEvent:
             "name": "event",
             "description": "description",
             "slug": "event-slug",
-            "poster_vertical": "https://example.com/",
-            "poster_horizontal": "https://example.com/",
             "held_at": datetime.now(),
         }
         event_in = schemas.EventCreate(

@@ -8,13 +8,11 @@ class TestSpeaker:
         name = "speaker"
         description = "description"
         slug = "speaker-slug"
-        photo = "https://example.com/"
-        speaker_in = schemas.SpeakerCreate(name=name, description=description, slug=slug, photo=photo)
+        speaker_in = schemas.SpeakerCreate(name=name, description=description, slug=slug)
         speaker = crud.speaker.create(db, obj_in=speaker_in)
         assert speaker.name == name
         assert speaker.description == description
         assert speaker.slug == slug
-        assert speaker.photo == photo
 
     def test_get_by_slug(self, db: Session, speaker: models.Speaker) -> None:
         speaker2 = crud.speaker.get_by_slug(db, slug=speaker.slug)
