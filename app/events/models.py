@@ -39,12 +39,18 @@ class Event(Base):
     speakers: Mapped[list["Speaker"]] = relationship("Speaker", secondary=event_speaker, back_populates="events")
     ticket_categories: Mapped[list["TicketCategory"]] = relationship("TicketCategory", back_populates="event")
 
+    def __str__(self) -> str:
+        return f"{self.name} ({self.held_at})"
+
 
 class Organizer(Base):
     id: Mapped[IntPk]
     name: Mapped[str] = mapped_column(String(128), nullable=False, unique=True, index=True)
 
     events: Mapped[list["Event"]] = relationship("Event", back_populates="organizer")
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class EventType(Base):
@@ -61,6 +67,9 @@ class EventType(Base):
     )
     events: Mapped[list["Event"]] = relationship("Event", back_populates="event_type", lazy="dynamic")
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Location(Base):
     id: Mapped[IntPk]
@@ -72,6 +81,9 @@ class Location(Base):
 
     events: Mapped[list["Event"]] = relationship("Event", back_populates="location", lazy="dynamic")
 
+    def __str__(self) -> str:
+        return f"{self.name}, {self.city}"
+
 
 class Speaker(Base):
     id: Mapped[IntPk]
@@ -81,3 +93,6 @@ class Speaker(Base):
     description: Mapped[Optional[str]] = mapped_column(Text)
 
     events: Mapped[list["Event"]] = relationship("Event", secondary=event_speaker, back_populates="speakers")
+
+    def __str__(self) -> str:
+        return self.name

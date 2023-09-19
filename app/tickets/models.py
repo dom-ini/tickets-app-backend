@@ -23,6 +23,9 @@ class Ticket(Base):
     user: Mapped["User"] = relationship("User", back_populates="tickets")
     ticket_category: Mapped["TicketCategory"] = relationship("TicketCategory", back_populates="tickets")
 
+    def __str__(self) -> str:
+        return f"{self.id} {self.user}"
+
 
 class TicketCategory(Base):
     id: Mapped[IntPk]
@@ -32,3 +35,6 @@ class TicketCategory(Base):
 
     tickets: Mapped[list["Ticket"]] = relationship("Ticket", back_populates="ticket_category")
     event: Mapped["Event"] = relationship(Event, back_populates="ticket_categories")
+
+    def __str__(self) -> str:
+        return f"{self.name} ({self.quota} pcs)"

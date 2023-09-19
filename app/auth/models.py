@@ -23,6 +23,9 @@ class User(Base):
     verification_token: Mapped["VerificationToken"] = relationship("VerificationToken", back_populates="user")
     tickets: Mapped[list["Ticket"]] = relationship(Ticket, back_populates="user")
 
+    def __str__(self) -> str:
+        return self.email
+
 
 class PasswordResetToken(Base):
     id: Mapped[IntPk]
@@ -33,6 +36,9 @@ class PasswordResetToken(Base):
 
     user: Mapped["User"] = relationship("User", back_populates="password_reset_tokens")
 
+    def __str__(self) -> str:
+        return f"Password reset token for {self.user}"
+
 
 class VerificationToken(Base):
     id: Mapped[IntPk]
@@ -40,3 +46,6 @@ class VerificationToken(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey("user.id"), nullable=False)
 
     user: Mapped["User"] = relationship("User", back_populates="verification_token")
+
+    def __str__(self) -> str:
+        return f"Verification token for {self.user}"
