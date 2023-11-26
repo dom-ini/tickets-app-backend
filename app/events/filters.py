@@ -23,4 +23,4 @@ class EventFilters(BaseFilter):
 class EventSorter(BaseSorter):
     class Constants:
         model = Event
-        order_by_fields = ["held_at"]
+        order_by_fields = ["held_at", "name"]
