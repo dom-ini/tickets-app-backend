@@ -39,9 +39,9 @@ def list_events(
     return paginate(events, events_count)
 
 
-@router.get("/{id}", response_model=schemas.EventDetails)
-def get_event(event: Annotated[schemas.EventDetails, Depends(event_exists.by_id)]) -> Any:
+@router.get("/{slug}", response_model=schemas.EventDetails)
+def get_event_by_slug(event: Annotated[schemas.EventDetails, Depends(event_exists.by_slug)]) -> Any:
     """
-    Read event by id
+    Read event by slug
     """
     return event

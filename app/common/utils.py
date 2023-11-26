@@ -2,10 +2,10 @@ from typing import Annotated, Any, Generic, Sequence, TypeVar, Union
 
 from fastapi import Path
 
-from app.common.crud import CRUDBase, Model
+from app.common.crud import CRUDBase, Model, SlugMixin
 from app.common.deps import DBSession
 
-CRUD = TypeVar("CRUD", bound=CRUDBase)
+CRUD = TypeVar("CRUD", bound=Union[CRUDBase, SlugMixin])
 
 
 class InstanceInDBValidator(Generic[Model, CRUD]):
@@ -19,7 +19,15 @@ class InstanceInDBValidator(Generic[Model, CRUD]):
         return instance
 
     def by_id(self, db: DBSession, id_: Annotated[int, Path(default=..., alias="id")]) -> Model:
+        if not hasattr(self.crud_service, "get"):
+            raise NotImplementedError("CRUD service does not implement retrieving by id")
         instance = self.crud_service.get(db, id_=id_)
+        return self.instance_or_404(instance)
+
+    def by_slug(self, db: DBSession, slug: str) -> Model:
+        if not hasattr(self.crud_service, "get_by_slug"):
+            raise NotImplementedError("CRUD service does not implement retrieving by slug")
+        instance = self.crud_service.get_by_slug(db, slug=slug)
         return self.instance_or_404(instance)
 
 

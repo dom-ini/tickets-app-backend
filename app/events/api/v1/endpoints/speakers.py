@@ -8,9 +8,9 @@ from app.events.deps import speaker_exists
 router = APIRouter()
 
 
-@router.get("/{id}", response_model=schemas.Speaker)
-def get_speaker(speaker: Annotated[schemas.Speaker, Depends(speaker_exists.by_id)]) -> Any:
+@router.get("/{slug}", response_model=schemas.Speaker)
+def get_speaker_by_slug(speaker: Annotated[schemas.Speaker, Depends(speaker_exists.by_slug)]) -> Any:
     """
-    Read speaker by id
+    Read speaker by slug
     """
     return speaker
