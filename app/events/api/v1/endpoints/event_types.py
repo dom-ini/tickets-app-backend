@@ -25,3 +25,13 @@ def get_event_type_by_slug(event_type: Annotated[schemas.EventType, Depends(even
     """
     return event_type
 
+
+@router.get("/{slug}/hierarchy", response_model=list[schemas.EventType])
+def get_event_type_hierarchy_by_slug(
+    db: DBSession, event_type: Annotated[schemas.EventType, Depends(event_type_exists.by_slug)]
+) -> Any:
+    """
+    Get event type hierarchy from the top node to the given event type
+    """
+    event_types = crud.event_type.get_event_type_parent_hierarchy(db, event_type_id=event_type.id)
+    return event_types
