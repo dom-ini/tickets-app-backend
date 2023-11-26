@@ -6,7 +6,7 @@ from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.common.crud import CRUDBase
-from app.tickets.models import Ticket
+from app.tickets.models import Ticket, TicketCategory
 from app.tickets.schemas.ticket import TicketCreate
 
 
@@ -21,12 +21,16 @@ class CRUDTicket(CRUDBase[Ticket, TicketCreate, BaseModel]):
         result = db.execute(query)
         return result.scalars().all()
 
-    def get_by_ticket_category_and_user(self, db: Session, *, user_id: int, ticket_category_id: int) -> Ticket | None:
-        query = select(self.model).where(
-            (self.model.user_id == user_id) & (self.model.ticket_category_id == ticket_category_id)
+    def get_by_event_and_user(self, db: Session, *, user_id: int, ticket_category_id: int) -> Sequence[Ticket]:
+        event_query = select(TicketCategory.event_id).where(TicketCategory.id == ticket_category_id)
+        ticket_categories_query = select(TicketCategory.id).where(TicketCategory.event_id.in_(event_query))
+        query = (
+            select(self.model)
+            .where(self.model.ticket_category_id.in_(ticket_categories_query))
+            .where(self.model.user_id == user_id)
         )
         result = db.execute(query)
-        return result.scalar()
+        return result.scalars().all()
 
     def create(self, db: Session, *, obj_in: TicketCreate) -> Ticket:
         while True:

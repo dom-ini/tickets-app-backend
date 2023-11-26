@@ -41,9 +41,7 @@ def validate_ticket_category(db: DBSession, ticket_body: schemas.TicketCreateBod
 def validate_ticket_payload(
     db: DBSession, ticket_body: schemas.TicketCreateBody, user: CurrentActiveUser
 ) -> schemas.TicketCreateBody:
-    ticket = crud.ticket.get_by_ticket_category_and_user(
-        db, user_id=user.id, ticket_category_id=ticket_body.ticket_category_id
-    )
+    ticket = crud.ticket.get_by_event_and_user(db, user_id=user.id, ticket_category_id=ticket_body.ticket_category_id)
     if ticket:
         raise TicketAlreadyReserved
     return ticket_body
