@@ -1,7 +1,7 @@
 import pytest
 from pydantic import BaseModel
 
-from app.common.crud import CRUDBase, FilterableMixin, SlugMixin
+from app.common.crud import CRUDBase, SlugMixin
 
 
 class Model:
@@ -20,9 +20,7 @@ class UpdateSchema(BaseModel):
     pass
 
 
-class SampleCRUD(
-    CRUDBase[Model, CreateSchema, UpdateSchema], SlugMixin[Model], FilterableMixin[Model]  # type: ignore[type-var]
-):
+class SampleCRUD(CRUDBase[Model, CreateSchema, UpdateSchema], SlugMixin[Model]):  # type: ignore[type-var]
     pass
 
 

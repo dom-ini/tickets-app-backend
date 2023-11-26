@@ -31,4 +31,4 @@ class TestTicketCategories:
         result = r.json()
         assert r.status_code == status.HTTP_200_OK
         assert len(result) == limit
-        assert result[0].get("id") == ticket_categories[skip].id
+        assert result[0]["ticket_category"].get("id") == ticket_categories[skip].id

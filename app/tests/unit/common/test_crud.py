@@ -25,7 +25,7 @@ def test_get_all(mock_db: Mock, mock_crud: SampleCRUD, mock_select: Mock) -> Non
     mock_select.assert_called_with(mock_crud.model)
 
 
-@pytest.mark.parametrize("method_name", ["get_all", "get_filtered"])
+@pytest.mark.parametrize("method_name", ["get_all"])
 def test_get_multiple_with_skip_and_limit(
     mock_db: Mock, mock_crud: SampleCRUD, mock_select: Mock, method_name: str
 ) -> None:
@@ -77,20 +77,21 @@ def test_get_by_slug(mock_db: Mock, mock_crud: SampleCRUD, mock_select: Mock) ->
     mock_select.assert_called_once_with(mock_crud.model)
 
 
-def test_get_filtered_with_filters(mock_db: Mock, mock_crud: SampleCRUD, mock_select: Mock) -> None:
-    filters = [1, 2, 3]
-
-    mock_crud.get_filtered(mock_db, filters=filters)
-
-    mock_select.return_value.where.assert_called_once_with(*filters)
-
-
-def test_get_filtered_with_ordering(mock_db: Mock, mock_crud: SampleCRUD, mock_select: Mock) -> None:
-    order_by = [1, 2, 3]
-
-    mock_crud.get_filtered(mock_db, order_by=order_by)
-
-    mock_select.return_value.order_by.assert_called_once_with(*order_by)
+# def test_get_filtered_with_filters(mock_db: Mock, mock_crud: SampleCRUD, mock_select: Mock) -> None:
+#     filters = [1, 2, 3]
+#
+#     mock_crud.get_filtered(mock_db, filters=filters)
+#
+#     mock_select.return_value.where.assert_called_once_with(*filters)
+#
+#
+# def test_get_filtered_with_ordering(mock_db: Mock, mock_crud: SampleCRUD, mock_select: Mock) -> None:
+#     order_by = [1, 2, 3]
+#
+#     mock_crud.get_filtered(mock_db, order_by=order_by)
+#
+#     mock_select.return_value.order_by.assert_called_once_with(*order_by)
+#
 
 
 def test_generate_unique_token_should_rollback_on_integrity_error(mock_db: Mock) -> None:

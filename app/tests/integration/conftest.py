@@ -20,6 +20,7 @@ from app.tests.integration.test_db_config.initial_data import INITIAL_DATA
 from app.tests.integration.test_db_config.session import TestingSessionLocal, engine
 from app.tests.integration.test_db_config.setup_db import init_db
 from app.tests.integration.utils.users import get_normal_user_token_headers, get_superuser_token_headers
+from app.tickets import crud as ticket_crud, models as ticket_models, schemas as ticket_schemas
 
 base.Base.metadata.drop_all(bind=engine)
 base.Base.metadata.create_all(bind=engine)
@@ -120,6 +121,14 @@ def create_event_type(db: Session) -> event_models.EventType:
     return event_crud.event_type.create(db, obj_in=event_type_in)
 
 
+@pytest.fixture(name="nested_event_type")
+def create_nested_event_type(db: Session, event_type: event_models.EventType) -> event_models.EventType:
+    event_type_in = event_schemas.EventTypeCreate(
+        name="nested event type", slug="nested-event-type", parent_type_id=event_type.id
+    )
+    return event_crud.event_type.create(db, obj_in=event_type_in)
+
+
 @pytest.fixture(name="speaker")
 def create_speaker(db: Session) -> event_models.Speaker:
     speaker_in = event_schemas.SpeakerCreate(name="Speaker", description="Description", slug="speaker")
@@ -153,3 +162,9 @@ def get_test_user(db: Session) -> models.User:
     user = crud.user.get_by_email(db, email=settings.TEST_USER_EMAIL)
     assert user is not None
     return user
+
+
+@pytest.fixture(name="ticket_category")
+def get_ticket_category(db: Session, event: event_models.Event) -> ticket_models.TicketCategory:
+    category_in = ticket_schemas.TicketCategoryCreate(name="example", quota=100, event_id=event.id)
+    return ticket_crud.ticket_category.create(db, obj_in=category_in)

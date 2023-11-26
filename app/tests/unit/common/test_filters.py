@@ -2,6 +2,7 @@
 from unittest.mock import Mock
 
 import pytest
+from pytest_mock import MockerFixture
 
 from app.common.exceptions import InvalidFilterField, InvalidFilterType, InvalidSortField
 from app.common.filters import BaseFilter, BaseSorter
@@ -32,12 +33,15 @@ def get_sorter_instance(mock_model: Mock) -> BaseSorter:
     return BaseSorter()
 
 
-def test_filters(filter_instance: BaseFilter) -> None:
+def test_filters(filter_instance: BaseFilter, mocker: MockerFixture) -> None:
+    mock_class_mapper = Mock()
+    mock_class_mapper.get_property.secondary.return_value = None
+    mocker.patch("app.common.filters.class_mapper", return_value=mock_class_mapper)
     filter_instance.model_dump.return_value = {"field__icontains": "", "other__exact": ""}
 
     result = filter_instance.filters
 
-    assert len(result) == 2
+    assert len(result.statements) == 2
 
 
 def test_filters_with_invalid_filter_type_should_raise_error(filter_instance: BaseFilter) -> None:

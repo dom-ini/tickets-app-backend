@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 
 from app.events.models import Event
 from app.tickets import crud
-from app.tickets.models import TicketCategory
+from app.tickets.models import Ticket, TicketCategory
 from app.tickets.schemas import TicketCategoryCreate
 
 
@@ -23,3 +23,16 @@ class TestTicketCategory:
     def test_get_all_by_event(self, db: Session, ticket_categories: list[TicketCategory], event: Event) -> None:
         categories = crud.ticket_category.get_all_by_event(db, event_id=event.id)
         assert len(categories) == len(ticket_categories)
+
+    def test_get_all_by_event_tickets_left(
+        self,
+        db: Session,
+        ticket: Ticket,  # pylint: disable=W0613
+        ticket_category: TicketCategory,  # pylint: disable=W0613
+        event: Event,
+    ) -> None:
+        categories = crud.ticket_category.get_all_by_event(db, event_id=event.id)
+        category = categories[0]
+        tickets_quota = category[0].quota
+        tickets_left = category[1]
+        assert tickets_left == tickets_quota - 1

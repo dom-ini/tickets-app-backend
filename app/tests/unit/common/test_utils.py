@@ -60,3 +60,43 @@ def test_by_id_without_instance_should_raise_exception(
 
     with pytest.raises(CustomException):
         mock_instance_validator.by_id(mock_db, id_=1)
+
+
+def test_by_slug_should_call_crud_method(
+    mock_instance_validator: InstanceInDBValidator, mock_db: Mock, mock_crud: SampleCRUD, mocker: MockerFixture
+) -> None:
+    instance_slug = "slug"
+    mock_get = mocker.patch.object(mock_crud, attribute="get_by_slug")
+
+    mock_instance_validator.by_slug(mock_db, slug=instance_slug)
+
+    mock_get.assert_called_once_with(mock_db, slug=instance_slug)
+
+
+def test_by_slug_should_fail_if_crud_service_does_not_have_get_by_slug_method(
+    mock_instance_validator: InstanceInDBValidator, mock_db: Mock, mock_crud: SampleCRUD, mocker: MockerFixture
+) -> None:
+    mocker.patch.object(mock_crud, attribute="get_by_slug", side_effect=NotImplementedError)
+
+    with pytest.raises(NotImplementedError):
+        mock_instance_validator.by_slug(mock_db, slug="slug")
+
+
+def test_by_slug_with_instance(
+    mock_instance_validator: InstanceInDBValidator, mock_db: Mock, mock_crud: SampleCRUD, mocker: MockerFixture
+) -> None:
+    instance = Model()
+    mocker.patch.object(mock_crud, attribute="get_by_slug", return_value=instance)
+
+    result = mock_instance_validator.by_slug(mock_db, slug="slug")
+
+    assert result == instance
+
+
+def test_by_slug_without_instance_should_raise_exception(
+    mock_instance_validator: InstanceInDBValidator, mock_db: Mock, mock_crud: SampleCRUD, mocker: MockerFixture
+) -> None:
+    mocker.patch.object(mock_crud, attribute="get_by_slug", return_value=None)
+
+    with pytest.raises(CustomException):
+        mock_instance_validator.by_slug(mock_db, slug="slug")

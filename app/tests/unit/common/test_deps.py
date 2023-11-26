@@ -52,6 +52,15 @@ def test_pagination_params_init() -> None:
     assert pagination.limit == limit
 
 
+def test_pagination_params_set_to_0_if_negative_values_given() -> None:
+    skip = -10
+    limit = -10
+
+    pagination = PaginationParams(skip=skip, limit=limit)
+
+    assert pagination.skip == pagination.limit == 0
+
+
 def test_pagination_params_default_values() -> None:
     pagination = PaginationParams()
 

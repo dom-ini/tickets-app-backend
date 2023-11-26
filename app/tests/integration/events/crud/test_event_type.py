@@ -29,6 +29,14 @@ class TestEventType:
         assert event_type_tree
         assert event_type_tree[0].children[0].id == event_type2.id
 
+    def test_get_parent_hierarchy(
+        self, db: Session, event_type: models.EventType, nested_event_type: models.EventType
+    ) -> None:
+        result = crud.event_type.get_event_type_parent_hierarchy(db, event_type_id=nested_event_type.id)
+        result_ids = [category[0] for category in result]
+        expected_ids = [nested_event_type.id, event_type.id]
+        assert result_ids == expected_ids
+
     def test_get_by_slug(self, db: Session, event_type: models.EventType) -> None:
         event_type2 = crud.event_type.get_by_slug(db, slug=event_type.slug)
         assert event_type2 is not None

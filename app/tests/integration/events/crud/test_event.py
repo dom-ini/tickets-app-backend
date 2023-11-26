@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.auth import models as auth_models
 from app.events import crud, models, schemas
+from app.events.filters import EventFilters
 
 
 class TestEvent:
@@ -34,6 +35,23 @@ class TestEvent:
         assert event.location.id == location.id
         assert event.organizer.id == organizer.id
         assert event.event_type.id == event_type.id
+
+    @pytest.mark.parametrize(
+        "filters, should_contain",
+        [
+            ({"name__icontains": "eve"}, True),
+            ({"name__icontains": "---"}, False),
+        ],
+    )
+    def test_get_filtered_count(
+        self, db: Session, event: models.Event, filters: dict[str, str], should_contain: bool
+    ) -> None:
+        event_filters = EventFilters(**filters).filters
+        events = crud.event.get_filtered(db, filters=event_filters.statements)
+        count = crud.event.get_filtered_count(db, filters=event_filters.statements)
+        expected = [event] if should_contain else []
+        assert events == expected
+        assert count == int(should_contain)
 
     def test_get_by_slug(self, db: Session, event: models.Event) -> None:
         event2 = crud.event.get_by_slug(db, slug=event.slug)

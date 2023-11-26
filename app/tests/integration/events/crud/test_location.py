@@ -18,6 +18,11 @@ class TestLocation:
         assert location.latitude == latitude
         assert location.longitude == longitude
 
+    def test_get_by_slug(self, db: Session, location: models.Location) -> None:
+        location2 = crud.location.get_by_slug(db, slug=location.slug)
+        assert location2 is not None
+        assert location2.id == location.id
+
     def test_remove_location(self, db: Session, location: models.Location) -> None:
         crud.location.remove(db, id_=location.id)
         location3 = crud.location.get(db, id_=location.id)
