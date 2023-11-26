@@ -1,4 +1,4 @@
-from typing import Annotated, Generic, TypeVar
+from typing import Annotated, Any, Generic, Sequence, TypeVar, Union
 
 from fastapi import Path
 
@@ -21,3 +21,7 @@ class InstanceInDBValidator(Generic[Model, CRUD]):
     def by_id(self, db: DBSession, id_: Annotated[int, Path(default=..., alias="id")]) -> Model:
         instance = self.crud_service.get(db, id_=id_)
         return self.instance_or_404(instance)
+
+
+def paginate(items: Sequence, count: int) -> dict[str, Any]:
+    return {"items": items, "total_count": count}

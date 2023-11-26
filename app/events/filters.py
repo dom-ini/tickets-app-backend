@@ -12,6 +12,9 @@ class EventFilters(BaseFilter):
     is_active__exact: bool | None = None
     event_type_id__exact: int | None = None
     location_id__exact: int | None = None
+    speakers__id__exact: int | None = None
+    location__name__icontains: str | None = None
+    location__city__icontains: str | None = None
 
     class Constants:
         model = Event
