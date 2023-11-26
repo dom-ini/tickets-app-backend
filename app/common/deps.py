@@ -53,8 +53,8 @@ def get_current_active_superuser(current_user: "CurrentActiveUser") -> models.Us
 
 class PaginationParams:
     def __init__(self, skip: int = DEFAULT_PAGE_OFFSET, limit: int = DEFAULT_PAGE_SIZE) -> None:
-        self.skip = skip
-        self.limit = limit
+        self.skip = max(skip, 0)
+        self.limit = max(limit, 0)
 
 
 DBSession = Annotated[Session, Depends(get_db)]
