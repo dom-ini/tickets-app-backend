@@ -34,7 +34,7 @@ class TicketCategory(Base):
     event_id: Mapped[int] = mapped_column(ForeignKey("event.id"), nullable=False)
 
     tickets: Mapped[list["Ticket"]] = relationship("Ticket", back_populates="ticket_category")
-    event: Mapped["Event"] = relationship(Event, back_populates="ticket_categories", lazy="joined")
+    event: Mapped["Event"] = relationship(Event, back_populates="ticket_categories")
 
     def __str__(self) -> str:
         return f"{self.name} ({self.quota} pcs)"

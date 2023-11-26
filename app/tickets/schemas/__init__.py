@@ -1,5 +1,5 @@
 from .ticket import Ticket, TicketCreate, TicketCreateBody, TicketWithUser
-from .ticket_category import TicketCategory, TicketCategoryCreate
+from .ticket_category import TicketCategory, TicketCategoryCreate, TicketCategoryWithLeftCount
 
 __all__ = [
     "Ticket",
@@ -7,5 +7,6 @@ __all__ = [
     "TicketCreate",
     "TicketCreateBody",
     "TicketCategory",
+    "TicketCategoryWithLeftCount",
     "TicketCategoryCreate",
 ]

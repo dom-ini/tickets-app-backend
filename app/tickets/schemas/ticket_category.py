@@ -15,5 +15,10 @@ class TicketCategory(TicketCategoryInDBBase):
     pass
 
 
+class TicketCategoryWithLeftCount(BaseModel):
+    ticket_category: TicketCategory
+    tickets_left: int
+
+
 class TicketCategoryCreate(TicketCategoryBase):
     event_id: int
