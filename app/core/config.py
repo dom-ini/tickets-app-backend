@@ -19,6 +19,8 @@ class Settings(BaseSettings):
     SQLALCHEMY_DATABASE_URI: str
     SQLALCHEMY_TEST_DATABASE_URI: str
 
+    CORS_ALLOWED_ORIGINS: list[str] = ["http://localhost:3000"]
+
     USERS_OPEN_REGISTRATION: bool = True
     FIRST_SUPERUSER_EMAIL: str
     FIRST_SUPERUSER_PASSWORD: str
