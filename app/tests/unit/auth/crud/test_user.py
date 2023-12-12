@@ -83,6 +83,25 @@ def test_authenticate_by_mail(
 
 
 @pytest.mark.parametrize(
+    "password_valid",
+    [
+        True,
+        False,
+    ],
+)
+def test_check_password(
+    mock_db: Mock,
+    mocker: MockerFixture,
+    password_valid: bool,
+) -> None:
+    user = Mock()
+    mocker.patch.object(crud.user, "authenticate_by_mail", return_value=user if password_valid else None)
+    result = crud.user.check_password(mock_db, user=user, password="password")
+
+    assert result == password_valid
+
+
+@pytest.mark.parametrize(
     "attr_name,attr_value",
     [
         ("is_disabled", True),

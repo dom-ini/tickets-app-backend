@@ -160,13 +160,13 @@ class TestUser:  # pylint: disable=R0904
     def test_updated_user_should_not_overwrite_unset_values(self, db: Session, default_user: models.User) -> None:
         new_password = generate_valid_password()
         old_email = default_user.email
-        user_in = schemas.UserUpdate(password=new_password)
+        user_in = schemas.UserUpdate(new_password=new_password)
         crud.user.update(db, db_obj=default_user, obj_in=user_in)
         assert default_user.email == old_email
 
     def test_updated_user_password_should_be_saved_as_hash(self, db: Session, default_user: models.User) -> None:
         new_password = generate_valid_password()
-        user_in = schemas.UserUpdate(password=new_password)
+        user_in = schemas.UserUpdate(new_password=new_password)
         crud.user.update(db, db_obj=default_user, obj_in=user_in)
         assert default_user.hashed_password != new_password
 
@@ -175,6 +175,14 @@ class TestUser:  # pylint: disable=R0904
         user_in = {"email": new_email}
         crud.user.update(db, db_obj=default_user, obj_in=user_in)
         assert default_user.email == new_email
+
+    def test_check_password(self, db: Session, default_user: models.User) -> None:
+        result = crud.user.check_password(db, user=default_user, password=self.password)
+        assert result
+
+    def test_check_password_with_invalid_password_returns_false(self, db: Session, default_user: models.User) -> None:
+        result = crud.user.check_password(db, user=default_user, password="invalid")
+        assert not result
 
     def test_change_password(self, db: Session, default_user: models.User) -> None:
         new_password = generate_valid_password()

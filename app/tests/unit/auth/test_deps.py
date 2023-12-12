@@ -30,7 +30,7 @@ from app.auth.exceptions import (
     UserDisabled,
     UserNotActivated,
 )
-from app.auth.schemas import UserCreate, UserCreateOpen, UserUpdate
+from app.auth.schemas import UserCreate, UserCreateOpen, UserUpdateWithCurrentPassword
 from app.auth.utils import generate_valid_password
 from app.core.config import settings
 
@@ -117,7 +117,7 @@ def test_validate_unique_email_existing_email_should_fail(mock_db: Mock, mocker:
 def test_user_update_unique_email_no_email_given(
     mock_db: Mock, mock_current_user: Mock, mock_validate_email: Mock
 ) -> None:
-    obj_in = UserUpdate()
+    obj_in = UserUpdateWithCurrentPassword(current_password="password")
     user_update_unique_email(mock_db, current_user=mock_current_user, user_in=obj_in)
 
     mock_validate_email.assert_not_called()
@@ -128,7 +128,7 @@ def test_user_update_unique_email_current_user_email_given(
 ) -> None:
     email = "email@example.com"
     mock_current_user.email = email
-    obj_in = UserUpdate(email=email)
+    obj_in = UserUpdateWithCurrentPassword(email=email, current_password="password")
     user_update_unique_email(mock_db, current_user=mock_current_user, user_in=obj_in)
 
     mock_validate_email.assert_not_called()
@@ -139,7 +139,7 @@ def test_user_update_unique_email_unique_email_given(
 ) -> None:
     email = "email@example.com"
     mock_current_user.email = "different@example.com"
-    obj_in = UserUpdate(email=email)
+    obj_in = UserUpdateWithCurrentPassword(email=email, current_password="password")
     result = user_update_unique_email(mock_db, current_user=mock_current_user, user_in=obj_in)
 
     mock_validate_email.assert_called_once()
@@ -151,7 +151,7 @@ def test_user_update_unique_email_existing_email_given(
 ) -> None:
     email = "email@example.com"
     mock_current_user.email = "different@example.com"
-    obj_in = UserUpdate(email=email)
+    obj_in = UserUpdateWithCurrentPassword(email=email, current_password="password")
     mock_validate_email.side_effect = EmailAlreadyTaken
 
     with pytest.raises(EmailAlreadyTaken):

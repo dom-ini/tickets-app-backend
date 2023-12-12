@@ -33,13 +33,17 @@ class UserCreateOpen(BaseModel):
 
 class UserUpdate(BaseModel):
     email: EmailStr | None = None
-    password: str | None = Field(None, examples=[generate_valid_password()])
+    new_password: str | None = Field(None, examples=[generate_valid_password()])
 
-    @field_validator("password")
-    def validate_password(cls, password: str | None) -> str | None:
-        if password is None:
-            return password
-        return validate_password(password)
+    @field_validator("new_password")
+    def validate_password(cls, new_password: str | None) -> str | None:
+        if new_password is None:
+            return new_password
+        return validate_password(new_password)
+
+
+class UserUpdateWithCurrentPassword(UserUpdate):
+    current_password: str
 
 
 class UserInDBBase(UserBase):

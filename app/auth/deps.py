@@ -29,8 +29,8 @@ def validate_unique_email(db: DBSession, email: str) -> None:
 
 
 def user_update_unique_email(
-    db: DBSession, current_user: CurrentActiveUser, user_in: schemas.UserUpdate
-) -> schemas.UserUpdate:
+    db: DBSession, current_user: CurrentActiveUser, user_in: schemas.UserUpdateWithCurrentPassword
+) -> schemas.UserUpdateWithCurrentPassword:
     if user_in.email is not None and not current_user.email == user_in.email:
         validate_unique_email(db, email=str(user_in.email))
     return user_in

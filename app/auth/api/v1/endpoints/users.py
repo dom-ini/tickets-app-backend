@@ -9,6 +9,7 @@ from app.auth.deps import (
     user_exists,
     user_update_unique_email,
 )
+from app.auth.exceptions import InvalidCurrentPassword
 from app.common.deps import CurrentActiveUser, DBSession, Pagination, get_current_active_superuser
 
 router = APIRouter()
@@ -53,11 +54,15 @@ def read_current_user(user: CurrentActiveUser) -> Any:
 
 @router.patch("/me", response_model=schemas.User)
 def update_current_user(
-    db: DBSession, user: CurrentActiveUser, user_in: Annotated[schemas.UserUpdate, Depends(user_update_unique_email)]
+    db: DBSession,
+    user: CurrentActiveUser,
+    user_in: Annotated[schemas.UserUpdateWithCurrentPassword, Depends(user_update_unique_email)],
 ) -> Any:
     """
     Update currently authenticated user
     """
+    if not crud.user.check_password(db, user=user, password=user_in.current_password):
+        raise InvalidCurrentPassword
     user = crud.user.update(db, db_obj=user, obj_in=user_in)
     return user
 

@@ -34,17 +34,21 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
             update_data = obj_in
         else:
             update_data = obj_in.model_dump(exclude_unset=True)
-        password = update_data.get("password")
-        if password:
-            hashed_password = get_password_hash(password)
-            del update_data["password"]
+        new_password = update_data.get("new_password")
+        if new_password:
+            hashed_password = get_password_hash(new_password)
+            del update_data["new_password"]
             update_data["hashed_password"] = hashed_password
         if update_data.get("email"):
             update_data["email"] = update_data["email"].lower()
         return super().update(db, db_obj=db_obj, obj_in=update_data)
 
+    def check_password(self, db: Session, *, user: User, password: str) -> bool:
+        authenticated_user = self.authenticate_by_mail(db, email=user.email, password=password)
+        return bool(authenticated_user)
+
     def change_password(self, db: Session, *, user: User, new_password: str) -> User:
-        user_in = UserUpdate(password=new_password)
+        user_in = UserUpdate(new_password=new_password)
         return self.update(db, db_obj=user, obj_in=user_in)
 
     def _set_attribute(self, db: Session, *, user_id: int, attr: str, value: Any) -> User | None:

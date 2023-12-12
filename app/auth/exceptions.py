@@ -21,6 +21,11 @@ class InvalidCredentials(HTTPException):
         super().__init__(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
 
 
+class InvalidCurrentPassword(HTTPException):
+    def __init__(self) -> None:
+        super().__init__(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid current password")
+
+
 class UserNotActivated(HTTPException):
     def __init__(self) -> None:
         super().__init__(status_code=status.HTTP_403_FORBIDDEN, detail="Account is not activated")

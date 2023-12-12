@@ -174,7 +174,7 @@ class TestUsers:  # pylint: disable=R0904
     def test_update_current_user_should_not_change_superuser_status(
         self, client: TestClient, normal_user_token_headers: dict[str, str]
     ) -> None:
-        payload = {"is_superuser": True}
+        payload = {"is_superuser": True, "current_password": settings.TEST_USER_PASSWORD}
         r = client.patch(f"{settings.API_V1_STR}/users/me", json=payload, headers=normal_user_token_headers)
         result = r.json()
         assert r.status_code == status.HTTP_200_OK
@@ -182,7 +182,7 @@ class TestUsers:  # pylint: disable=R0904
 
     def test_update_current_user_new_email(self, client: TestClient, normal_user_token_headers: dict[str, str]) -> None:
         new_email = "new@example.com"
-        payload = {"email": new_email}
+        payload = {"email": new_email, "current_password": settings.TEST_USER_PASSWORD}
         r = client.patch(f"{settings.API_V1_STR}/users/me", json=payload, headers=normal_user_token_headers)
         result = r.json()
         assert r.status_code == status.HTTP_200_OK
@@ -192,7 +192,7 @@ class TestUsers:  # pylint: disable=R0904
         self, client: TestClient, normal_user_token_headers: dict[str, str]
     ) -> None:
         new_email = settings.TEST_SUPERUSER_EMAIL
-        payload = {"email": new_email}
+        payload = {"email": new_email, "current_password": settings.TEST_USER_PASSWORD}
         r = client.patch(f"{settings.API_V1_STR}/users/me", json=payload, headers=normal_user_token_headers)
         assert r.status_code == status.HTTP_400_BAD_REQUEST
 
@@ -200,7 +200,7 @@ class TestUsers:  # pylint: disable=R0904
         self, db: Session, client: TestClient, normal_user_token_headers: dict[str, str]
     ) -> None:
         new_password = generate_valid_password()
-        payload = {"password": new_password}
+        payload = {"new_password": new_password, "current_password": settings.TEST_USER_PASSWORD}
         r = client.patch(f"{settings.API_V1_STR}/users/me", json=payload, headers=normal_user_token_headers)
         assert r.status_code == status.HTTP_200_OK
         assert crud.user.authenticate_by_mail(db, email=settings.TEST_USER_EMAIL, password=new_password)
@@ -209,7 +209,7 @@ class TestUsers:  # pylint: disable=R0904
         self, client: TestClient, normal_user_token_headers: dict[str, str]
     ) -> None:
         new_password = "weak"
-        payload = {"password": new_password}
+        payload = {"new_password": new_password, "current_password": settings.TEST_USER_PASSWORD}
         r = client.patch(f"{settings.API_V1_STR}/users/me", json=payload, headers=normal_user_token_headers)
         assert r.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
 
@@ -217,8 +217,16 @@ class TestUsers:  # pylint: disable=R0904
         self, client: TestClient, normal_user_token_headers: dict[str, str]
     ) -> None:
         new_password = generate_valid_password()
-        payload = {"password": new_password}
+        payload = {"new_password": new_password, "current_password": settings.TEST_USER_PASSWORD}
         r = client.patch(f"{settings.API_V1_STR}/users/me", json=payload, headers=normal_user_token_headers)
         result = r.json()
         assert r.status_code == status.HTTP_200_OK
         assert result.get("email") == settings.TEST_USER_EMAIL
+
+    def test_update_current_user_invalid_password_should_fail(
+        self, client: TestClient, normal_user_token_headers: dict[str, str]
+    ) -> None:
+        new_email = "new@example.com"
+        payload = {"email": new_email, "current_password": "invalid"}
+        r = client.patch(f"{settings.API_V1_STR}/users/me", json=payload, headers=normal_user_token_headers)
+        assert r.status_code == status.HTTP_403_FORBIDDEN
