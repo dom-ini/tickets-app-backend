@@ -56,6 +56,29 @@ class TestTickets:  # pylint: disable=R0904
         assert r.status_code == status.HTTP_200_OK
         assert len(result) == len(user_tickets)
 
+    def test_get_tickets_by_user_and_event_with_invalid_event_id(
+        self,
+        client: TestClient,
+        user_tickets: list[Ticket],  # pylint: disable=W0613
+        normal_user_token_headers: dict[str, str],
+    ) -> None:
+        event_id = 999
+        r = client.get(f"{settings.API_V1_STR}/tickets/?event_id={event_id}", headers=normal_user_token_headers)
+        result = r.json()
+        assert r.status_code == status.HTTP_200_OK
+        assert len(result) == 0
+
+    def test_get_tickets_by_user_and_event(
+        self, client: TestClient, event: Event, user_tickets: list[Ticket], normal_user_token_headers: dict[str, str]
+    ) -> None:
+        event_id = event.id
+        print(event.id)
+        r = client.get(f"{settings.API_V1_STR}/tickets/?event_id={event_id}", headers=normal_user_token_headers)
+        result = r.json()
+        print(result)
+        assert r.status_code == status.HTTP_200_OK
+        assert len(result) == len(user_tickets)
+
     def test_get_tickets_by_user_pagination(
         self, client: TestClient, user_tickets: list[Ticket], normal_user_token_headers: dict[str, str]
     ) -> None:

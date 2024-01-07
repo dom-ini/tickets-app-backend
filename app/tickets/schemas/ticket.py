@@ -2,6 +2,8 @@ from datetime import datetime
 
 from pydantic import BaseModel, ConfigDict, EmailStr
 
+from app.tickets.schemas.ticket_category import TicketCategoryWithEvent
+
 
 class TicketBase(BaseModel):
     email: EmailStr
@@ -15,6 +17,10 @@ class TicketInDBBase(TicketBase):
 class Ticket(TicketInDBBase):
     token: str
     created_at: datetime
+
+
+class TicketWithEvent(Ticket):
+    ticket_category: TicketCategoryWithEvent
 
 
 class TicketWithUser(Ticket):

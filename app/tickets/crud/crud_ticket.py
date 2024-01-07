@@ -17,17 +17,40 @@ class CRUDTicket(CRUDBase[Ticket, TicketCreate, BaseModel]):
         return result.scalar()
 
     def get_all_by_user(self, db: Session, *, user_id: int, skip: int = 0, limit: int = 100) -> Sequence[Ticket]:
-        query = select(self.model).where(self.model.user_id == user_id).offset(skip).limit(limit)
+        query = (
+            select(self.model)
+            .where(self.model.user_id == user_id)
+            .offset(skip)
+            .limit(limit)
+            .join(self.model.ticket_category)
+            .join(TicketCategory.event)
+        )
         result = db.execute(query)
         return result.scalars().all()
 
-    def get_by_event_and_user(self, db: Session, *, user_id: int, ticket_category_id: int) -> Sequence[Ticket]:
+    def get_by_category_and_user(self, db: Session, *, user_id: int, ticket_category_id: int) -> Sequence[Ticket]:
         event_query = select(TicketCategory.event_id).where(TicketCategory.id == ticket_category_id)
         ticket_categories_query = select(TicketCategory.id).where(TicketCategory.event_id.in_(event_query))
         query = (
             select(self.model)
             .where(self.model.ticket_category_id.in_(ticket_categories_query))
             .where(self.model.user_id == user_id)
+        )
+        result = db.execute(query)
+        return result.scalars().all()
+
+    def get_by_event_and_user(
+        self, db: Session, *, user_id: int, event_id: int, skip: int = 0, limit: int = 100
+    ) -> Sequence[Ticket]:
+        ticket_categories_query = select(TicketCategory.id).where(TicketCategory.event_id == event_id)
+        query = (
+            (
+                select(self.model)
+                .where(self.model.ticket_category_id.in_(ticket_categories_query))
+                .where(self.model.user_id == user_id)
+            )
+            .offset(skip)
+            .limit(limit)
         )
         result = db.execute(query)
         return result.scalars().all()

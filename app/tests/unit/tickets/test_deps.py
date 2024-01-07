@@ -69,7 +69,7 @@ def test_ticket_belongs_to_user_returns_ticket_if_user_matches(mock_user: Mock, 
 def test_validate_ticket_payload_should_raise_error_if_user_already_has_ticket_for_event(
     mock_db: Mock, mock_user: Mock, ticket_payload: TicketCreateBody, mock_crud: Mock
 ) -> None:
-    mock_crud.get_by_event_and_user.return_value = Mock()
+    mock_crud.get_by_category_and_user.return_value = Mock()
     with pytest.raises(TicketAlreadyReserved):
         validate_ticket_payload(mock_db, ticket_body=ticket_payload, user=mock_user)
 
@@ -78,7 +78,7 @@ def test_validate_ticket_payload_should_return_payload(
     mock_db: Mock, mock_user: Mock, ticket_payload: TicketCreateBody, mock_crud: Mock, mocker: MockerFixture
 ) -> None:
     mocker.patch.object(ticket_category_exists, "by_id")
-    mock_crud.get_by_event_and_user.return_value = None
+    mock_crud.get_by_category_and_user.return_value = None
     result = validate_ticket_payload(mock_db, ticket_body=ticket_payload, user=mock_user)
 
     assert result == ticket_payload

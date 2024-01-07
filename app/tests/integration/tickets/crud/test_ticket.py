@@ -43,6 +43,20 @@ class TestTicket:
         result = crud.ticket.get_count_for_ticket_category(db, ticket_category_id=ticket.ticket_category_id)
         assert result == 1
 
+    def test_get_by_category_and_user(  # pylint: disable=R0913
+        self,
+        db: Session,
+        ticket_category: TicketCategory,
+        ticket_category_second: TicketCategory,  # pylint: disable=W0613
+        ticket: Ticket,
+        ticket_second: Ticket,
+        test_user: User,
+    ) -> None:
+        tickets = crud.ticket.get_by_category_and_user(db, user_id=test_user.id, ticket_category_id=ticket_category.id)
+        assert len(tickets) == 2
+        assert ticket in tickets
+        assert ticket_second in tickets
+
     def test_get_by_event_and_user(  # pylint: disable=R0913
         self,
         db: Session,
@@ -52,7 +66,7 @@ class TestTicket:
         ticket_second: Ticket,
         test_user: User,
     ) -> None:
-        tickets = crud.ticket.get_by_event_and_user(db, user_id=test_user.id, ticket_category_id=ticket_category.id)
+        tickets = crud.ticket.get_by_event_and_user(db, user_id=test_user.id, event_id=ticket_category.event_id)
         assert len(tickets) == 2
         assert ticket in tickets
         assert ticket_second in tickets

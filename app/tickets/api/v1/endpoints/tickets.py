@@ -23,9 +23,15 @@ def reserve_ticket(reserved_ticket: Annotated[Ticket, Depends(reserve_ticket_if_
     return reserved_ticket
 
 
-@router.get("/", response_model=list[schemas.Ticket])
-def get_tickets_by_user(db: DBSession, user: CurrentActiveUser, pagination: Pagination) -> Any:
+@router.get("/", response_model=list[schemas.TicketWithEvent])
+def get_tickets_by_user(
+    db: DBSession, user: CurrentActiveUser, pagination: Pagination, event_id: int | None = None
+) -> Any:
     """Get all tickets reserved by current user"""
+    if event_id is not None:
+        return crud.ticket.get_by_event_and_user(
+            db, user_id=user.id, event_id=event_id, limit=pagination.limit, skip=pagination.skip
+        )
     tickets = crud.ticket.get_all_by_user(db, user_id=user.id, limit=pagination.limit, skip=pagination.skip)
     return tickets
 
