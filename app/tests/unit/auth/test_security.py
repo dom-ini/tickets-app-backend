@@ -56,9 +56,8 @@ def test_create_access_token_returns_token(mock_jwt_encode: Mock) -> None:
     assert token == expected_token
 
 
-def test_create_access_token_correct_payload(
-    mock_jwt_encode: Mock, override_token_settings: Generator, mocker: MockerFixture  # pylint: disable=W0613
-) -> None:
+@pytest.mark.usefixtures("override_token_settings")
+def test_create_access_token_correct_payload(mock_jwt_encode: Mock, mocker: MockerFixture) -> None:
     subject = "subject"
     now = datetime.utcnow()
     mock_date = mocker.patch("app.auth.security.datetime")

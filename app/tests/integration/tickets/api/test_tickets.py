@@ -56,10 +56,10 @@ class TestTickets:  # pylint: disable=R0904
         assert r.status_code == status.HTTP_200_OK
         assert len(result) == len(user_tickets)
 
+    @pytest.mark.usefixtures("user_tickets")
     def test_get_tickets_by_user_and_event_with_invalid_event_id(
         self,
         client: TestClient,
-        user_tickets: list[Ticket],  # pylint: disable=W0613
         normal_user_token_headers: dict[str, str],
     ) -> None:
         event_id = 999

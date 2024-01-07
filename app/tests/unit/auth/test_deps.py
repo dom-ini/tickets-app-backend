@@ -158,9 +158,8 @@ def test_user_update_unique_email_existing_email_given(
         user_update_unique_email(mock_db, current_user=mock_current_user, user_in=obj_in)
 
 
-def test_user_create_unique_email_unique_email_given(
-    mock_db: Mock, mock_validate_email: Mock  # pylint: disable=W0613
-) -> None:
+@pytest.mark.usefixtures("mock_validate_email")
+def test_user_create_unique_email_unique_email_given(mock_db: Mock) -> None:
     email = "email@example.com"
     obj_in = UserCreateOpen(email=email, password=generate_valid_password())
     result = user_create_unique_email(mock_db, user_in=obj_in)
@@ -177,16 +176,16 @@ def test_user_create_unique_email_existing_email_given(mock_db: Mock, mock_valid
         user_create_unique_email(mock_db, user_in=obj_in)
 
 
-def test_open_registration_allowed_when_allowed(allow_open_registration: Generator) -> None:  # pylint: disable=W0613
+@pytest.mark.usefixtures("allow_open_registration")
+def test_open_registration_allowed_when_allowed() -> None:
     try:
         open_registration_allowed()
     except OpenRegistrationNotAllowed as exc:
         pytest.fail(f"An exception was raised: {exc}")
 
 
-def test_open_registration_allowed_when_disallowed(
-    disallow_open_registration: Generator,  # pylint: disable=W0613
-) -> None:
+@pytest.mark.usefixtures("disallow_open_registration")
+def test_open_registration_allowed_when_disallowed() -> None:
     with pytest.raises(OpenRegistrationNotAllowed):
         open_registration_allowed()
 
@@ -245,9 +244,8 @@ def verify_account_should_activate_user(
     mock_crud_user.activate.assert_called_once()
 
 
-def verify_account_should_remove_verification_token(
-    mock_db: Mock, mock_crud_verification_token: Mock, mock_crud_user: Mock  # pylint: disable=W0613
-) -> None:
+@pytest.mark.usefixtures("mock_crud_user")
+def verify_account_should_remove_verification_token(mock_db: Mock, mock_crud_verification_token: Mock) -> None:
     mock_crud_verification_token.get_by_value.return_value = Mock()
     verify_account(mock_db, "token")
 
@@ -286,6 +284,7 @@ def test_process_reset_password_request_token_should_not_be_created_if_no_user_w
     mock_crud_password_reset.create.assert_not_called()
 
 
+@pytest.mark.usefixtures("mock_send_password_reset_request_mail")
 def test_process_reset_password_request_should_invalidate_all_other_reset_tokens(
     mock_db: Mock,
     mock_crud_user: Mock,
@@ -293,7 +292,6 @@ def test_process_reset_password_request_should_invalidate_all_other_reset_tokens
     mock_background_tasks: Mock,
     mock_mailer: Mock,
     mock_current_user: Mock,
-    mock_send_password_reset_request_mail: Mock,  # pylint: disable=W0613
 ) -> None:
     mock_crud_user.get_by_email.return_value = mock_current_user
     process_reset_password_request(
@@ -303,6 +301,7 @@ def test_process_reset_password_request_should_invalidate_all_other_reset_tokens
     mock_crud_password_reset.invalidate_all.assert_called_once()
 
 
+@pytest.mark.usefixtures("mock_send_password_reset_request_mail")
 def test_process_reset_password_request_should_create_password_reset_token(
     mock_db: Mock,
     mock_crud_user: Mock,
@@ -310,7 +309,6 @@ def test_process_reset_password_request_should_create_password_reset_token(
     mock_background_tasks: Mock,
     mock_mailer: Mock,
     mock_current_user: Mock,
-    mock_send_password_reset_request_mail: Mock,  # pylint: disable=W0613
 ) -> None:
     mock_crud_user.get_by_email.return_value = mock_current_user
     process_reset_password_request(
@@ -320,10 +318,10 @@ def test_process_reset_password_request_should_create_password_reset_token(
     mock_crud_password_reset.create.assert_called_once()
 
 
+@pytest.mark.usefixtures("mock_crud_password_reset")
 def test_process_reset_password_request_should_send_email(
     mock_db: Mock,
     mock_crud_user: Mock,
-    mock_crud_password_reset: Mock,  # pylint: disable=W0613
     mock_background_tasks: Mock,
     mock_mailer: Mock,
     mock_current_user: Mock,

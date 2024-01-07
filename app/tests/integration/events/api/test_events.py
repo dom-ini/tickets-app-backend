@@ -9,7 +9,6 @@ from sqlalchemy.orm import Session
 from app.auth import models as auth_models
 from app.core.config import settings
 from app.events import crud, models, schemas
-from app.tickets import models as ticket_models
 
 EVENT_COUNT = 3
 
@@ -74,10 +73,10 @@ class TestEvents:
             ("location_id__exact=999", 0),
         ],
     )
+    @pytest.mark.usefixtures("multiple_events")
     def test_list_events_filtering(
         self,
         client: TestClient,
-        multiple_events: list[models.Event],  # pylint: disable=W0613
         filter_: str,
         expected_count: int,
     ) -> None:
@@ -97,10 +96,10 @@ class TestEvents:
             ("location__city__icontains", None, 0),
         ],
     )
+    @pytest.mark.usefixtures("multiple_events")
     def test_list_events_filtering_by_relationship(  # pylint: disable=R0913
         self,
         client: TestClient,
-        multiple_events: list[models.Event],  # pylint: disable=W0613
         filter_name: str,
         related_instance: str,
         expected_count: int,
@@ -150,11 +149,10 @@ class TestEvents:
         assert r.status_code == status.HTTP_200_OK
         assert result["total_count"] == EVENT_COUNT
 
+    @pytest.mark.usefixtures("multiple_events", "ticket_category")
     def test_list_events_only_with_available_tickets(
         self,
         client: TestClient,
-        multiple_events: list[models.Event],  # pylint: disable=W0613
-        ticket_category: ticket_models.TicketCategory,  # pylint: disable=W0613
         event: models.Event,
     ) -> None:
         r = client.get(f"{settings.API_V1_STR}/events/?only_with_available_tickets=true")

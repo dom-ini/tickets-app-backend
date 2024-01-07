@@ -69,9 +69,8 @@ class TestPasswordReset:
     def test_is_expired_if_not_expired(self, reset_token: models.PasswordResetToken) -> None:
         assert not crud.password_reset_token.is_expired(reset_token)
 
-    def test_is_expired_if_expired(
-        self, override_token_expire_time: Generator, reset_token: models.PasswordResetToken  # pylint: disable=W0613
-    ) -> None:
+    @pytest.mark.usefixtures("override_token_expire_time")
+    def test_is_expired_if_expired(self, reset_token: models.PasswordResetToken) -> None:
         assert crud.password_reset_token.is_expired(reset_token)
 
     def test_invalidate_all_tokens_for_one_user_should_not_invalidate_for_other_users(

@@ -43,11 +43,11 @@ class TestTicket:
         result = crud.ticket.get_count_for_ticket_category(db, ticket_category_id=ticket.ticket_category_id)
         assert result == 1
 
+    @pytest.mark.usefixtures("ticket_category_second")
     def test_get_by_category_and_user(  # pylint: disable=R0913
         self,
         db: Session,
         ticket_category: TicketCategory,
-        ticket_category_second: TicketCategory,  # pylint: disable=W0613
         ticket: Ticket,
         ticket_second: Ticket,
         test_user: User,
@@ -57,11 +57,11 @@ class TestTicket:
         assert ticket in tickets
         assert ticket_second in tickets
 
+    @pytest.mark.usefixtures("ticket_category_second")
     def test_get_by_event_and_user(  # pylint: disable=R0913
         self,
         db: Session,
         ticket_category: TicketCategory,
-        ticket_category_second: TicketCategory,  # pylint: disable=W0613
         ticket: Ticket,
         ticket_second: Ticket,
         test_user: User,

@@ -1,8 +1,9 @@
+import pytest
 from sqlalchemy.orm import Session
 
 from app.events.models import Event
 from app.tickets import crud
-from app.tickets.models import Ticket, TicketCategory
+from app.tickets.models import TicketCategory
 from app.tickets.schemas import TicketCategoryCreate
 
 
@@ -24,11 +25,10 @@ class TestTicketCategory:
         categories = crud.ticket_category.get_all_by_event(db, event_id=event.id)
         assert len(categories) == len(ticket_categories)
 
+    @pytest.mark.usefixtures("ticket", "ticket_category")
     def test_get_all_by_event_tickets_left(
         self,
         db: Session,
-        ticket: Ticket,  # pylint: disable=W0613
-        ticket_category: TicketCategory,  # pylint: disable=W0613
         event: Event,
     ) -> None:
         categories = crud.ticket_category.get_all_by_event(db, event_id=event.id)

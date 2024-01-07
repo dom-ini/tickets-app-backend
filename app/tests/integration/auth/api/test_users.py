@@ -57,9 +57,8 @@ class TestUsers:  # pylint: disable=R0904
         assert "email" in result
         assert not result.get("is_activated")
 
-    def test_create_user_open_disallowed_open_registration_should_fail(
-        self, client: TestClient, disallow_open_registration: Generator  # pylint: disable=W0613
-    ) -> None:
+    @pytest.mark.usefixtures("disallow_open_registration")
+    def test_create_user_open_disallowed_open_registration_should_fail(self, client: TestClient) -> None:
         password = generate_valid_password()
         email = "random@email.com"
         payload = {"email": email, "password": password}
@@ -89,9 +88,8 @@ class TestUsers:  # pylint: disable=R0904
         assert r.status_code == status.HTTP_200_OK
         assert len(result) == len(INITIAL_DATA["users"].data)
 
-    def test_list_users_pagination(
-        self, client: TestClient, superuser_token_headers: dict[str, str], create_users: None  # pylint: disable=W0613
-    ) -> None:
+    @pytest.mark.usefixtures("create_users")
+    def test_list_users_pagination(self, client: TestClient, superuser_token_headers: dict[str, str]) -> None:
         limit = 5
         skip = len(INITIAL_DATA["users"].data)
         r = client.get(f"{settings.API_V1_STR}/users/?limit={limit}&skip={skip}", headers=superuser_token_headers)
@@ -123,7 +121,10 @@ class TestUsers:  # pylint: disable=R0904
         assert r.status_code == status.HTTP_403_FORBIDDEN
 
     def test_read_current_user_by_disabled_user_should_fail(
-        self, client: TestClient, normal_user_token_headers: dict[str, str], disable_user: None  # pylint: disable=W0613
+        self,
+        client: TestClient,
+        normal_user_token_headers: dict[str, str],
+        disable_user: None,  # pylint: disable=W0613
     ) -> None:
         r = client.get(f"{settings.API_V1_STR}/users/me", headers=normal_user_token_headers)
         assert r.status_code == status.HTTP_403_FORBIDDEN

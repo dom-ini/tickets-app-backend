@@ -24,9 +24,8 @@ def set_random_seed() -> None:
     random.seed(0)
 
 
-def test_validate_password_returns_password_if_all_rules_are_met(
-    override_password_rules: Generator,  # pylint: disable=W0613
-) -> None:
+@pytest.mark.usefixtures("override_password_rules")
+def test_validate_password_returns_password_if_all_rules_are_met() -> None:
     password = "password"
     validated = validate_password(password)
     assert validated == password
@@ -38,7 +37,8 @@ def test_validate_password_should_fail_if_rules_are_not_met() -> None:
         validate_password(password)
 
 
-def test_generate_valid_password(fixed_random: None) -> None:  # pylint: disable=W0613
+@pytest.mark.usefixtures("fixed_random")
+def test_generate_valid_password() -> None:
     for _ in range(100):
         password = generate_valid_password()
         assert check_password_rules(password)
