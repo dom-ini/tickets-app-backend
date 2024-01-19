@@ -10,8 +10,9 @@ _PASSWORD_MIN_LENGTH = 8
 
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "Tickets App"
+    PROJECT_NAME: str = "Tickts"
     SERVER_HOST: str
+    FRONT_URL: str
     SERVER_PROTOCOL: str
     API_V1_STR: str = "/api/v1"
     SECRET_KEY: str
