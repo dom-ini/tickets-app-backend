@@ -13,11 +13,43 @@
     "data": [
       {
         "id": 1,
-        "name": "Politechnika Gdańska, WZiE",
+        "name": "Ergo Arena",
+        "city": "Gdańsk/Sopot",
+        "longitude": 18.5806,
+        "latitude": 54.4264,
+        "slug": "ergo-arena-gdansk-sopot"
+      },
+      {
+        "id": 2,
+        "name": "Olivia Business Centre",
         "city": "Gdańsk",
-        "longitude": 18.6166,
-        "latitude": 54.3703,
-        "slug": "pg-wzie"
+        "longitude": 18.5706,
+        "latitude": 54.4037,
+        "slug": "olivia-business-centre-gdansk"
+      },
+      {
+        "id": 3,
+        "name": "Stadion Narodowy",
+        "city": "Warszawa",
+        "longitude": 21.0456,
+        "latitude": 52.2394,
+        "slug": "stadion-narodowy-warszawa"
+      },
+      {
+        "id": 4,
+        "name": "Pałac Kultury i Nauki",
+        "city": "Warszawa",
+        "longitude": 21.0057,
+        "latitude": 52.2317,
+        "slug": "palac-kultury-i-nauki"
+      },
+      {
+        "id": 5,
+        "name": "Międzynarodowe Centrum Kongresowe w Katowicach",
+        "city": "Katowice",
+        "longitude": 19.0276,
+        "latitude": 50.2662,
+        "slug": "mck-katowice"
       }
     ]
   },
@@ -39,20 +71,44 @@
       {
         "id": 3,
         "parent_type_id": null,
+        "name": "Gotowanie",
+        "slug": "gotowanie"
+      },
+      {
+        "id": 4,
+        "parent_type_id": null,
+        "name": "Muzyka",
+        "slug": "muzyka"
+      },
+      {
+        "id": 5,
+        "parent_type_id": null,
         "name": "Sport",
         "slug": "sport"
       },
       {
-        "id": 4,
+        "id": 6,
         "parent_type_id": 2,
         "name": "Warsztaty",
         "slug": "warsztaty"
       },
       {
-        "id": 5,
+        "id": 7,
         "parent_type_id": 2,
         "name": "Wykłady",
         "slug": "wyklady"
+      },
+      {
+        "id": 8,
+        "parent_type_id": 1,
+        "name": "Konferencje",
+        "slug": "konferencje"
+      },
+      {
+        "id": 9,
+        "parent_type_id": 1,
+        "name": "Panele dyskusyjne",
+        "slug": "panele"
       }
     ]
   },
@@ -61,16 +117,423 @@
     "data": [
       {
         "id": 1,
-        "name": "Warsztaty z Pythonem",
-        "description": "<b>Warsztaty z Pythonem</b>",
+        "name": "Koduj z Pasją - warsztaty z pasjonatami programowania",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
         "poster_vertical": null,
         "poster_horizontal": null,
-        "held_at": "2023-12-01 14:00:00",
+        "held_at": "2029-03-17 01:31:47",
         "created_by_id": 1,
-        "event_type_id": 1,
+        "event_type_id": 6,
+        "location_id": 4,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "koduj-z-pasja-warsztaty-z-pasjonatami-programowania"
+      },
+      {
+        "id": 2,
+        "name": "Warsztaty Cyberbezpieczeństwa",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-06-25 15:52:57",
+        "created_by_id": 1,
+        "event_type_id": 6,
         "location_id": 1,
         "organizer_id": 1,
-        "slug": "warszaty-z-pythonem"
+        "is_active": true,
+        "slug": "warsztaty-cyberbezpieczenstwa"
+      },
+      {
+        "id": 3,
+        "name": "Zrób to sam - warsztaty z Arduino",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-08-11 10:36:48",
+        "created_by_id": 1,
+        "event_type_id": 6,
+        "location_id": 3,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "zrob-to-sam-warsztaty-z-arduino"
+      },
+      {
+        "id": 4,
+        "name": "Światowe Dni Javascript",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-05-19 09:52:03",
+        "created_by_id": 1,
+        "event_type_id": 6,
+        "location_id": 4,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "swiatowe-dni-javascript"
+      },
+      {
+        "id": 5,
+        "name": "Warsztaty z programowania w Pythonie",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-10-21 17:43:24",
+        "created_by_id": 1,
+        "event_type_id": 6,
+        "location_id": 3,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "warsztaty-z-programowania-w-pythonie"
+      },
+      {
+        "id": 6,
+        "name": "Zarządzanie projektami IT: sukcesy, wyzwania i przyszłość",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-12-11 16:00:51",
+        "created_by_id": 1,
+        "event_type_id": 7,
+        "location_id": 2,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "zarzadzanie-projektami-it-sukcesy-wyzwania-i-przyszlosc"
+      },
+      {
+        "id": 7,
+        "name": "Blockchain Beyond Bitcoin: zastosowania technologii blockchain w biznesie",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-05-12 14:41:47",
+        "created_by_id": 1,
+        "event_type_id": 7,
+        "location_id": 4,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "blockchain-beyond-bitcoin-zastosowania-technologii-blockchain-w-biznesie"
+      },
+      {
+        "id": 8,
+        "name": "Data Science Demystified: analiza danych dla wszystkich",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-06-30 13:25:55",
+        "created_by_id": 1,
+        "event_type_id": 7,
+        "location_id": 3,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "data-science-demystified-analiza-danych-dla-wszystkich"
+      },
+      {
+        "id": 9,
+        "name": "Etyka w technologii",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-01-16 23:53:15",
+        "created_by_id": 1,
+        "event_type_id": 7,
+        "location_id": 1,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "etyka-w-technologii"
+      },
+      {
+        "id": 10,
+        "name": "Przyszłość AI: wpływ na biznes i społeczeństwo",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-09-01 11:53:53",
+        "created_by_id": 1,
+        "event_type_id": 7,
+        "location_id": 5,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "przyszosc-ai-wplyw-na-biznes-i-spoleczenstwo"
+      },
+      {
+        "id": 11,
+        "name": "Ekonomiczne perspektywy: konferencja na rzecz zrównoważonego rozwoju",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-01-21 06:18:30",
+        "created_by_id": 1,
+        "event_type_id": 8,
+        "location_id": 1,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "ekonomiczne-perspektywy-konferencja-na-rzecz-zrownowazonego-rozwoju"
+      },
+      {
+        "id": 12,
+        "name": "BIZTECH connect: integracja technologii z biznesem",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-07-14 19:35:39",
+        "created_by_id": 1,
+        "event_type_id": 8,
+        "location_id": 2,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "biztech-connect-integracja-technologii-z-biznesem"
+      },
+      {
+        "id": 13,
+        "name": "Przyszłość pracy: nowoczesne koncepcje organizacji i zarządzania",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-09-02 11:19:17",
+        "created_by_id": 1,
+        "event_type_id": 8,
+        "location_id": 3,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "przyszlosc-pracy-nowoczesne-koncepcje-organizacji-i-zarzadzania"
+      },
+      {
+        "id": 14,
+        "name": "Startup summit: inwestycje, innowacje i wzrost gospodarczy",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-07-02 12:52:06",
+        "created_by_id": 1,
+        "event_type_id": 8,
+        "location_id": 2,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "startup-summit-inwestycje-innowacje-i-wzrost-gospodarczy"
+      },
+      {
+        "id": 15,
+        "name": "Cyfrowa transformacja: nowe horyzonty dla firm przyszłości",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-04-16 04:19:56",
+        "created_by_id": 1,
+        "event_type_id": 8,
+        "location_id": 5,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "cyfrowa-transformacja-nowe-horyzonty-dla-firm-przyszlosci"
+      },
+      {
+        "id": 16,
+        "name": "Przedsiębiorczość społeczna: wpływ na społeczeństwo i biznes",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-11-09 11:33:33",
+        "created_by_id": 1,
+        "event_type_id": 9,
+        "location_id": 4,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "przedsiebiorczosc-spoleczna-wplyw-na-spoleczenstwo-i-biznes"
+      },
+      {
+        "id": 17,
+        "name": "Równość i dywersyfikacja w biznesie: wpływ na efektywność organizacji",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-02-04 02:29:25",
+        "created_by_id": 1,
+        "event_type_id": 9,
+        "location_id": 1,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "rownosc-i-dywersyfikacja-w-biznesie-wplyw-na-efektywnosc-organizacji"
+      },
+      {
+        "id": 18,
+        "name": "Przemiany kulturowe w organizacjach: nowe podejścia do zarządzania",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-09-19 05:28:50",
+        "created_by_id": 1,
+        "event_type_id": 9,
+        "location_id": 5,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "przemiany-kulturowe-w-organizacjach-nowe-podejscia-do-zarzadzania"
+      },
+      {
+        "id": 19,
+        "name": "Zrównoważony biznes: strategie działania dla przedsiębiorstw odpowiedzialnych",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-07-12 12:40:49",
+        "created_by_id": 1,
+        "event_type_id": 9,
+        "location_id": 2,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "zrownowazony-biznes-strategie-dzialania-dla-przedsiebiorstw-odpowiedzialnych"
+      },
+      {
+        "id": 20,
+        "name": "Innowacje w praktyce: case studies i dyskusje z przedsiębiorcami",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-04-17 20:50:47",
+        "created_by_id": 1,
+        "event_type_id": 9,
+        "location_id": 1,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "innowacje-w-praktyce-case-studies-i-dyskusje-z-przedsiebiorcami"
+      },
+      {
+        "id": 21,
+        "name": "Sportfest: festiwal aktywnego stylu życia",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-01-11 06:10:46",
+        "created_by_id": 1,
+        "event_type_id": 5,
+        "location_id": 1,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "sportfest-festiwal-aktywnego-stylu-zycia"
+      },
+      {
+        "id": 22,
+        "name": "Wspinaczka na Wysokość: zawody wspinaczkowe",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-06-28 03:36:21",
+        "created_by_id": 1,
+        "event_type_id": 5,
+        "location_id": 4,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "wspinaczka-na-wysokosc-zawody-wspinaczkowe"
+      },
+      {
+        "id": 23,
+        "name": "EkoFitness Expo: wydarzenie promujące zdrowy tryb życia",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-11-15 04:08:26",
+        "created_by_id": 1,
+        "event_type_id": 5,
+        "location_id": 1,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "ekofitness-expo-wydarzenie-promujace-zdrowy-tryb-zycia"
+      },
+      {
+        "id": 24,
+        "name": "Skatepark Jam: showdown rolkowy z Mistrzami Stuntu",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-04-22 00:25:11",
+        "created_by_id": 1,
+        "event_type_id": 5,
+        "location_id": 2,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "skatepark-jam-showdown-rolkowy-z-mistrzami-stuntu"
+      },
+      {
+        "id": 25,
+        "name": "Fit & Fun Weekend: warsztaty fitness i zabawy sportowe",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-04-09 11:17:16",
+        "created_by_id": 1,
+        "event_type_id": 5,
+        "location_id": 2,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "fit-fun-weekend-warsztaty-fitness-i-zabawy-sportowe"
+      },
+      {
+        "id": 26,
+        "name": "Rock'n'Roll: sztuka wizualna inspirująca rock",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-01-13 17:39:32",
+        "created_by_id": 1,
+        "event_type_id": 4,
+        "location_id": 5,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "rocknart-exhibition-sztuka-wizualna-inspirujaca-rock"
+      },
+      {
+        "id": 27,
+        "name": "RetroGroove Expo: odkryj historię i styl w muzyce",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-03-04 19:28:19",
+        "created_by_id": 1,
+        "event_type_id": 4,
+        "location_id": 1,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "retrogroove-expo-odkryj-historie-i-styl-w-muzyce"
+      },
+      {
+        "id": 28,
+        "name": "Muzyczna Mania: warsztaty produkcji dźwięku",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-09-06 16:48:50",
+        "created_by_id": 1,
+        "event_type_id": 4,
+        "location_id": 2,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "muzyczna-mania-warsztaty-produkcji-dzwieku"
+      },
+      {
+        "id": 29,
+        "name": "Pieczenie z Pasją: warsztaty wypieku chleba i ciast",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-08-07 05:59:58",
+        "created_by_id": 1,
+        "event_type_id": 3,
+        "location_id": 5,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "pieczenie-z-pasja-warsztaty-wypieku-chleba-i-ciast"
+      },
+      {
+        "id": 30,
+        "name": "Degustacyjna Eskapada: podróże smaków świata",
+        "description": "\n<h2>\n  <b>\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mauris\n    dolor, vehicula sit amet sem at, tincidunt facilisis quam.\n  </b>\n</h2>\n<br />\n<p>\n  Duis ullamcorper fringilla ex vitae pulvinar. Mauris id egestas libero, vel\n  vestibulum mi.\n  <b><i>Vestibulum fermentum lectus sit amet vehicula imperdiet.</i></b>\n  Aliquam sit amet metus pulvinar, condimentum velit at, semper metus. Fusce\n  quis ex enim. Sed molestie orci eget pretium tristique. Fusce semper orci in\n  nulla molestie pretium. Nullam rutrum tempus ex, a cursus mi semper at. Fusce\n  arcu turpis, finibus vel nisl nec, molestie egestas lorem. Aliquam lacinia\n  luctus tellus, at elementum felis fermentum quis. Quisque vitae mi ligula.\n  Fusce ullamcorper sem sit amet elit porttitor, ac placerat turpis tristique.\n  Etiam ut risus tincidunt odio pretium tincidunt ut eu nulla. Proin eleifend\n  eros ac arcu tristique ornare. Phasellus euismod varius nisi, et molestie\n  dolor auctor id.\n</p>\n<br />\n<h2><b>Curabitur a quam at neque semper convallis vitae et nisl.</b></h2>\n<br />\n<p>\n  Integer ullamcorper orci nisl, eu elementum tortor ultricies at. Nulla ut\n  bibendum lectus. Suspendisse congue tortor enim, ut eleifend nibh imperdiet\n  vitae. Mauris ut gravida diam.\n  <b>Etiam nec sapien placerat, varius neque ut, rhoncus magna.</b> Nam justo\n  orci, auctor non neque eget, molestie viverra turpis. Sed porta, est at\n  dignissim varius, lacus felis aliquet felis, at volutpat tellus tortor sed\n  quam. Donec consectetur vulputate mi, a condimentum felis. Vivamus lobortis\n  ipsum eu purus lacinia sagittis. Aenean gravida pretium finibus. Cras cursus\n  tortor nec risus cursus, sed fringilla magna hendrerit.\n</p>\n<br />\n<p>\n  <b\n    >Aenean erat ipsum, pharetra vitae dignissim fermentum, consequat vel\n    justo.</b\n  >\n  In mollis nunc sed ligula sollicitudin, in efficitur libero tincidunt. Aenean\n  a nisi molestie justo vehicula laoreet eget tempor sem. Curabitur auctor\n  ultricies urna, eget gravida lorem. Vestibulum sed enim nibh. Quisque sit amet\n  arcu a orci laoreet mollis ullamcorper non elit. Ut porttitor pharetra felis,\n  vel congue ex condimentum ultrices. Etiam finibus, felis ut mattis porttitor,\n  neque nisi finibus turpis, sit amet faucibus quam eros et tellus. Etiam at\n  nisi vel odio finibus iaculis vitae vitae quam.\n  <b> Curabitur luctus risus non tincidunt rhoncus. Maecenas sed mi justo. </b>\n  Suspendisse eget risus ante. Aliquam maximus tristique lacus, et ullamcorper\n  lectus rutrum sit amet.\n</p>\n<br />\n<h2><b>Vivamus consequat augue sit amet lacus facilisis finibus.</b></h2>\n<br />\n<p>\n  Pellentesque sit amet vulputate lacus. Morbi eleifend consectetur orci, sit\n  amet porta est laoreet non. Nulla facilisi. Sed tincidunt turpis in tellus\n  malesuada aliquet. Donec molestie egestas ex. Etiam volutpat arcu nibh, sit\n  amet mollis elit elementum id. Suspendisse quis lacus ut turpis elementum\n  maximus. Mauris efficitur magna vel sapien condimentum semper. Pellentesque\n  bibendum in ipsum sit amet congue. Donec erat lorem, congue sit amet tempor\n  et, cursus at ante.\n</p>\n<br />\n<p>\n  <i>\n    Nunca elit dapibus, lobortis risus a, aliquet ex. Vivamus malesuada lacus\n    sit amet nisl sagittis, et pharetra nibh viverra. Duis turpis nunc, euismod\n    id mattis ut, interdum eget nulla.\n  </i>\n</p>\n",
+        "poster_vertical": null,
+        "poster_horizontal": null,
+        "held_at": "2029-02-24 22:48:22",
+        "created_by_id": 1,
+        "event_type_id": 3,
+        "location_id": 1,
+        "organizer_id": 1,
+        "is_active": true,
+        "slug": "degustacyjna-eskapada-podroze-smakow-swiata"
       }
     ]
   },
@@ -81,9 +544,113 @@
         "id": 1,
         "name": "Jan Kowalski",
         "photo": null,
-        "description": "<b>Jan Kowalski</b>",
+        "description": "<p>\n  <b>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b> In placerat,\n  felis ut consequat iaculis, libero tortor imperdiet neque, vel ultricies felis\n  sem sit amet sapien. Suspendisse in metus in nibh maximus ultrices eget ac\n  tortor. Integer porta ornare enim maximus posuere. Sed non ex sed turpis\n  posuere commodo. Nullam sit amet tortor congue, condimentum quam volutpat,\n  ultricies nulla. Phasellus a dui lorem. Aliquam augue quam, iaculis a odio in,\n  lobortis semper sapien. Etiam semper quam at convallis sollicitudin. Aliquam\n  non euismod turpis. Pellentesque habitant morbi tristique senectus et netus et\n  malesuada fames ac turpis egestas. Ut eu dapibus purus, a vestibulum enim.\n</p>\n<br />\n<p>\n  Suspendisse eget massa sed diam efficitur vestibulum. Etiam pretium tempus\n  auctor.<b> Maecenas tortor odio, feugiat quis eleifend eu, porta eu velit.</b>\n  In posuere, enim sit amet blandit scelerisque, lectus justo aliquet diam, id\n  cursus mi tortor eget sapien. Duis efficitur, turpis sit amet ornare lacinia,\n  erat justo aliquet eros, sit amet imperdiet erat nisl in justo. Nunc eu dictum\n  arcu. Mauris egestas iaculis nulla ac accumsan. Aliquam lobortis venenatis\n  consectetur. In hac habitasse platea dictumst. Nunc magna dolor, pellentesque\n  sit amet scelerisque sed, semper non purus. Praesent lacinia ante tellus, eget\n  volutpat diam viverra sit amet. Maecenas accumsan quam vel enim elementum,\n  eget pellentesque sem semper. Suspendisse interdum sed dui id tristique.\n  Phasellus arcu justo, maximus vitae sem ut, feugiat malesuada enim.\n  Suspendisse potenti.\n</p>\n",
         "slug": "jan-kowalski"
+      },
+      {
+        "id": 2,
+        "name": "Piotr Nowak",
+        "photo": null,
+        "description": "<p>\n  <b>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b> In placerat,\n  felis ut consequat iaculis, libero tortor imperdiet neque, vel ultricies felis\n  sem sit amet sapien. Suspendisse in metus in nibh maximus ultrices eget ac\n  tortor. Integer porta ornare enim maximus posuere. Sed non ex sed turpis\n  posuere commodo. Nullam sit amet tortor congue, condimentum quam volutpat,\n  ultricies nulla. Phasellus a dui lorem. Aliquam augue quam, iaculis a odio in,\n  lobortis semper sapien. Etiam semper quam at convallis sollicitudin. Aliquam\n  non euismod turpis. Pellentesque habitant morbi tristique senectus et netus et\n  malesuada fames ac turpis egestas. Ut eu dapibus purus, a vestibulum enim.\n</p>\n<br />\n<p>\n  Suspendisse eget massa sed diam efficitur vestibulum. Etiam pretium tempus\n  auctor.<b> Maecenas tortor odio, feugiat quis eleifend eu, porta eu velit.</b>\n  In posuere, enim sit amet blandit scelerisque, lectus justo aliquet diam, id\n  cursus mi tortor eget sapien. Duis efficitur, turpis sit amet ornare lacinia,\n  erat justo aliquet eros, sit amet imperdiet erat nisl in justo. Nunc eu dictum\n  arcu. Mauris egestas iaculis nulla ac accumsan. Aliquam lobortis venenatis\n  consectetur. In hac habitasse platea dictumst. Nunc magna dolor, pellentesque\n  sit amet scelerisque sed, semper non purus. Praesent lacinia ante tellus, eget\n  volutpat diam viverra sit amet. Maecenas accumsan quam vel enim elementum,\n  eget pellentesque sem semper. Suspendisse interdum sed dui id tristique.\n  Phasellus arcu justo, maximus vitae sem ut, feugiat malesuada enim.\n  Suspendisse potenti.\n</p>\n",
+        "slug": "piotr-nowak"
+      },
+      {
+        "id": 3,
+        "name": "Ryszard Iksiński",
+        "photo": null,
+        "description": "<p>\n  <b>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b> In placerat,\n  felis ut consequat iaculis, libero tortor imperdiet neque, vel ultricies felis\n  sem sit amet sapien. Suspendisse in metus in nibh maximus ultrices eget ac\n  tortor. Integer porta ornare enim maximus posuere. Sed non ex sed turpis\n  posuere commodo. Nullam sit amet tortor congue, condimentum quam volutpat,\n  ultricies nulla. Phasellus a dui lorem. Aliquam augue quam, iaculis a odio in,\n  lobortis semper sapien. Etiam semper quam at convallis sollicitudin. Aliquam\n  non euismod turpis. Pellentesque habitant morbi tristique senectus et netus et\n  malesuada fames ac turpis egestas. Ut eu dapibus purus, a vestibulum enim.\n</p>\n<br />\n<p>\n  Suspendisse eget massa sed diam efficitur vestibulum. Etiam pretium tempus\n  auctor.<b> Maecenas tortor odio, feugiat quis eleifend eu, porta eu velit.</b>\n  In posuere, enim sit amet blandit scelerisque, lectus justo aliquet diam, id\n  cursus mi tortor eget sapien. Duis efficitur, turpis sit amet ornare lacinia,\n  erat justo aliquet eros, sit amet imperdiet erat nisl in justo. Nunc eu dictum\n  arcu. Mauris egestas iaculis nulla ac accumsan. Aliquam lobortis venenatis\n  consectetur. In hac habitasse platea dictumst. Nunc magna dolor, pellentesque\n  sit amet scelerisque sed, semper non purus. Praesent lacinia ante tellus, eget\n  volutpat diam viverra sit amet. Maecenas accumsan quam vel enim elementum,\n  eget pellentesque sem semper. Suspendisse interdum sed dui id tristique.\n  Phasellus arcu justo, maximus vitae sem ut, feugiat malesuada enim.\n  Suspendisse potenti.\n</p>\n",
+        "slug": "ryszard-iksinski"
       }
+    ]
+  },
+  {
+    "model": "TicketCategory",
+    "data": [
+      {
+        "id": 1,
+        "quota": 10,
+        "name": "Opcja 1",
+        "event_id": 1
+      },
+      {
+        "id": 2,
+        "quota": 10,
+        "name": "Opcja 2",
+        "event_id": 1
+      },
+      {
+        "id": 3,
+        "quota": 10,
+        "name": "Opcja 1",
+        "event_id": 2
+      },
+      {
+        "id": 4,
+        "quota": 10,
+        "name": "Opcja 2",
+        "event_id": 2
+      },
+      {
+        "id": 5,
+        "quota": 10,
+        "name": "Opcja 1",
+        "event_id": 3
+      },
+      {
+        "id": 6,
+        "quota": 10,
+        "name": "Opcja 2",
+        "event_id": 3
+      },
+      {
+        "id": 7,
+        "quota": 10,
+        "name": "Opcja 1",
+        "event_id": 4
+      },
+      {
+        "id": 8,
+        "quota": 10,
+        "name": "Opcja 2",
+        "event_id": 4
+      },
+      {
+        "id": 9,
+        "quota": 10,
+        "name": "Opcja 1",
+        "event_id": 5
+      },
+      {
+        "id": 10,
+        "quota": 10,
+        "name": "Opcja 2",
+        "event_id": 5
+      },
+      { "id": 11, "quota": 10, "name": "Opcja 1", "event_id": 6 },
+      { "id": 12, "quota": 10, "name": "Opcja 1", "event_id": 7 },
+      { "id": 13, "quota": 10, "name": "Opcja 1", "event_id": 8 },
+      { "id": 14, "quota": 10, "name": "Opcja 1", "event_id": 9 },
+      { "id": 15, "quota": 10, "name": "Opcja 1", "event_id": 10 },
+      { "id": 16, "quota": 10, "name": "Opcja 1", "event_id": 11 },
+      { "id": 17, "quota": 10, "name": "Opcja 1", "event_id": 12 },
+      { "id": 18, "quota": 10, "name": "Opcja 1", "event_id": 13 },
+      { "id": 19, "quota": 10, "name": "Opcja 1", "event_id": 14 },
+      { "id": 20, "quota": 10, "name": "Opcja 1", "event_id": 15 },
+      { "id": 21, "quota": 10, "name": "Opcja 1", "event_id": 16 },
+      { "id": 22, "quota": 10, "name": "Opcja 1", "event_id": 17 },
+      { "id": 23, "quota": 10, "name": "Opcja 1", "event_id": 18 },
+      { "id": 24, "quota": 10, "name": "Opcja 1", "event_id": 19 },
+      { "id": 25, "quota": 10, "name": "Opcja 1", "event_id": 20 },
+      { "id": 26, "quota": 10, "name": "Opcja 1", "event_id": 21 },
+      { "id": 27, "quota": 10, "name": "Opcja 1", "event_id": 22 },
+      { "id": 28, "quota": 10, "name": "Opcja 1", "event_id": 23 },
+      { "id": 29, "quota": 10, "name": "Opcja 1", "event_id": 24 },
+      { "id": 30, "quota": 10, "name": "Opcja 1", "event_id": 25 },
+      { "id": 31, "quota": 10, "name": "Opcja 1", "event_id": 26 },
+      { "id": 32, "quota": 10, "name": "Opcja 1", "event_id": 27 },
+      { "id": 33, "quota": 10, "name": "Opcja 1", "event_id": 28 },
+      { "id": 34, "quota": 10, "name": "Opcja 1", "event_id": 29 },
+      { "id": 35, "quota": 10, "name": "Opcja 1", "event_id": 30 }
     ]
   },
   {
@@ -92,6 +659,34 @@
       {
         "event_id": 1,
         "speaker_id": 1
+      },
+      {
+        "event_id": 1,
+        "speaker_id": 2
+      },
+      {
+        "event_id": 2,
+        "speaker_id": 3
+      },
+      {
+        "event_id": 3,
+        "speaker_id": 1
+      },
+      {
+        "event_id": 3,
+        "speaker_id": 2
+      },
+      {
+        "event_id": 3,
+        "speaker_id": 3
+      },
+      {
+        "event_id": 4,
+        "speaker_id": 1
+      },
+      {
+        "event_id": 5,
+        "speaker_id": 2
       }
     ]
   }
