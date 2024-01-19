@@ -4,21 +4,37 @@ from contextlib import contextmanager
 from typing import Any, Generator
 
 import click
-from sqlalchemy import insert
+from sqlalchemy import insert, text
 from sqlalchemy.orm import Session
 
 from app.db.session import SessionLocal
 
 MODELS_MODULE_NAME = "app.db.base"
+IMAGE_URL_QUERIES = [
+    text(
+        """
+        UPDATE event
+        SET poster_vertical = 'event-' || id || '.webp', poster_horizontal = 'event-' || id || '-hor.webp';
+    """
+    ),
+    text(
+        """
+        UPDATE speaker
+        SET photo = 'speaker-' || id || '.webp';
+    """
+    ),
+]
 
 
 class DBDataImporter:
+    MODULE_NAME = "app.db.base"
+
     def __init__(self, session: Session) -> None:
         self._session = session
 
     def from_json(self, file_path: str) -> None:
         data = get_json_content(file_path)
-        insert_data_to_db(self._session, data)
+        insert_data_to_db(session=self._session, module_name=self.MODULE_NAME, raw_data=data)
 
 
 def get_json_content(file_path: str) -> list[dict]:
@@ -38,16 +54,16 @@ def create_db_session() -> Generator:
         session.close()
 
 
-def get_model_class(model_name: str) -> Any:
+def get_model_class(model_name: str, module_name: str) -> Any:
     try:
-        module = importlib.import_module(MODELS_MODULE_NAME)
+        module = importlib.import_module(module_name)
     except ImportError as exc:
-        raise ImportError(f"Unable to import module '{MODELS_MODULE_NAME}'") from exc
+        raise ImportError(f"Unable to import module '{module_name}'") from exc
 
     try:
         model = getattr(module, model_name)
     except AttributeError as exc:
-        raise ImportError(f"Model '{model_name}' not found in module '{MODELS_MODULE_NAME}'") from exc
+        raise ImportError(f"Model '{model_name}' not found in module '{module_name}'") from exc
 
     return model
 
@@ -57,10 +73,10 @@ def insert_row_to_db(session: Session, table: Any, row: dict) -> None:
     session.execute(query)
 
 
-def insert_data_to_db(session: Session, raw_data: list[dict]) -> None:
+def insert_data_to_db(session: Session, module_name: str, raw_data: list[dict]) -> None:
     for entry in raw_data:
         model_name = entry["model"]
-        model = get_model_class(model_name)
+        model = get_model_class(model_name, module_name)
 
         data: list[dict] = entry["data"]
         for row in data:
@@ -82,6 +98,22 @@ def populate_db(json_file: str) -> None:
             DBDataImporter(session).from_json(json_file)
             session.commit()
             print("Data import completed")
+        except Exception as exc:
+            print(f"Error: {exc}")
+            print("Rolling back...")
+            session.rollback()
+
+
+@cli.command()
+def regenerate_image_urls() -> None:
+    """Set image urls for event posters and speaker photos"""
+    print("Regenerating urls...")
+    with create_db_session() as session:  # type: Session
+        try:
+            for query in IMAGE_URL_QUERIES:
+                session.execute(query)
+            session.commit()
+            print("Urls regenerated")
         except Exception as exc:
             print(f"Error: {exc}")
             print("Rolling back...")
