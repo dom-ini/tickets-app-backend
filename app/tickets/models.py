@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship  # type: ignore[attr-defined]
 
-from app.common.models import IntPk, UniqueIndexedStr
+from app.common.models import IntPk
 from app.db.base_class import Base
 from app.events.models import Event
 
@@ -29,7 +29,7 @@ class Ticket(Base):
 
 class TicketCategory(Base):
     id: Mapped[IntPk]
-    name: Mapped[UniqueIndexedStr]
+    name: Mapped[str] = mapped_column(nullable=False)
     quota: Mapped[int] = mapped_column(nullable=False)
     event_id: Mapped[int] = mapped_column(ForeignKey("event.id"), nullable=False)
 
