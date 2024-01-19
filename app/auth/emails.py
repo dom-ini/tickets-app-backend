@@ -4,7 +4,7 @@ from app.common.emails import prepare_email
 
 
 def send_new_user_email(email_to: str, verification_token: str) -> MessageSchema:
-    subject = "[{{ project_name }}] Welcome to {{ project_name }}!"
+    subject = "Witamy w {{ project_name }}!"
     return prepare_email(
         email_to=[email_to],
         subject=subject,
@@ -16,7 +16,7 @@ def send_new_user_email(email_to: str, verification_token: str) -> MessageSchema
 
 
 def send_password_reset_request_mail(email_to: str, token: str) -> MessageSchema:
-    subject = "[{{ project_name }}] Reset your password"
+    subject = "Zresetuj swoje hasło"
     return prepare_email(
         email_to=[email_to],
         subject=subject,

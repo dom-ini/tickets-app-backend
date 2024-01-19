@@ -8,16 +8,18 @@ from app.events.models import Event, EventType, Location, Organizer, Speaker
 
 from ...core.config import settings
 from ..fields import CKTextAreaField
+from .core import FileModelView
 from .registry import register_view
 
 
 @register_view
-class EventView(ModelView, model=Event):  # type: ignore[call-arg]
+class EventView(FileModelView, model=Event):  # type: ignore[call-arg]
+    FILE_FIELDS = ("poster_vertical", "poster_horizontal")
     icon = "fa-solid fa-calendar-days"
     column_list = [Event.id, Event.name, Event.held_at, Event.is_active, Event.slug]
     column_searchable_list = [Event.name, Event.slug]
     column_sortable_list = [Event.id, Event.name, Event.held_at, Event.is_active, Event.slug]
-    form_excluded_columns = [Event.ticket_categories, Event.speakers, Event.created_by]
+    form_excluded_columns = [Event.ticket_categories, Event.created_by]
     column_details_exclude_list = [Event.location_id, Event.organizer_id, Event.created_by_id, Event.event_type_id]
     form_ajax_refs = {
         "organizer": {
@@ -107,7 +109,8 @@ class LocationView(ModelView, model=Location):  # type: ignore[call-arg]
 
 
 @register_view
-class SpeakerView(ModelView, model=Speaker):  # type: ignore[call-arg]
+class SpeakerView(FileModelView, model=Speaker):  # type: ignore[call-arg]
+    FILE_FIELDS = ("photo",)
     icon = "fa-solid fa-chalkboard-user"
     column_list = [Speaker.id, Speaker.name, Speaker.slug]
     column_searchable_list = [Speaker.name, Speaker.slug]

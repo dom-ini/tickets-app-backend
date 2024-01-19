@@ -43,7 +43,7 @@ def prepare_email(
 ) -> MessageSchema:
     base_context = {
         "project_name": settings.PROJECT_NAME,
-        "url": settings.SERVER_HOST,
+        "url": settings.FRONT_URL,
     }
     if context is not None:
         base_context.update(context)
