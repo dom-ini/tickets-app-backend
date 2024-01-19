@@ -60,9 +60,9 @@ class CRUDEvent(CRUDBase[Event, EventCreate, EmptySchema], SlugMixin[Event]):
                 .group_by(TicketCategory.id)
                 .having(TicketCategory.quota > func.count(Ticket.id))  # pylint: disable=not-callable
             )
-            query = select(self.model).where(self.model.id.in_(subquery))
+            query = select(self.model).where(self.model.id.in_(subquery)).distinct()
         else:
-            query = select(self.model)
+            query = select(self.model).distinct()
         if joins:
             for join in joins:
                 query = query.join(join)  # type: ignore[assignment]

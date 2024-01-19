@@ -52,7 +52,7 @@ class TestEvents:
     def test_list_events_pagination(self, client: TestClient, multiple_events: list[models.Event]) -> None:
         limit = 2
         skip = 1
-        r = client.get(f"{settings.API_V1_STR}/events/?limit={limit}&skip={skip}")
+        r = client.get(f"{settings.API_V1_STR}/events/?limit={limit}&skip={skip}&sort_by=id")
         result = r.json()["items"]
         assert r.status_code == status.HTTP_200_OK
         assert len(result) == min(EVENT_COUNT, limit)
