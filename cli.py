@@ -88,36 +88,36 @@ def cli() -> None:
     pass
 
 
+@contextmanager
+def get_safe_session() -> Generator:
+    with create_db_session() as session:  # type: Session
+        try:
+            yield session
+            session.commit()
+        except Exception as exc:
+            print(f"Error: {exc}")
+            print("Rolling back...")
+            session.rollback()
+
+
 @cli.command()
 @click.argument("json_file", type=click.Path(exists=True))
 def populate_db(json_file: str) -> None:
     """Populate database with JSON data"""
     print(f"Reading data from {json_file}...")
-    with create_db_session() as session:  # type: Session
-        try:
-            DBDataImporter(session).from_json(json_file)
-            session.commit()
-            print("Data import completed")
-        except Exception as exc:
-            print(f"Error: {exc}")
-            print("Rolling back...")
-            session.rollback()
+    with get_safe_session() as session:  # type: Session
+        DBDataImporter(session).from_json(json_file)
+        print("Data import completed")
 
 
 @cli.command()
 def regenerate_image_urls() -> None:
     """Set image urls for event posters and speaker photos"""
     print("Regenerating urls...")
-    with create_db_session() as session:  # type: Session
-        try:
-            for query in IMAGE_URL_QUERIES:
-                session.execute(query)
-            session.commit()
-            print("Urls regenerated")
-        except Exception as exc:
-            print(f"Error: {exc}")
-            print("Rolling back...")
-            session.rollback()
+    with get_safe_session() as session:  # type: Session
+        for query in IMAGE_URL_QUERIES:
+            session.execute(query)
+        print("Urls regenerated")
 
 
 if __name__ == "__main__":
