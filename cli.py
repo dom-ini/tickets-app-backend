@@ -8,6 +8,7 @@ from sqlalchemy import insert, text
 from sqlalchemy.orm import Session
 
 from app.db.session import SessionLocal
+from app.logging import logger
 
 MODELS_MODULE_NAME = "app.db.base"
 IMAGE_URL_QUERIES = [
@@ -81,8 +82,8 @@ def get_safe_db_session() -> Generator:
         yield session
         session.commit()
     except Exception as exc:
-        print(f"Error: {exc}")
-        print("Rolling back...")
+        logger.error(f"Error: {exc}")
+        logger.error("Rolling back...")
         session.rollback()
 
 
@@ -95,20 +96,20 @@ def cli() -> None:
 @click.argument("json_file", type=click.Path(exists=True))
 def populate_db(json_file: str) -> None:
     """Populate database with JSON data"""
-    print(f"Reading data from {json_file}...")
+    logger.info(f"Reading data from {json_file}...")
     with get_safe_db_session() as session:  # type: Session
         DBDataImporter(session).from_json(json_file)
-        print("Data import completed")
+        logger.info("Data import completed")
 
 
 @cli.command()
 def regenerate_image_urls() -> None:
     """Set image urls for event posters and speaker photos"""
-    print("Regenerating urls...")
+    logger.info("Regenerating urls...")
     with get_safe_db_session() as session:  # type: Session
         for query in IMAGE_URL_QUERIES:
             session.execute(query)
-        print("Urls regenerated")
+        logger.info("Urls regenerated")
 
 
 if __name__ == "__main__":
