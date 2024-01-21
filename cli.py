@@ -7,6 +7,8 @@ import click
 from sqlalchemy import insert, text
 from sqlalchemy.orm import Session
 
+from app.auth import crud
+from app.auth.schemas import UserCreate
 from app.db.session import SessionLocal
 from app.logging import logger
 
@@ -110,6 +112,38 @@ def regenerate_image_urls() -> None:
         for query in IMAGE_URL_QUERIES:
             session.execute(query)
         logger.info("Urls regenerated")
+
+
+@cli.command()
+@click.option("--email", prompt=True)
+@click.password_option()
+def create_superuser(email: str, password: str) -> None:
+    """Create a superuser with given email address and password"""
+    user_in = UserCreate(
+        email=email,
+        password=password,
+        is_superuser=True,
+        is_activated=True,
+    )
+    with get_safe_db_session() as session:  # type: Session
+        crud.user.create(session, obj_in=user_in)
+        logger.info(f"Superuser ({email}) created successfully")
+
+
+@cli.command()
+@click.option("--email", prompt=True)
+@click.password_option()
+def create_user(email: str, password: str) -> None:
+    """Create a normal user with given email address and password"""
+    user_in = UserCreate(
+        email=email,
+        password=password,
+        is_superuser=False,
+        is_activated=True,
+    )
+    with get_safe_db_session() as session:  # type: Session
+        crud.user.create(session, obj_in=user_in)
+        logger.info(f"User ({email}) created successfully")
 
 
 if __name__ == "__main__":
