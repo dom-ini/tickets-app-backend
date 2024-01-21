@@ -45,15 +45,6 @@ def get_json_content(file_path: str) -> list[dict]:
     return content
 
 
-@contextmanager
-def create_db_session() -> Generator:
-    try:
-        session = SessionLocal()
-        yield session
-    finally:
-        session.close()
-
-
 def get_model_class(model_name: str, module_name: str) -> Any:
     try:
         module = importlib.import_module(module_name)
@@ -83,21 +74,21 @@ def insert_data_to_db(session: Session, module_name: str, raw_data: list[dict]) 
             insert_row_to_db(session, model, row)
 
 
+@contextmanager
+def get_safe_db_session() -> Generator:
+    session = SessionLocal()
+    try:
+        yield session
+        session.commit()
+    except Exception as exc:
+        print(f"Error: {exc}")
+        print("Rolling back...")
+        session.rollback()
+
+
 @click.group()
 def cli() -> None:
     pass
-
-
-@contextmanager
-def get_safe_session() -> Generator:
-    with create_db_session() as session:  # type: Session
-        try:
-            yield session
-            session.commit()
-        except Exception as exc:
-            print(f"Error: {exc}")
-            print("Rolling back...")
-            session.rollback()
 
 
 @cli.command()
@@ -105,7 +96,7 @@ def get_safe_session() -> Generator:
 def populate_db(json_file: str) -> None:
     """Populate database with JSON data"""
     print(f"Reading data from {json_file}...")
-    with get_safe_session() as session:  # type: Session
+    with get_safe_db_session() as session:  # type: Session
         DBDataImporter(session).from_json(json_file)
         print("Data import completed")
 
@@ -114,7 +105,7 @@ def populate_db(json_file: str) -> None:
 def regenerate_image_urls() -> None:
     """Set image urls for event posters and speaker photos"""
     print("Regenerating urls...")
-    with get_safe_session() as session:  # type: Session
+    with get_safe_db_session() as session:  # type: Session
         for query in IMAGE_URL_QUERIES:
             session.execute(query)
         print("Urls regenerated")
