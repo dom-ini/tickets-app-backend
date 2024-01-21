@@ -72,10 +72,8 @@ class TestTickets:  # pylint: disable=R0904
         self, client: TestClient, event: Event, user_tickets: list[Ticket], normal_user_token_headers: dict[str, str]
     ) -> None:
         event_id = event.id
-        print(event.id)
         r = client.get(f"{settings.API_V1_STR}/tickets/?event_id={event_id}", headers=normal_user_token_headers)
         result = r.json()
-        print(result)
         assert r.status_code == status.HTTP_200_OK
         assert len(result) == len(user_tickets)
 

@@ -108,9 +108,6 @@ class TestEvents:
         lookup_field = filter_name.split("__")[1]
         filter_value = getattr(request.getfixturevalue(related_instance), lookup_field) if related_instance else 0
         r = client.get(f"{settings.API_V1_STR}/events/?{filter_name}={filter_value}")
-        print(filter_value)
-        print(filter_name)
-        print(r.json())
         result = r.json()
         assert r.status_code == status.HTTP_200_OK
         assert result["total_count"] == expected_count
