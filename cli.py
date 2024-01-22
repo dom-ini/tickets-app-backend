@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from app.auth import crud
 from app.auth.schemas import UserCreate
 from app.db.session import SessionLocal
-from app.logging import logger
+from app.loggers import logger
 
 MODELS_MODULE_NAME = "app.db.base"
 IMAGE_URL_QUERIES = [

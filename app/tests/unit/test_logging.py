@@ -1,6 +1,6 @@
 import logging
 
-from app.logging import create_stdout_handler, set_up_logger
+from app.loggers import create_stdout_handler, set_up_logger
 
 
 def test_create_stdout_handler_creates_stream_handler() -> None:
