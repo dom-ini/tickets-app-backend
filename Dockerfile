@@ -15,7 +15,7 @@ COPY ./pyproject.toml ./poetry.lock* /app/
 ARG INSTALL_DEV=false
 RUN bash -c "if [ $INSTALL_DEV == 'true' ] ; then poetry install --no-root ; else poetry install --no-root --no-dev ; fi"
 
-COPY ./app /app
+COPY . /app
 ENV PYTHONPATH=/app
 
 CMD ["bash", "-c", "alembic upgrade head && python3 ./run.py"]
