@@ -24,6 +24,7 @@ Run `docker-compose up` to run the development server.
 Access the API documentation at http://localhost:8000/docs#/.
 
 To fill the database with example data, run `python ./cli.py populate-db ./example_data.json` and `python ./cli.py regenerate-image-urls` in the web container terminal.
+
 To create an user, run `python ./cli.py create-user` or `python ./cli.py create-superuser`.
 
 To run tests, run these commands in the web container terminal:
