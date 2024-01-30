@@ -30,6 +30,12 @@ class InstanceInDBValidator(Generic[Model, CRUD]):
         instance = self.crud_service.get_by_slug(db, slug=slug)
         return self.instance_or_404(instance)
 
+    def by_token(self, db: DBSession, token: str) -> Model:
+        if not hasattr(self.crud_service, "get_by_token"):
+            raise NotImplementedError("CRUD service does not implement retrieving by token")
+        instance = self.crud_service.get_by_token(db, token=token)
+        return self.instance_or_404(instance)
+
 
 def paginate(items: Sequence, count: int) -> dict[str, Any]:
     return {"items": items, "total_count": count}

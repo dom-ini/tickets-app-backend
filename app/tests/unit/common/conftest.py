@@ -1,5 +1,6 @@
 import pytest
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
 
 from app.common.crud import CRUDBase, SlugMixin
 
@@ -21,7 +22,8 @@ class UpdateSchema(BaseModel):
 
 
 class SampleCRUD(CRUDBase[Model, CreateSchema, UpdateSchema], SlugMixin[Model]):  # type: ignore[type-var]
-    pass
+    def get_by_token(self, db: Session, token: str) -> Model | None:
+        pass
 
 
 @pytest.fixture(name="mock_crud", scope="session")

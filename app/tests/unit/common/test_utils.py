@@ -100,3 +100,43 @@ def test_by_slug_without_instance_should_raise_exception(
 
     with pytest.raises(CustomException):
         mock_instance_validator.by_slug(mock_db, slug="slug")
+
+
+def test_by_token_should_call_crud_method(
+    mock_instance_validator: InstanceInDBValidator, mock_db: Mock, mock_crud: SampleCRUD, mocker: MockerFixture
+) -> None:
+    token = "token"
+    mock_get = mocker.patch.object(mock_crud, attribute="get_by_token")
+
+    mock_instance_validator.by_token(mock_db, token=token)
+
+    mock_get.assert_called_once_with(mock_db, token=token)
+
+
+def test_by_token_should_fail_if_crud_service_does_not_have_get_by_token_method(
+    mock_instance_validator: InstanceInDBValidator, mock_db: Mock, mock_crud: SampleCRUD, mocker: MockerFixture
+) -> None:
+    mocker.patch.object(mock_crud, attribute="get_by_token", side_effect=NotImplementedError)
+
+    with pytest.raises(NotImplementedError):
+        mock_instance_validator.by_token(mock_db, token="token")
+
+
+def test_by_token_with_instance(
+    mock_instance_validator: InstanceInDBValidator, mock_db: Mock, mock_crud: SampleCRUD, mocker: MockerFixture
+) -> None:
+    instance = Model()
+    mocker.patch.object(mock_crud, attribute="get_by_token", return_value=instance)
+
+    result = mock_instance_validator.by_token(mock_db, token="token")
+
+    assert result == instance
+
+
+def test_by_token_without_instance_should_raise_exception(
+    mock_instance_validator: InstanceInDBValidator, mock_db: Mock, mock_crud: SampleCRUD, mocker: MockerFixture
+) -> None:
+    mocker.patch.object(mock_crud, attribute="get_by_token", return_value=None)
+
+    with pytest.raises(CustomException):
+        mock_instance_validator.by_token(mock_db, token="token")

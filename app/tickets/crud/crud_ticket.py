@@ -12,7 +12,12 @@ from app.tickets.schemas.ticket import TicketCreate
 
 class CRUDTicket(CRUDBase[Ticket, TicketCreate, BaseModel]):
     def get_by_token(self, db: Session, token: str) -> Ticket | None:
-        query = select(self.model).where(self.model.token == token)
+        query = (
+            select(self.model)
+            .where(self.model.token == token)
+            .join(self.model.ticket_category)
+            .join(TicketCategory.event)
+        )
         result = db.execute(query)
         return result.scalar()
 
