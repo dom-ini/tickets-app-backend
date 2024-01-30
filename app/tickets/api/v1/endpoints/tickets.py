@@ -36,8 +36,8 @@ def get_tickets_by_user(
     return tickets
 
 
-@router.get("/token/{token}", response_model=schemas.TicketWithEvent)
-def get_ticket_by_token(ticket: Annotated[schemas.TicketWithEvent, Depends(ticket_exists.by_token)]) -> Any:
+@router.get("/token/{token}", response_model=schemas.SafeTicketWithEvent)
+def get_ticket_by_token(ticket: Annotated[schemas.SafeTicketWithEvent, Depends(ticket_exists.by_token)]) -> Any:
     """Get ticket by token"""
     return ticket
 

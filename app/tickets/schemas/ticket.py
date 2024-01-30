@@ -14,9 +14,19 @@ class TicketInDBBase(TicketBase):
     id: int
 
 
+class SafeTicketInDBBase(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id: int
+
+
 class Ticket(TicketInDBBase):
     token: str
     created_at: datetime
+
+
+class SafeTicketWithEvent(SafeTicketInDBBase):
+    token: str
+    ticket_category: TicketCategoryWithEvent
 
 
 class TicketWithEvent(Ticket):
