@@ -113,6 +113,17 @@ class TestTickets:  # pylint: disable=R0904
         r = client.get(f"{settings.API_V1_STR}/tickets/{ticket_id}", headers=normal_user_token_headers)
         assert r.status_code == status.HTTP_404_NOT_FOUND
 
+    def test_get_ticket_by_token(self, client: TestClient, ticket: Ticket) -> None:
+        r = client.get(f"{settings.API_V1_STR}/tickets/token/{ticket.token}")
+        result = r.json()
+        assert r.status_code == status.HTTP_200_OK
+        assert result.get("id") == ticket.id
+
+    def test_get_ticket_by_wrong_token_should_fail(self, client: TestClient) -> None:
+        ticket_token = "wrong-token"
+        r = client.get(f"{settings.API_V1_STR}/tickets/token/{ticket_token}")
+        assert r.status_code == status.HTTP_404_NOT_FOUND
+
     def test_reserve_ticket(
         self, client: TestClient, ticket_category: TicketCategory, normal_user_token_headers: dict[str, str]
     ) -> None:

@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, status
 
 from app.common.deps import CurrentActiveUser, DBSession, Pagination, get_current_active_user
 from app.tickets import crud, schemas
-from app.tickets.deps import reserve_ticket_if_available, ticket_belongs_to_user
+from app.tickets.deps import reserve_ticket_if_available, ticket_belongs_to_user, ticket_exists
 from app.tickets.models import Ticket
 
 router = APIRouter()
@@ -34,6 +34,12 @@ def get_tickets_by_user(
         )
     tickets = crud.ticket.get_all_by_user(db, user_id=user.id, limit=pagination.limit, skip=pagination.skip)
     return tickets
+
+
+@router.get("/token/{token}", response_model=schemas.TicketWithEvent)
+def get_ticket_by_token(ticket: Annotated[schemas.TicketWithEvent, Depends(ticket_exists.by_token)]) -> Any:
+    """Get ticket by token"""
+    return ticket
 
 
 @router.get("/{id}", response_model=schemas.Ticket, dependencies=[Depends(get_current_active_user)])
