@@ -1,4 +1,4 @@
-from typing import Sequence
+from typing import Sequence, Tuple
 
 from pydantic import BaseModel
 from sqlalchemy import Row, func, select  # type: ignore[attr-defined]
@@ -12,7 +12,7 @@ from app.tickets.schemas import TicketCategoryCreate
 class CRUDTicketCategory(CRUDBase[TicketCategory, TicketCategoryCreate, BaseModel]):
     def get_all_by_event(
         self, db: Session, *, event_id: int, skip: int = 0, limit: int = 100
-    ) -> Sequence[Row[TicketCategory, int]]:
+    ) -> Sequence[Row[Tuple[TicketCategory, int]]]:
         query = (
             select(  # type: ignore[attr-defined]
                 self.model,
