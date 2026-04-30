@@ -29,9 +29,10 @@ def get_current_user(db: "DBSession", token: Annotated[str, Depends(oauth2_schem
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.JWT_ALGORITHM])
         token_data = schemas.TokenPayload(sub=payload["sub"])
-    except (jwt.JWTError, ValidationError) as exc:
+        user_id = int(token_data.sub or "")
+    except (jwt.JWTError, ValidationError, ValueError) as exc:
         raise InvalidCredentials from exc
-    user = crud.user.get(db, id_=token_data.sub)
+    user = crud.user.get(db, id_=user_id)
     if not user:
         raise UserNotFound
     return user
