@@ -77,4 +77,5 @@ class CRUDTicket(CRUDBase[Ticket, TicketCreate, BaseModel]):
             self.model.ticket_category_id == ticket_category_id
         )
         result = db.execute(query)
-        return result.scalar()
+        count = result.scalar()
+        return count if count is not None else 0
