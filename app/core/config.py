@@ -81,5 +81,7 @@ class Settings(BaseSettings):
     AWS_DEFAULT_ACL: str
     AWS_S3_USE_SSL: bool
 
+    DEMO_MODE_ENABLED: bool = False
+
 
 settings = Settings()
