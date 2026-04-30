@@ -23,8 +23,8 @@ class CRUDBase(Generic[Model, CreateSchema, UpdateSchema]):
         """
         self.model = model
 
-    def get(self, db: Session, id_: Any) -> Model | None:
-        query = select(self.model).where(self.model.id == id_)
+    def get(self, db: Session, id_: int) -> Model | None:
+        query = select(self.model).where(self.model.id == id_)  # type: ignore[attr-defined]
         result = db.execute(query)
         return result.scalar()
 
@@ -63,10 +63,8 @@ class CRUDBase(Generic[Model, CreateSchema, UpdateSchema]):
 
 
 class SlugMixin(Generic[Model]):
-    model: Type[Model]
-
     def get_by_slug(self, db: Session, slug: str) -> Model | None:
-        query = select(self.model).where(self.model.slug == slug)
+        query = select(self.model).where(self.model.slug == slug)  # type: ignore[attr-defined]
         result = db.execute(query)
         return result.scalar()
 
