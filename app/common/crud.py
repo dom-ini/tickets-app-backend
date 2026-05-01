@@ -23,9 +23,9 @@ class CRUDBase(Generic[Model, CreateSchema, UpdateSchema]):
         """
         self.model = model
 
-    def get(self, db: Session, id_: int, aquire_lock: bool = False) -> Model | None:
+    def get(self, db: Session, id_: int, acquire_lock: bool = False) -> Model | None:
         query = select(self.model).where(self.model.id == id_)  # type: ignore[attr-defined]
-        if aquire_lock:
+        if acquire_lock:
             query = query.with_for_update()
         result = db.execute(query)
         return result.scalar()

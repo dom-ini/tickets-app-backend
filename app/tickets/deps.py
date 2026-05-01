@@ -42,7 +42,10 @@ def validate_ticket_payload(
 
 
 def get_valid_category_with_lock(db: DBSession, category_id: int) -> TicketCategory:
-    category = ticket_category_exists.by_id(db, id_=category_id, aquire_lock=True)
+    category = crud.ticket_category.get(db, id_=category_id, acquire_lock=True)
+    if category is None:
+        raise TicketCategoryNotFound
+
     event = category.event
     if not crud_events.event.is_active(event) or crud_events.event.is_expired(event):
         raise TicketReservationNotAvailableForEvent

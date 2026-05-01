@@ -18,12 +18,10 @@ class InstanceInDBValidator(Generic[Model, CRUD]):
             raise self.exception
         return instance
 
-    def by_id(
-        self, db: DBSession, id_: Annotated[int, Path(default=..., alias="id")], aquire_lock: bool = False
-    ) -> Model:
+    def by_id(self, db: DBSession, id_: Annotated[int, Path(default=..., alias="id")]) -> Model:
         if not hasattr(self.crud_service, "get"):
             raise NotImplementedError("CRUD service does not implement retrieving by id")
-        instance = self.crud_service.get(db, id_=id_, aquire_lock=aquire_lock)
+        instance = self.crud_service.get(db, id_=id_)
         return self.instance_or_404(instance)
 
     def by_slug(self, db: DBSession, slug: str) -> Model:
