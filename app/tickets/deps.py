@@ -42,7 +42,7 @@ def validate_ticket_payload(
 
 
 def get_valid_category_with_lock(db: DBSession, category_id: int) -> TicketCategory:
-    category = crud.ticket_category.get(db, id_=category_id, aquire_lock=True)
+    category = crud.ticket_category.get(db, id_=category_id, acquire_lock=True)
     if category is None:
         raise TicketCategoryNotFound
 
