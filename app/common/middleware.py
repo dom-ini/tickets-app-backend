@@ -27,6 +27,7 @@ class DemoModeMiddleware(BaseHTTPMiddleware):
                     "detail": "Demo mode: request accepted but not persisted.",
                     "method": request.method,
                     "path": request.url.path,
+                    "blocked": True,
                 },
                 status_code=200,
             )
