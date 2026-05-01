@@ -31,15 +31,20 @@ def test_instance_or_404_without_instance_should_raise_exception(
         mock_instance_validator.instance_or_404(None)
 
 
+@pytest.mark.parametrize("with_lock", [True, False])
 def test_by_id_should_call_crud_method(
-    mock_instance_validator: InstanceInDBValidator, mock_db: Mock, mock_crud: SampleCRUD, mocker: MockerFixture
+    mock_instance_validator: InstanceInDBValidator,
+    mock_db: Mock,
+    mock_crud: SampleCRUD,
+    mocker: MockerFixture,
+    with_lock: bool,
 ) -> None:
     instance_id = 1
     mock_get = mocker.patch.object(mock_crud, attribute="get")
 
-    mock_instance_validator.by_id(mock_db, id_=instance_id)
+    mock_instance_validator.by_id(mock_db, id_=instance_id, aquire_lock=with_lock)
 
-    mock_get.assert_called_once_with(mock_db, id_=instance_id)
+    mock_get.assert_called_once_with(mock_db, id_=instance_id, aquire_lock=with_lock)
 
 
 def test_by_id_with_instance(

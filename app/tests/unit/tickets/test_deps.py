@@ -7,10 +7,10 @@ from pytest_mock import MockerFixture
 
 from app.tickets import crud
 from app.tickets.deps import (
+    get_valid_category_with_lock,
     reserve_ticket_if_available,
     ticket_belongs_to_user,
     ticket_category_exists,
-    validate_ticket_category,
     validate_ticket_payload,
 )
 from app.tickets.exceptions import (
@@ -36,6 +36,14 @@ def get_mock_ticket() -> Mock:
 @pytest.fixture(name="mock_category")
 def get_mock_category() -> Mock:
     return Mock()
+
+
+@pytest.fixture(name="mock_event")
+def get_mock_event() -> Mock:
+    event = Mock()
+    event.is_active = True
+    event.held_at = datetime.datetime(2099, 1, 1)
+    return event
 
 
 @pytest.fixture(name="ticket_payload")
@@ -95,6 +103,7 @@ def test_reserve_ticket_if_available(  # pylint: disable=R0913
     mock_crud: Mock,
     mock_ticket: Mock,
     mock_category: Mock,
+    mock_event: Mock,
     mocker: MockerFixture,
     tickets_quota: int,
     tickets_reserved: int,
@@ -102,17 +111,16 @@ def test_reserve_ticket_if_available(  # pylint: disable=R0913
 ) -> None:
     mock_user.id = 1
     mock_category.quota = tickets_quota
+    mock_category.event = mock_event
     mocker.patch.object(crud.ticket_category, "get", return_value=mock_category)
     mock_crud.get_count_for_ticket_category.return_value = tickets_reserved
     mock_crud.create.return_value = mock_ticket
 
     if exception:
         with pytest.raises(exception):
-            reserve_ticket_if_available(mock_db, ticket_data=ticket_payload, user=mock_user, category=mock_category)
+            reserve_ticket_if_available(mock_db, ticket_data=ticket_payload, user=mock_user)
     else:
-        ticket = reserve_ticket_if_available(
-            mock_db, ticket_data=ticket_payload, user=mock_user, category=mock_category
-        )
+        ticket = reserve_ticket_if_available(mock_db, ticket_data=ticket_payload, user=mock_user)
         assert ticket == mock_ticket
 
 
@@ -124,7 +132,7 @@ def test_reserve_ticket_if_available(  # pylint: disable=R0913
         (True, datetime.datetime(2040, 1, 1), None),
     ],
 )
-def test_validate_ticket_category(  # pylint: disable=R0913
+def test_get_valid_category_with_lock(  # pylint: disable=R0913
     mock_db: Mock,
     ticket_payload: TicketCreateBody,
     mock_category: Mock,
@@ -141,16 +149,16 @@ def test_validate_ticket_category(  # pylint: disable=R0913
 
     if exception:
         with pytest.raises(exception):
-            validate_ticket_category(mock_db, ticket_body=ticket_payload)
+            get_valid_category_with_lock(mock_db, category_id=ticket_payload.ticket_category_id)
     else:
-        category = validate_ticket_category(mock_db, ticket_body=ticket_payload)
+        category = get_valid_category_with_lock(mock_db, category_id=ticket_payload.ticket_category_id)
         assert category == mock_category
 
 
-def test_validate_ticket_category_should_raise_error_if_category_does_not_exist(
+def test_get_valid_category_with_lock_should_raise_error_if_category_does_not_exist(
     mock_db: Mock, ticket_payload: TicketCreateBody, mocker: MockerFixture
 ) -> None:
     mocker.patch.object(ticket_category_exists, "by_id", side_effect=TicketCategoryNotFound)
 
     with pytest.raises(TicketCategoryNotFound):
-        validate_ticket_category(mock_db, ticket_body=ticket_payload)
+        get_valid_category_with_lock(mock_db, category_id=ticket_payload.ticket_category_id)
