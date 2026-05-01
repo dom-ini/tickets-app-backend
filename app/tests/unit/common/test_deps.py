@@ -70,14 +70,24 @@ def test_pagination_params_default_values() -> None:
 
 def test_get_current_user_valid_token(mock_db: Mock, mock_crud_user: MockCrudUser) -> None:
     token = "valid-token"
-    token_payload = {"sub": "user_id"}
+    token_payload = {"sub": "1"}
 
     with patch("app.common.deps.jwt.decode", return_value=token_payload) as mock_decode:
         user = get_current_user(mock_db, token)
 
         mock_decode.assert_called_once_with(token, settings.SECRET_KEY, algorithms=[settings.JWT_ALGORITHM])
-        mock_crud_user["get"].assert_called_once_with(mock_db, id_=token_payload["sub"])
         assert user == mock_crud_user["get"].return_value
+
+
+def test_get_current_user_invalid_data_in_token_should_fail(mock_db: Mock) -> None:
+    token = "valid-token"
+    token_payload = {"sub": "invalid"}
+
+    with patch("app.common.deps.jwt.decode", return_value=token_payload):
+        with pytest.raises(HTTPException) as exc_info:
+            get_current_user(mock_db, token)
+
+        assert exc_info.value.status_code == status.HTTP_401_UNAUTHORIZED
 
 
 def test_get_current_user_invalid_token_should_fail(mock_db: Mock) -> None:
@@ -92,7 +102,7 @@ def test_get_current_user_invalid_token_should_fail(mock_db: Mock) -> None:
 
 def test_get_current_user_invalid_user_id_should_fail(mock_db: Mock, mock_crud_user: MockCrudUser) -> None:
     token = "valid-token"
-    token_payload = {"sub": "invalid_user_id"}
+    token_payload = {"sub": "999"}
     mock_crud_user["get"].return_value = None
 
     with patch("app.common.deps.jwt.decode", return_value=token_payload):

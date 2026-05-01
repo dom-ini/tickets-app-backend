@@ -30,14 +30,6 @@ def ticket_belongs_to_user(
     return ticket
 
 
-def validate_ticket_category(db: DBSession, ticket_body: schemas.TicketCreateBody) -> TicketCategory:
-    category = ticket_category_exists.by_id(db, id_=ticket_body.ticket_category_id)
-    event = category.event
-    if not crud_events.event.is_active(event) or crud_events.event.is_expired(event):
-        raise TicketReservationNotAvailableForEvent
-    return category
-
-
 def validate_ticket_payload(
     db: DBSession, ticket_body: schemas.TicketCreateBody, user: CurrentActiveUser
 ) -> schemas.TicketCreateBody:
@@ -49,12 +41,20 @@ def validate_ticket_payload(
     return ticket_body
 
 
+def get_valid_category_with_lock(db: DBSession, category_id: int) -> TicketCategory:
+    category = ticket_category_exists.by_id(db, id_=category_id, aquire_lock=True)
+    event = category.event
+    if not crud_events.event.is_active(event) or crud_events.event.is_expired(event):
+        raise TicketReservationNotAvailableForEvent
+    return category
+
+
 def reserve_ticket_if_available(
     db: DBSession,
-    category: Annotated[TicketCategory, Depends(validate_ticket_category)],
     ticket_data: Annotated[schemas.TicketCreateBody, Depends(validate_ticket_payload)],
     user: CurrentActiveUser,
 ) -> Ticket:
+    category = get_valid_category_with_lock(db, category_id=ticket_data.ticket_category_id)
     ticket_in = schemas.TicketCreate(**ticket_data.model_dump(), user_id=user.id)
     ticket_count_for_category = crud.ticket.get_count_for_ticket_category(db, ticket_category_id=category.id)
     if ticket_count_for_category >= category.quota:

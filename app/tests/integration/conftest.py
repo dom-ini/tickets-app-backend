@@ -8,14 +8,14 @@ from fastapi_mail import ConnectionConfig, FastMail
 from sqlalchemy.orm.session import Session, SessionTransaction
 from starlette.testclient import TestClient
 
+from app.app_factory import create_app
 from app.auth import crud, models, schemas
 from app.auth.utils import generate_valid_password
 from app.common.deps import get_db
 from app.common.emails import MailSender, get_mailer_config, mailer
-from app.core.config import settings
+from app.core.config import Settings, settings
 from app.db import base
 from app.events import crud as event_crud, models as event_models, schemas as event_schemas
-from app.main import app
 from app.tests.integration.test_db_config.initial_data import INITIAL_DATA
 from app.tests.integration.test_db_config.session import TestingSessionLocal, engine
 from app.tests.integration.test_db_config.setup_db import init_db
@@ -67,9 +67,13 @@ def client(db: Session) -> Generator:
     def override_get_db() -> Generator:
         yield db
 
+    app_settings = Settings(DEMO_MODE_ENABLED=False)
+    app = create_app(app_settings)
     app.dependency_overrides[get_db] = override_get_db
     app.dependency_overrides[mailer] = create_test_mailer
+
     yield TestClient(app)
+
     del app.dependency_overrides[get_db]
     del app.dependency_overrides[mailer]
 
