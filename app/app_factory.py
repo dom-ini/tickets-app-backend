@@ -14,6 +14,7 @@ def create_app(settings: Settings) -> FastAPI:
         openapi_url=f"{settings.API_V1_STR}/openapi.json",
     )
 
+    app.add_middleware(DemoModeMiddleware, enabled=settings.DEMO_MODE_ENABLED)
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.CORS_ALLOWED_ORIGINS,
@@ -21,7 +22,6 @@ def create_app(settings: Settings) -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
-    app.add_middleware(DemoModeMiddleware, enabled=settings.DEMO_MODE_ENABLED)
 
     app.include_router(api_router)
     setup_admin(app, engine)
