@@ -10,7 +10,6 @@ from app.tickets.deps import (
     get_valid_category_with_lock,
     reserve_ticket_if_available,
     ticket_belongs_to_user,
-    ticket_category_exists,
     validate_ticket_payload,
 )
 from app.tickets.exceptions import (
@@ -83,9 +82,8 @@ def test_validate_ticket_payload_should_raise_error_if_user_already_has_ticket_f
 
 
 def test_validate_ticket_payload_should_return_payload(
-    mock_db: Mock, mock_user: Mock, ticket_payload: TicketCreateBody, mock_crud: Mock, mocker: MockerFixture
+    mock_db: Mock, mock_user: Mock, ticket_payload: TicketCreateBody, mock_crud: Mock
 ) -> None:
-    mocker.patch.object(ticket_category_exists, "by_id")
     mock_crud.get_by_category_and_user.return_value = None
     result = validate_ticket_payload(mock_db, ticket_body=ticket_payload, user=mock_user)
 
@@ -145,7 +143,7 @@ def test_get_valid_category_with_lock(  # pylint: disable=R0913
     event.is_active = is_active
     event.held_at = held_at
     mock_category.event = event
-    mocker.patch.object(ticket_category_exists, "by_id", return_value=mock_category)
+    mocker.patch.object(crud.ticket_category, "get", return_value=mock_category)
 
     if exception:
         with pytest.raises(exception):
@@ -156,9 +154,11 @@ def test_get_valid_category_with_lock(  # pylint: disable=R0913
 
 
 def test_get_valid_category_with_lock_should_raise_error_if_category_does_not_exist(
-    mock_db: Mock, ticket_payload: TicketCreateBody, mocker: MockerFixture
+    mock_db: Mock,
+    ticket_payload: TicketCreateBody,
+    mocker: MockerFixture,
 ) -> None:
-    mocker.patch.object(ticket_category_exists, "by_id", side_effect=TicketCategoryNotFound)
+    mocker.patch.object(crud.ticket_category, "get", return_value=None)
 
     with pytest.raises(TicketCategoryNotFound):
         get_valid_category_with_lock(mock_db, category_id=ticket_payload.ticket_category_id)
